@@ -1,9 +1,9 @@
-const App = () => {
+import { Button } from "@/components/ui/button"
+
+function App() {
   return (
-    <div>
-      <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-        Welcome to the Future
-      </h1>
+    <div className="flex min-h-svh flex-col items-center justify-center">
+      <Button>Click me</Button>
     </div>
   )
 }
