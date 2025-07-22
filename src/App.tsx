@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 function App() {
   return (
