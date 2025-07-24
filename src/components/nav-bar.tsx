@@ -93,7 +93,7 @@ const Cursor = ({ position }: CursorProps) => {
         stiffness: 350,
         damping: 25,
       }}
-      className="absolute z-0 h-[calc(100%-16px)] rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+      className="absolute z-0 h-[calc(100%-16px)] rounded-full cursor-glass-effect"
       style={{
         backdropFilter: "blur(10px)",
       }}
