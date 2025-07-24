@@ -3,7 +3,7 @@ import { Globe } from "lucide-react";
 import { navigationItems } from "@/constants/index";
 import { Tab } from "./tab";
 import { Cursor } from "./cursor";
-import { SidebarTrigger } from "../sidebar/sidebar-trigger";
+import { SidebarTrigger } from "./sidebar/sidebar-trigger";
 import type { Position } from "./types";
 
 export function NavBar() {
