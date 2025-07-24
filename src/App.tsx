@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { NavBar } from "@/components/nav-bar";
+import { NavBar } from "@/components/navigation/nav-bar";
 import { SvgFilters } from "@/components/ui/svg-filters";
 
 function App() {
