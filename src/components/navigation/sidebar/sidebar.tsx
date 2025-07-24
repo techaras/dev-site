@@ -12,7 +12,7 @@ export function Sidebar() {
   return (
     <Dialog>
       <SidebarTrigger />
-      <DialogContent className="h-full w-[280px] p-6 sm:w-[320px] md:hidden glass-texture">
+      <DialogContent className="sm:w-[320px] md:hidden cursor-glass-effect">
         <DialogHeader>
           <DialogTitle className="text-lg font-heading">
             Navigation
