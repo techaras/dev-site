@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Globe } from "lucide-react";
+import { Globe, Menu } from "lucide-react";
 import { navigationItems } from "@/constants/index";
 import { Tab } from "./tab";
 import { Cursor } from "./cursor";
@@ -13,25 +13,36 @@ export function NavBar() {
   });
 
   return (
-    <nav className="fixed top-7 left-1/2 -translate-x-1/2 z-50">
-      <ul
-        onMouseLeave={() => {
-          setPosition((pv) => ({
-            ...pv,
-            opacity: 0,
-          }));
-        }}
-        className="glass-texture rounded-full flex items-center justify-center gap-2 px-2 py-2 relative"
+    <>
+      {/* Desktop Navigation - Hidden on mobile, visible on md+ */}
+      <nav className="fixed top-7 left-1/2 -translate-x-1/2 z-50 hidden md:block">
+        <ul
+          onMouseLeave={() => {
+            setPosition((pv) => ({
+              ...pv,
+              opacity: 0,
+            }));
+          }}
+          className="glass-texture rounded-full flex items-center justify-center gap-2 px-2 py-2 relative"
+        >
+          {navigationItems.map((item) => (
+            <Tab key={item.name} setPosition={setPosition} href={item.link}>
+              {item.name === "Contact" && <Globe className="w-4 h-4" />}
+              {item.name}
+            </Tab>
+          ))}
+          
+          <Cursor position={position} />
+        </ul>
+      </nav>
+
+      {/* Mobile Hamburger Button - Visible on mobile, hidden on md+ */}
+      <button
+        className="fixed top-7 right-6 z-50 md:hidden flex items-center justify-center p-2 transition-all duration-300 hover:scale-105 active:scale-95"
+        aria-label="Open navigation menu"
       >
-        {navigationItems.map((item) => (
-          <Tab key={item.name} setPosition={setPosition} href={item.link}>
-            {item.name === "Contact" && <Globe className="w-4 h-4" />}
-            {item.name}
-          </Tab>
-        ))}
-        
-        <Cursor position={position} />
-      </ul>
-    </nav>
+        <Menu className="w-6 h-6 text-foreground" />
+      </button>
+    </>
   );
 }
