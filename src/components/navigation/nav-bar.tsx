@@ -3,7 +3,7 @@ import { Globe } from "lucide-react";
 import { navigationItems } from "@/constants/index";
 import { Tab } from "./tab";
 import { Cursor } from "./cursor";
-import { SidebarTrigger } from "./sidebar/sidebar-trigger";
+import { Sidebar } from "./sidebar/sidebar";
 import type { Position } from "./types";
 
 export function NavBar() {
@@ -37,8 +37,7 @@ export function NavBar() {
         </ul>
       </nav>
 
-      {/* Mobile Navigation Trigger */}
-      <SidebarTrigger />
+      <Sidebar />
     </>
   );
 }
