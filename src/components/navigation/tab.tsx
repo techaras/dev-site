@@ -22,7 +22,7 @@ export const Tab = ({ children, setPosition, href }: TabProps) => {
     >
       <a
         href={href}
-        className="relative z-10 block cursor-pointer px-4 py-2 text-sm font-medium text-foreground mix-blend-difference transition-colors"
+        className="relative z-10 block cursor-pointer px-4 py-2 text-sm font-medium text-foreground mix-blend-difference transition-colors whitespace-nowrap"
       >
         <span className="flex items-center gap-2">
           {children}
