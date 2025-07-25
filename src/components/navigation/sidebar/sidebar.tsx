@@ -50,7 +50,7 @@ export function Sidebar() {
           </DialogTitle>
         </DialogHeader>
         
-        <nav className="flex flex-col gap-2 mt-6 flex-1">
+        <nav className="flex flex-col gap-2 flex-1">
           {navigationItems.map((item) => (
             <a
               key={item.name}
