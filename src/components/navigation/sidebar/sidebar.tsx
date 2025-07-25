@@ -42,7 +42,7 @@ export function Sidebar() {
       <DialogContent 
         variant="sidebar" 
         className="md:hidden cursor-glass-effect"
-        showCloseButton={true}
+        showCloseButton={false}
       >
         <DialogHeader>
           <DialogTitle className="text-lg font-heading">
