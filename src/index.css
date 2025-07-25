@@ -175,6 +175,13 @@
   pointer-events: none;
 }
 
+* Remove focus rings on dialog triggers and close buttons */
+[data-slot="dialog-trigger"]:focus-visible,
+[data-slot="dialog-close"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
