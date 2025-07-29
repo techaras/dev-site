@@ -9,9 +9,10 @@ export function ParticleSystem() {
   const sphereRadius = baseSize / 200
   
   return (
-    <ParticleEmitter 
-      sphereRadius={sphereRadius}
-      particleCount={10000}
-    />
+  <ParticleEmitter 
+    sphereRadius={sphereRadius}
+    particleCount={10000}
+    birthRate={2000}        // ✅ Explicit and visible
+  />
   )
 }

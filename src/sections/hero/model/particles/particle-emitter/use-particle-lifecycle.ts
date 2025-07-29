@@ -10,7 +10,7 @@ import type { ParticleData, ParticleEmitterProps } from './types'
 export function useParticleLifecycle({
   sphereRadius,
   particleCount = 5000,
-  birthRate = 500,
+  birthRate,              // ✅ No default
   lifetime = 10
 }: ParticleEmitterProps) {
   

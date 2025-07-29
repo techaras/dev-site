@@ -12,7 +12,7 @@ export type ParticleData = {
 export type ParticleEmitterProps = {
   sphereRadius: number
   particleCount?: number
-  birthRate?: number
+  birthRate: number        // ✅ Required, no default
   lifetime?: number
 }
 
