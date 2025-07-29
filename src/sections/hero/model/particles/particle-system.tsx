@@ -1,5 +1,5 @@
 import { useThree } from '@react-three/fiber'
-import { ParticleEmitter } from './particle-emitter'
+import { ParticleEmitter } from './particle-emitter/particle-emitter'
 
 export function ParticleSystem() {
   const { size } = useThree()
