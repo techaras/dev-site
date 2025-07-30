@@ -1,4 +1,4 @@
-import { HeroCanvas } from './model/canvas'
+import { ParticleSphere } from './model/particle-sphere'
 
 export function Hero() {
   return (
@@ -7,7 +7,7 @@ export function Hero() {
       className="relative h-screen w-full overflow-hidden"
     >
       <div className="absolute inset-0 bg-background">
-        <HeroCanvas />
+        <ParticleSphere />
       </div>
     </section>
   )
