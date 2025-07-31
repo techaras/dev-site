@@ -1,6 +1,7 @@
 import { ParticleSphere } from './model/particle-sphere'
 import { HeroTitle } from './content/hero-title'
 import { HeroInfoGrid } from './content/hero-info-grid'
+import { AvailabilityStatus } from './content/availability-status'
 
 export function Hero() {
   return (
@@ -20,6 +21,9 @@ export function Hero() {
             <HeroInfoGrid />
           </div>
         </div>
+      </div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <AvailabilityStatus />
       </div>
     </section>
   )
