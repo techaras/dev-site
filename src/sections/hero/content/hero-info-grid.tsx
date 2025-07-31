@@ -19,10 +19,10 @@ export function HeroInfoGrid() {
       {/* Left Column */}
       <div className="flex flex-col gap-3 justify-items-start">
         <div className="flex flex-col gap-3 w-fit">
-          <button className="glass-texture font-heading z-10 cursor-pointer text-sm px-4 py-2 rounded-full text-foreground hover:opacity-80 transition-opacity flex items-center justify-between gap-3">
-            <span>let's connect</span>
-            <div className="glass-texture rounded-full p-1">
-              <ArrowRight className="w-4 h-4" />
+          <button className="glass-texture font-heading z-10 cursor-pointer text-sm pl-6 rounded-full text-foreground hover:opacity-80 transition-opacity flex items-center justify-between gap-3">
+            <span className="mt-1">let's connect</span>
+            <div className="glass-texture rounded-full p-1 m-1">
+              <ArrowRight className="w-6 h-6" />
             </div>
           </button>
           <div className="flex items-center gap-2">
