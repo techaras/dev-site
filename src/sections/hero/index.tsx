@@ -1,4 +1,5 @@
 import { ParticleSphere } from './model/particle-sphere'
+import { HeroTitle } from './content/hero-title'
 
 export function Hero() {
   return (
@@ -9,6 +10,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-background">
         <ParticleSphere />
       </div>
+      <HeroTitle />
     </section>
   )
 }
