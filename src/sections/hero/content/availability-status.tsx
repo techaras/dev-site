@@ -26,7 +26,7 @@ export function AvailabilityStatus() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-2 text-sm font-body text-[#b3b3b3]">
+    <div className="flex items-center justify-center gap-2 text-sm font-body text-[#b3b3b3] whitespace-nowrap">
       {/* Animated green dot */}
       <div className="relative">
         <motion.div
