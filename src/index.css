@@ -182,6 +182,25 @@
   box-shadow: none !important;
 }
 
+/* Hero Info Grid text responsive breakpoints */
+.hero-info-grid-text-medium {
+  display: none;
+}
+
+.hero-info-grid-text-small {
+  display: inline;
+}
+
+/* 507px to 767px: Show 2-line version */
+@media (min-width: 507px) and (max-width: 767px) {
+  .hero-info-grid-text-medium {
+    display: inline;
+  }
+  .hero-info-grid-text-small {
+    display: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
