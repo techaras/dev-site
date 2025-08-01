@@ -12,7 +12,18 @@ export function Hero() {
       <div className="absolute inset-0 bg-background">
         <ParticleSphere />
       </div>
-      <div className="absolute inset-0 z-10 flex flex-col">
+      
+      {/* Mobile Layout: Top-aligned vertical stack (default, under 768px) */}
+      <div className="relative z-10 h-full flex flex-col pt-24 px-6 md:hidden">
+        <div className="space-y-8">
+          <HeroTitle />
+          <HeroInfoGrid />
+          <AvailabilityStatus />
+        </div>
+      </div>
+
+      {/* Desktop Layout: Centered with absolute positioning (768px and above) */}
+      <div className="absolute inset-0 z-10 flex-col hidden md:flex">
         <div className="flex-1 flex items-center">
           <HeroTitle />
         </div>
