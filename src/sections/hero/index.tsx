@@ -14,7 +14,7 @@ export function Hero() {
       </div>
 
       {/* Mobile Layout: Top-aligned vertical stack (default, under 768px) */}
-      <div className="relative z-10 h-full flex flex-col pt-24 px-6 md:hidden mt-36">
+      <div className="relative z-10 h-full flex flex-col pt-24 px-6 md:hidden mt-32">
           <HeroTitle />
         <div className="mt-20">
           <HeroInfoGrid />
