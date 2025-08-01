@@ -4,6 +4,12 @@ import type { Application } from '@splinetool/runtime'
 
 export function ParticleSphere() {
   const [splineApp, setSplineApp] = useState<Application | null>(null)
+  const [shouldRender3D, setShouldRender3D] = useState<boolean>(false)
+
+  // Check if screen is large enough for 3D rendering
+  const checkScreenSize = () => {
+    return window.innerWidth >= 768
+  }
 
   // Function to get appropriate zoom level based on screen size
   const getZoomLevel = () => {
@@ -27,14 +33,21 @@ export function ParticleSphere() {
     console.log(`setZoom(${zoomLevel}) called for screen width: ${window.innerWidth}px`)
   }
 
-  // Handle window resize to adjust zoom level
+  // Initialize screen size check and handle resize
   useEffect(() => {
-    if (!splineApp) return
+    // Set initial render state
+    setShouldRender3D(checkScreenSize())
 
     const handleResize = () => {
-      const zoomLevel = getZoomLevel()
-      splineApp.setZoom(zoomLevel)
-      console.log(`Zoom adjusted to ${zoomLevel} for screen width: ${window.innerWidth}px`)
+      const shouldRender = checkScreenSize()
+      setShouldRender3D(shouldRender)
+
+      // Only adjust zoom if we have a spline app and should render
+      if (splineApp && shouldRender) {
+        const zoomLevel = getZoomLevel()
+        splineApp.setZoom(zoomLevel)
+        console.log(`Zoom adjusted to ${zoomLevel} for screen width: ${window.innerWidth}px`)
+      }
     }
 
     window.addEventListener('resize', handleResize)
@@ -43,6 +56,11 @@ export function ParticleSphere() {
       window.removeEventListener('resize', handleResize)
     }
   }, [splineApp])
+
+  // Don't render 3D model on mobile screens
+  if (!shouldRender3D) {
+    return null
+  }
 
   return (
     <Spline 
