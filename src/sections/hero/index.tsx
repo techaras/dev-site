@@ -16,13 +16,13 @@ export function Hero() {
         <div className="flex-1 flex items-center">
           <HeroTitle />
         </div>
-        <div className="flex-1 flex items-center">
+        <div className="flex-1 flex items-center mt-16">
           <div className="w-full">
             <HeroInfoGrid />
           </div>
         </div>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-            <AvailabilityStatus />
+          <AvailabilityStatus />
         </div>
       </div>
     </section>
