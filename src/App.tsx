@@ -9,7 +9,7 @@ function App() {
       <SvgFilters />
       <div className="flex min-h-svh flex-col">
         <NavBar />
-        <main>
+        <main className="w-full max-w-[1550px] mx-auto">
           <Hero />
         </main>
       </div>
