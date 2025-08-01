@@ -15,9 +15,9 @@ export function HeroInfoGrid() {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-8 px-6 md:px-12 lg:px-16">
+    <div className="grid grid-cols-2 gap-8 px-6 md:px-12 lg:px-16 items-center">
       {/* Left Column */}
-      <div className="flex flex-col gap-3 justify-items-start">
+      <div className="flex flex-col gap-3 justify-center">
         <div className="flex flex-col gap-3 w-fit">
           <button className="glass-texture font-heading z-10 cursor-pointer text-sm pl-6 rounded-full text-foreground hover:opacity-80 transition-opacity flex items-center justify-between gap-3">
             <span className="mt-1">let's connect</span>
@@ -43,9 +43,10 @@ export function HeroInfoGrid() {
           </div>
         </div>
       </div>
+      
       {/* Right Column */}
-      <div className="text-start justify-items-end">
-        <p className="font-body font-light text-[18px] text-[#b3b3b3] leading-relaxed">
+      <div className="flex items-center justify-end">
+        <p className="font-body font-light text-[18px] text-[#b3b3b3] leading-relaxed text-left">
           Patent-winning full-stack developer<br />who combines technical expertise<br />with deep business understanding.
         </p>
       </div>
