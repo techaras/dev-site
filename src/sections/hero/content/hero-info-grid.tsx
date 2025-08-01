@@ -23,8 +23,8 @@ export function HeroInfoGrid() {
           <span className="hero-info-grid-text-medium">
             Patent-winning full-stack developer who combines<br />technical expertise with deep business understanding.
           </span>
-          {/* 506px and lower - 3 lines */}
-          <span className="hero-info-grid-text-small">
+          {/* 562px and lower - 3 lines */}
+          <span className="hero-info-grid-text-small whitespace-nowrap">
             Patent-winning full-stack developer<br />who combines technical expertise<br />with deep business understanding.
           </span>
         </p>
@@ -32,7 +32,7 @@ export function HeroInfoGrid() {
       
       {/* Contact Info - Second on mobile, Left column on desktop */}
       <div className="flex flex-col gap-3 justify-center items-center md:items-start md:order-1">
-        <div className="flex flex-col gap-3 w-fit">
+        <div className="flex flex-col gap-8 md:gap-3 w-fit">
           <button className="glass-texture font-heading z-10 cursor-pointer text-sm pl-6 rounded-full text-foreground hover:opacity-80 transition-opacity flex items-center justify-between gap-3">
             <span className="mt-1">let's connect</span>
             <div className="glass-texture rounded-full p-1 m-1">

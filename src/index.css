@@ -191,8 +191,8 @@
   display: inline;
 }
 
-/* 507px to 767px: Show 2-line version */
-@media (min-width: 507px) and (max-width: 767px) {
+/* 562px to 767px: Show 2-line version */
+@media (min-width: 562px) and (max-width: 767px) {
   .hero-info-grid-text-medium {
     display: inline;
   }
