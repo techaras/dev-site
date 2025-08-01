@@ -12,7 +12,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-background">
         <ParticleSphere />
       </div>
-      <div className="absolute inset-0 z-10 flex flex-col justify-between">
+      <div className="absolute inset-0 z-10 flex flex-col">
         <div className="flex-1 flex items-center">
           <HeroTitle />
         </div>
@@ -21,9 +21,9 @@ export function Hero() {
             <HeroInfoGrid />
           </div>
         </div>
-      </div>
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <AvailabilityStatus />
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+            <AvailabilityStatus />
+        </div>
       </div>
     </section>
   )
