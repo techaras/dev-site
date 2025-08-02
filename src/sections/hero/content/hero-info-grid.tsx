@@ -52,7 +52,7 @@ export function HeroInfoGrid() {
               )}
             </button>
             <span className="font-body font-light text-base max-[562px]:text-[14px] text-[#b3b3b3]">
-              info@stavrossymeonidis.dev
+              info&#64;stavrossymeonidis.dev
             </span>
           </div>
         </div>
