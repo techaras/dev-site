@@ -4,9 +4,9 @@ import type { Application } from '@splinetool/runtime'
 
 export function ParticleSphere() {
   const [splineApp, setSplineApp] = useState<Application | null>(null)
-  const [shouldRender3D, setShouldRender3D] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(false)
 
-  // Check if screen is large enough for 3D rendering
+  // Check if screen is desktop size (768px and above)
   const checkScreenSize = () => {
     return window.innerWidth >= 768
   }
@@ -33,15 +33,15 @@ export function ParticleSphere() {
 
   // Initialize screen size check and handle resize
   useEffect(() => {
-    // Set initial render state
-    setShouldRender3D(checkScreenSize())
+    // Set initial screen size state
+    setIsDesktop(checkScreenSize())
 
     const handleResize = () => {
-      const shouldRender = checkScreenSize()
-      setShouldRender3D(shouldRender)
+      const isDesktopSize = checkScreenSize()
+      setIsDesktop(isDesktopSize)
 
-      // Only adjust zoom if we have a spline app and should render
-      if (splineApp && shouldRender) {
+      // Only adjust zoom if we have a spline app and it's desktop
+      if (splineApp && isDesktopSize) {
         const zoomLevel = getZoomLevel()
         splineApp.setZoom(zoomLevel)
         console.log(`Zoom adjusted to ${zoomLevel} for screen width: ${window.innerWidth}px`)
@@ -55,14 +55,12 @@ export function ParticleSphere() {
     }
   }, [splineApp])
 
-  // Don't render 3D model on mobile screens
-  if (!shouldRender3D) {
-    return null
-  }
+  // Determine which scene to render based on screen size
+  const sceneUrl = isDesktop ? "/scene-f0f0f0.splinecode" : "/scene-earth.splinecode"
 
   return (
     <Spline 
-      scene="/scene-f0f0f0.splinecode" 
+      scene={sceneUrl}
       onLoad={onLoad}
       style={{ width: '100%', height: '100%' }}
     />
