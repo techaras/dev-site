@@ -34,7 +34,7 @@ export function HeroInfoGrid() {
       <div className="flex flex-col gap-3 justify-center items-center md:items-start md:order-1">
         <div className="flex flex-col gap-8 md:gap-3 w-fit">
           <button className="glass-texture font-heading z-10 cursor-pointer text-sm pl-6 rounded-full text-foreground hover:opacity-80 transition-opacity flex items-center justify-between gap-3">
-            <span className="mt-1">let's connect</span>
+            <span className="mt-1 max-[562px]:text-[14px]">let's connect</span>
             <div className="glass-texture rounded-full p-1 m-1">
               <ArrowRight className="w-6 h-6" />
             </div>
@@ -51,7 +51,7 @@ export function HeroInfoGrid() {
                 <Copy className="w-4 h-4 text-[#b3b3b3] hover:text-foreground" />
               )}
             </button>
-            <span className="font-body font-light text-base text-[#b3b3b3]">
+            <span className="font-body font-light text-base max-[562px]:text-[14px] text-[#b3b3b3]">
               info@stavrossymeonidis.dev
             </span>
           </div>
