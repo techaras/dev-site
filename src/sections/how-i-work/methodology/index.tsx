@@ -2,8 +2,8 @@ export function Methodology() {
     return (
       <div className="w-full h-full text-white">
         <h3 className="font-heading text-xl mb-4">Methodology</h3>
-        <p className="font-body text-sm text-gray-400">
-          Content coming soon...
+        <p className="font-body text-sm text-[#b3b3b3]">
+          I use lightweight Agile delivery designed for SMEs and I'm available in
         </p>
       </div>
     );

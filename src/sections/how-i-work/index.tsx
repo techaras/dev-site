@@ -21,7 +21,7 @@ export function HowIWork() {
           </div>
 
           {/* Focus */}
-          <div className="bento-square">
+          <div className="">
             <Focus />
           </div>
 
