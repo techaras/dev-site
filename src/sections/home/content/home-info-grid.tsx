@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Copy, Check, ArrowRight } from "lucide-react";
 
-export function HeroInfoGrid() {
+export function HomeInfoGrid() {
   const [copied, setCopied] = useState(false);
 
   // Original email for copy functionality
@@ -26,11 +26,11 @@ export function HeroInfoGrid() {
       <div className="flex items-center justify-center md:justify-end md:order-2">
         <p className="font-body font-light text-[18px] text-[#b3b3b3] leading-relaxed text-center md:text-left">
           {/* 767px to 507px - 2 lines */}
-          <span className="hero-info-grid-text-medium text-[16px]">
+          <span className="home-info-grid-text-medium text-[16px]">
             Patent-winning full-stack developer who combines<br />technical expertise with deep business understanding.
           </span>
           {/* 562px and lower - 3 lines */}
-          <span className="hero-info-grid-text-small whitespace-nowrap text-[14px]">
+          <span className="home-info-grid-text-small whitespace-nowrap text-[14px]">
             Patent-winning full-stack developer<br />who combines technical expertise<br />with deep business understanding.
           </span>
         </p>

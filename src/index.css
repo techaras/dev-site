@@ -182,21 +182,21 @@
   box-shadow: none !important;
 }
 
-/* Hero Info Grid text responsive breakpoints */
-.hero-info-grid-text-medium {
+/* Home Info Grid text responsive breakpoints */
+.home-info-grid-text-medium {
   display: none;
 }
 
-.hero-info-grid-text-small {
+.home-info-grid-text-small {
   display: inline;
 }
 
 /* 562px to 767px: Show 2-line version */
 @media (min-width: 562px) and (max-width: 767px) {
-  .hero-info-grid-text-medium {
+  .home-info-grid-text-medium {
     display: inline;
   }
-  .hero-info-grid-text-small {
+  .home-info-grid-text-small {
     display: none;
   }
 }

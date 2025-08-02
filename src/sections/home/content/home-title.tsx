@@ -1,4 +1,4 @@
-export function HeroTitle() {
+export function HomeTitle() {
   return (
     <div className="absolute inset-0 z-10 flex md:items-center justify-center">
       <div className="px-6 md:px-12 lg:px-16 lg:-mt-20">
