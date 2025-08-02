@@ -4,9 +4,15 @@ import { Copy, Check, ArrowRight } from "lucide-react";
 export function HeroInfoGrid() {
   const [copied, setCopied] = useState(false);
 
+  // Original email for copy functionality
+  const originalEmail = "info@stavrossymeonidis.dev";
+  
+  // Email with invisible characters to prevent mobile auto-detection
+  const emailDisplay = "info" + String.fromCharCode(8203) + "@" + String.fromCharCode(8203) + "stavrossymeonidis.dev";
+
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText("info@stavrossymeonidis.dev");
+      await navigator.clipboard.writeText(originalEmail);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -52,7 +58,7 @@ export function HeroInfoGrid() {
               )}
             </button>
             <span className="font-body font-light text-base max-[562px]:text-[14px] text-[#b3b3b3]">
-              info&#64;stavrossymeonidis.dev
+              {emailDisplay}
             </span>
           </div>
         </div>
