@@ -33,7 +33,7 @@ export function HowIWork() {
           {/* Bottom Left - Stacked Response Time and Contact */}
           <div className="flex flex-col gap-6">
             {/* Response Time */}
-            <div className="bento-square">
+            <div>
               <ResponseTime />
             </div>
 
