@@ -175,6 +175,24 @@
   pointer-events: none;
 }
 
+/* Bento Grid Square Styling */
+.bento-square {
+  background-color: #000000;
+  border: 1px solid #353739;
+  border-radius: 2rem;
+  padding: 2rem;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.bento-square:hover {
+  border-color: #555759;
+  transform: translateY(-2px);
+}
+
 /* Remove focus rings on dialog triggers and close buttons */
 [data-slot="dialog-trigger"]:focus-visible,
 [data-slot="dialog-close"]:focus-visible {
