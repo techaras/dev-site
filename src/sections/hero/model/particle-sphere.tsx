@@ -56,7 +56,7 @@ export function ParticleSphere() {
   }, [splineApp])
 
   // Determine which scene to render based on screen size
-  const sceneUrl = isDesktop ? "/scene-f0f0f0.splinecode" : "/scene-earth.splinecode"
+  const sceneUrl = isDesktop ? "/scene-f0f0f0.splinecode" : "/scene-f0f0f0.splinecode"
 
   return (
     <Spline 
