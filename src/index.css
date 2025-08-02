@@ -181,10 +181,7 @@
   border: 1px solid #353739;
   border-radius: 2rem;
   padding: 2rem;
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 200px;
   transition: all 0.3s ease;
 }
 
