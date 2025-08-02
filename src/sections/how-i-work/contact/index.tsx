@@ -22,9 +22,9 @@ export function Contact() {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center text-center gap-4">
-      <h3 className="font-heading text-2xl mb-3 text-white">Let's work together</h3>
+      <h3 className="font-heading text-2xl mb-3 text-[#f2f2f2]">Let's work together</h3>
       
-      <div className="text-white text-xl font-light">
+      <div className="text-[#f2f2f2] text-xl font-light">
         EMAIL
       </div>
       
