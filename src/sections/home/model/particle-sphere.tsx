@@ -4,12 +4,6 @@ import type { Application } from '@splinetool/runtime'
 
 export function ParticleSphere() {
   const [splineApp, setSplineApp] = useState<Application | null>(null)
-  const [isDesktop, setIsDesktop] = useState<boolean>(false)
-
-  // Check if screen is desktop size (768px and above)
-  const checkScreenSize = () => {
-    return window.innerWidth >= 768
-  }
 
   // Function to get appropriate zoom level based on screen size
   const getZoomLevel = () => {
@@ -31,17 +25,11 @@ export function ParticleSphere() {
     console.log(`setZoom(${zoomLevel}) called for screen width: ${window.innerWidth}px`)
   }
 
-  // Initialize screen size check and handle resize
+  // Handle resize for zoom adjustments
   useEffect(() => {
-    // Set initial screen size state
-    setIsDesktop(checkScreenSize())
-
     const handleResize = () => {
-      const isDesktopSize = checkScreenSize()
-      setIsDesktop(isDesktopSize)
-
-      // Only adjust zoom if we have a spline app and it's desktop
-      if (splineApp && isDesktopSize) {
+      // Adjust zoom if we have a spline app
+      if (splineApp) {
         const zoomLevel = getZoomLevel()
         splineApp.setZoom(zoomLevel)
         console.log(`Zoom adjusted to ${zoomLevel} for screen width: ${window.innerWidth}px`)
@@ -54,11 +42,6 @@ export function ParticleSphere() {
       window.removeEventListener('resize', handleResize)
     }
   }, [splineApp])
-
-  // Only render Spline component on desktop screens
-  if (!isDesktop) {
-    return null
-  }
 
   return (
     <Spline 
