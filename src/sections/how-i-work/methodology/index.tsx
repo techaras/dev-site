@@ -46,7 +46,7 @@ export function Methodology() {
       
       {/* Request Channel Button */}
       <div className="mt-4">
-        <button className="w-full px-6 py-2 border border-[#353739] rounded-full font-heading text-sm text-[#f2f2f2] hover:border-[#555759] transition-colors duration-300 cursor-pointer">
+        <button className="w-full px-6 py-2 border border-[#353739] rounded-full font-heading text-sm text-[#f2f2f2] hover:border-[#555759] transition-colors duration-300 cursor-pointer hover:opacity-80">
           Request Channel
         </button>
       </div>
