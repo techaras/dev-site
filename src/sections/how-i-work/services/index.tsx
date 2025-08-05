@@ -9,21 +9,24 @@ interface ServiceCardProps {
 
 function ServiceCard({ icon, iconBg, title, description }: ServiceCardProps) {
   return (
-    <div className="flex-shrink-0 w-80 bg-black border border-[#353739] rounded-t-3xl p-6 transition-all duration-300 hover:border-[#555759] hover:transform hover:-translate-y-1 border-b-0">
-      {/* Icon with circular background */}
-      <div className={`w-12 h-12 ${iconBg} rounded-full flex items-center justify-center mb-6`}>
-        {icon}
+    <div className="flex-shrink-0 w-80 relative h-full">
+      {/* Main card content */}
+      <div className="bg-black border border-[#353739] rounded-3xl p-6">
+        {/* Icon with circular background */}
+        <div className={`w-12 h-12 ${iconBg} rounded-full flex items-center justify-center mb-6`}>
+          {icon}
+        </div>
+        
+        {/* Title */}
+        <h4 className="font-body font-medium text-[#f2f2f2] text-xl mb-4 leading-tight">
+          {title}
+        </h4>
+        
+        {/* Description */}
+        <p className="text-[#b3b3b3] font-body font-light text-sm leading-relaxed mb-17">
+          {description}
+        </p>
       </div>
-      
-      {/* Title */}
-      <h4 className="font-body font-medium text-[#f2f2f2] text-xl mb-4 leading-tight">
-        {title}
-      </h4>
-      
-      {/* Description */}
-      <p className="text-[#b3b3b3] font-body font-light text-sm leading-relaxed">
-        {description}
-      </p>
     </div>
   );
 }
@@ -76,17 +79,20 @@ export function Services() {
         <ArrowRight className="w-7 h-7 mb-1" />
       </button>
       
-      {/* Horizontal scrolling cards */}
-      <div className="flex gap-6 overflow-x-auto scrollbar-none edge-to-edge" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-        {services.map((service, index) => (
-          <ServiceCard
-            key={index}
-            icon={service.icon}
-            iconBg={service.iconBg}
-            title={service.title}
-            description={service.description}
-          />
-        ))}
+      {/* Card container with defined height */}
+      <div className="flex-1 min-h-0">
+        {/* Horizontal scrolling cards */}
+        <div className="flex gap-6 overflow-x-auto scrollbar-none edge-to-edge h-full" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              icon={service.icon}
+              iconBg={service.iconBg}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
