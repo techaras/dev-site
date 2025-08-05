@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, Link, BarChart3, TrendingUp, Smartphone, Cloud } from "lucide-react";
+import { ArrowRight, Sparkles, Link, BarChart3, TrendingUp, Smartphone, Cloud, Database, ShoppingCart, DollarSign } from "lucide-react";
 
 interface ServiceCardProps {
   icon: React.ReactNode;
@@ -23,7 +23,7 @@ function ServiceCard({ icon, iconBg, title, description }: ServiceCardProps) {
         </h4>
         
         {/* Description */}
-        <p className="text-[#b3b3b3] font-body font-light text-sm leading-relaxed mb-17">
+        <p className="text-[#b3b3b3] font-body font-light text-sm leading-relaxed mb-17 whitespace-pre-line">
           {description}
         </p>
       </div>
@@ -68,6 +68,24 @@ export function Services() {
       iconBg: "bg-black/20 border border-[#353739]",
       title: "Cloud Cost Optimisation",
       description: "Analyse and reduce AWS/Azure/GCP spend by 20-40% through serverless migration and smart scaling."
+    },
+    {
+      icon: <Database className="w-6 h-6 text-white" />,
+      iconBg: "bg-black/20 border border-[#353739]",
+      title: "Data Modernisation",
+      description: "Migrate from legacy systems to BigQuery or Snowflake with cost-optimised ETL pipelines."
+    },
+    {
+      icon: <ShoppingCart className="w-6 h-6 text-white" />,
+      iconBg: "bg-black/20 border border-[#353739]",
+      title: "Conversion Optimisation",
+      description: "Boost sales through funnel analytics,\nA/B testing, and Core Web Vitals performance improvements."
+    },
+    {
+      icon: <DollarSign className="w-6 h-6 text-white" />,
+      iconBg: "bg-black/20 border border-[#353739]",
+      title: "SaaS Spend Governance",
+      description: "Discover and optimise your 139+ software subscriptions, eliminating waste and negotiating better deals."
     }
   ];
 
