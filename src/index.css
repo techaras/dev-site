@@ -206,6 +206,12 @@
   display: inline;
 }
 
+/* Edge-to-edge skills container - extends to bento-square borders */
+.skills-edge-to-edge {
+  margin-left: -2rem !important;
+  margin-right: -2rem !important;
+}
+
 /* 562px to 767px: Show 2-line version */
 @media (min-width: 562px) and (max-width: 767px) {
   .home-info-grid-text-medium {

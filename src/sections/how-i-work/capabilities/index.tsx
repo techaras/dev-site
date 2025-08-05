@@ -66,8 +66,8 @@ export function Capabilities() {
     <div className="w-full h-full text-[#f2f2f2] flex flex-col">
       <h3 className="font-heading text-xl">Capabilities</h3>
       
-      {/* Skills Pills - 3 rows with horizontal overflow */}
-      <div className="flex-1 flex flex-col gap-11 overflow-hidden justify-center mb-1">
+      {/* Skills Pills - 3 rows with horizontal overflow, extending edge-to-edge */}
+      <div className="flex-1 flex flex-col gap-11 overflow-hidden justify-center mb-1 skills-edge-to-edge">
         {skillRows.map((row, rowIndex) => (
           <div
             key={rowIndex}
