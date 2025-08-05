@@ -206,8 +206,8 @@
   display: inline;
 }
 
-/* Edge-to-edge skills container - extends to bento-square borders */
-.skills-edge-to-edge {
+/* Edge-to-edge container - extends to bento-square borders */
+.edge-to-edge {
   margin-left: -2rem !important;
   margin-right: -2rem !important;
 }
