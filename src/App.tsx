@@ -3,6 +3,7 @@ import { NavBar } from "@/components/navigation/nav-bar";
 import { SvgFilters } from "@/components/ui/svg-filters";
 import { Home } from "@/sections/home";
 import { HowIWork } from "@/sections/how-i-work";
+import { CaseStudies } from "@/sections/case-studies";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 function DesktopApp() {
@@ -12,6 +13,7 @@ function DesktopApp() {
       <main className="w-full max-w-[1550px] mx-auto">
         <Home />
         <HowIWork />
+        <CaseStudies />
       </main>
     </div>
   );
