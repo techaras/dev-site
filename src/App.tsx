@@ -4,6 +4,7 @@ import { SvgFilters } from "@/components/ui/svg-filters";
 import { Home } from "@/sections/home";
 import { HowIWork } from "@/sections/how-i-work";
 import { CaseStudies } from "@/sections/case-studies";
+import { Skills } from "@/sections/skills";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 function DesktopApp() {
@@ -14,6 +15,7 @@ function DesktopApp() {
         <Home />
         <HowIWork />
         <CaseStudies />
+        <Skills />
       </main>
     </div>
   );
