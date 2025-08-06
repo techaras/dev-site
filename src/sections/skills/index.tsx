@@ -71,13 +71,13 @@ import {
   
           {/* Skills Table - 6x3 */}
           <div className="mb-12">
-            <table className="w-full max-w-6xl mx-auto border-separate border-spacing-4 table-fixed">
+            <table className="w-full max-w-6xl mx-auto border-collapse border border-[#353739] table-fixed">
               <tbody>
                 {skillsData.map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     {row.map((skill, colIndex) => (
-                      <td key={colIndex} className="p-0 w-1/6">
-                        <div className="bg-black border border-[#353739] rounded-2xl p-6 flex flex-col items-center justify-center text-center h-[150px] w-full transition-all duration-300 hover:border-[#555759] hover:transform hover:-translate-y-1">
+                      <td key={colIndex} className="border border-[#353739] p-4 w-1/6">
+                        <div className="bg-black p-6 flex flex-col items-center justify-center text-center h-[150px] w-full transition-all duration-300">
                           <div className="mb-4">
                             {skill.icon}
                           </div>
