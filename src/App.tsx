@@ -6,6 +6,7 @@ import { HowIWork } from "@/sections/how-i-work";
 import { CaseStudies } from "@/sections/case-studies";
 import { Skills } from "@/sections/skills";
 import { AboutMe } from "@/sections/about-me";
+import { Footer } from "@/sections/footer";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 function DesktopApp() {
@@ -18,6 +19,7 @@ function DesktopApp() {
         <CaseStudies />
         <Skills />
         <AboutMe />
+        <Footer />
       </main>
     </div>
   );
