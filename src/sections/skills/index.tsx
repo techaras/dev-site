@@ -35,7 +35,7 @@ export function Skills() {
 
         {/* Bottom Section */}
         <div className="flex items-center justify-center gap-6 max-w-6xl mx-auto">
-          <p className="font-body text-[#b3b3b3] text-base">
+          <p className="font-body font-light text-[#b3b3b3] text-base">
             Don't see your stack?
           </p>
           <button className="px-6 pt-2 pb-1 border border-[#353739] rounded-full font-heading text-sm text-foreground hover:border-[#555759] transition-colors duration-300 cursor-pointer hover:opacity-80">
