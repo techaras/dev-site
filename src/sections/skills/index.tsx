@@ -1,53 +1,5 @@
-import {
-  PythonIcon,
-  TypescriptIcon,
-  ReactIcon,
-  NextjsIcon,
-  FastAPIIcon,
-  ViteIcon,
-  LangchainIcon,
-  OpenaiIcon,
-  HuggingFaceIcon,
-  OpencvIcon,
-  PineconeIcon,
-  PrismaIcon,
-  PostgresqlIcon,
-  MongodbIcon,
-  DockerIcon,
-  VercelIcon,
-  StripeIcon,
-  ClerkIcon,
-} from "./icons";
-
-interface Skill {
-  name: string;
-  icon: React.ReactNode;
-}
-
-// Flattened skills data for grid layout
-const skillsData: Skill[] = [
-  // Row 1
-  { name: "Python", icon: <PythonIcon className="w-12 h-12" /> },
-  { name: "LangChain", icon: <LangchainIcon className="w-12 h-12" /> },
-  { name: "Hugging Face", icon: <HuggingFaceIcon className="w-12 h-12" /> },
-  { name: "OpenAI API", icon: <OpenaiIcon className="w-12 h-12" /> },
-  { name: "OpenCV", icon: <OpencvIcon className="w-12 h-12" /> },
-  { name: "FastAPI", icon: <FastAPIIcon className="w-12 h-12" /> },
-  // Row 2
-  { name: "TypeScript", icon: <TypescriptIcon className="w-12 h-12" /> },
-  { name: "React", icon: <ReactIcon className="w-12 h-12" /> },
-  { name: "Next.js", icon: <NextjsIcon className="w-12 h-12" /> },
-  { name: "Vite", icon: <ViteIcon className="w-12 h-12" /> },
-  { name: "PostgreSQL", icon: <PostgresqlIcon className="w-12 h-12" /> },
-  { name: "Prisma", icon: <PrismaIcon className="w-12 h-12" /> },
-  // Row 3
-  { name: "MongoDB", icon: <MongodbIcon className="w-12 h-12" /> },
-  { name: "Pinecone", icon: <PineconeIcon className="w-12 h-12" /> },
-  { name: "Docker", icon: <DockerIcon className="w-12 h-12" /> },
-  { name: "Vercel", icon: <VercelIcon className="w-12 h-12" /> },
-  { name: "Stripe", icon: <StripeIcon className="w-12 h-12" /> },
-  { name: "Clerk", icon: <ClerkIcon className="w-12 h-12" /> },
-];
+import { SkillCard } from "./skill-card";
+import { skillsData } from "./constants";
 
 export function Skills() {
   return (
@@ -71,16 +23,11 @@ export function Skills() {
           <div className="w-full max-w-6xl mx-auto bg-[#353739] p-[1px] rounded-2xl">
             <div className="grid grid-cols-6 gap-[1px] bg-[#353739] rounded-2xl overflow-hidden">
               {skillsData.map((skill, index) => (
-                <div key={index} className="bg-black">
-                  <div className="p-6 flex flex-col items-center justify-center text-center h-[180px] w-full">
-                    <div className="mb-4">
-                      {skill.icon}
-                    </div>
-                    <span className="font-body text-sm text-foreground font-light">
-                      {skill.name}
-                    </span>
-                  </div>
-                </div>
+                <SkillCard 
+                  key={index}
+                  skill={skill}
+                  index={index}
+                />
               ))}
             </div>
           </div>
