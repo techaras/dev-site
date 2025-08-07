@@ -53,7 +53,7 @@ export function Footer() {
               </label>
               <textarea
                 placeholder="Tell me about your project..."
-                rows={4}
+                rows={8}
                 className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors resize-none"
               />
             </div>
