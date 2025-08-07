@@ -16,12 +16,9 @@ export function AboutMe() {
       <div className="w-full max-w-7xl mx-auto">
         {/* 5x6 Bento Grid */}
         <div className="grid grid-cols-5 gap-4">
+
           {/* Column 1, Row 1 - Streamline Processes */}
-          <SimpleTextCard>
-            <h3 className="font-heading text-2xl text-foreground text-center">
-              Streamline Processes
-            </h3>
-          </SimpleTextCard>
+          <SimpleTextCard text="Streamline Processes" />
 
           {/* Column 2, Rows 1-2 - AI Forge */}
           <AchievementCard 
@@ -66,11 +63,8 @@ export function AboutMe() {
           <AvailabilityCard />
 
           {/* Column 5, Row 6 - Enterprise Compliance Standards */}
-          <SimpleTextCard>
-            <h3 className="font-heading text-2xl text-foreground text-center">
-              Enterprise Compliance Standards
-            </h3>
-          </SimpleTextCard>
+          <SimpleTextCard text="Enterprise Compliance Standards" />
+          
         </div>
       </div>
     </section>
