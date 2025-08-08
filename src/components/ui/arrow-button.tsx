@@ -11,24 +11,25 @@ export function ArrowButton({ children }: ArrowButtonProps) {
 
   return (
     <motion.button
-      className="relative overflow-hidden font-heading z-10 cursor-pointer text-sm pl-6 rounded-full border border-white/30 flex items-center justify-between"
+      className="relative overflow-hidden font-heading z-10 cursor-pointer text-sm pl-6 rounded-full glass-texture flex items-center justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Expanding background circle (now vertically centred & anchored right) */}
       <motion.div
-        className="absolute right-1 top-1/2 -translate-y-1/2 h-[34px] bg-foreground rounded-full"
+        className="absolute right-1 top-1/2 -translate-y-1/2 h-[34px] rounded-full cursor-glass-effect"
         initial={{ width: 34 }}
-        animate={{ width: isHovered ? "calc(100% - 8px)" : 34 }}
+        animate={{ width: isHovered ? 'calc(100% - 8px)' : 34 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-        style={{ transformOrigin: "right center" }}
+        style={{ transformOrigin: 'right center' }}
       />
+
 
 
       {/* Text */}
       <motion.span
         className="relative z-10 mt-1"
-        animate={{ color: isHovered ? "#000" : "#fff" }}
+        animate={{ color: "#f2f2f2" }}
         transition={{ duration: 0.4, ease: "linear" }}
       >
         {children}
@@ -40,7 +41,7 @@ export function ArrowButton({ children }: ArrowButtonProps) {
         animate={{ x: isHovered ? -16 : 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <ArrowRight className="w-6 h-6 text-black" />
+        <ArrowRight className="w-6 h-6 text-[#f2f2f2]" />
       </motion.div>
     </motion.button>
   );
