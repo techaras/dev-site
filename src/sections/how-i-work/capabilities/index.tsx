@@ -1,35 +1,10 @@
-import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { SkillPill } from "./skill-pill";
 import { skillRows } from "./constants";
+import { useSkillRowAnimation } from "./useSkillRowAnimation";
 
 export function Capabilities() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (!containerRef.current) return;
-
-    // Select all skill rows
-    const rows = containerRef.current.querySelectorAll('.skill-row');
-    
-    rows.forEach((row, index) => {
-      // Middle row (index 1) goes left to right, others go right to left
-      const isMiddleRow = index === 1;
-      
-      gsap.fromTo(row, 
-        { xPercent: isMiddleRow ? -50 : 0 }, 
-        { 
-          xPercent: isMiddleRow ? 0 : -50,
-          duration: 50,
-          repeat: -1, 
-          ease: 'none',
-          delay: index * 0.5 // Stagger the start times
-        }
-      );
-    });
-  }, { scope: containerRef });
+  const containerRef = useSkillRowAnimation();
 
   return (
     <div className="w-full h-full text-[#f2f2f2] flex flex-col">
