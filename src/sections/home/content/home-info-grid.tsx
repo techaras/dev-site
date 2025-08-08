@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Copy, Check, ArrowRight } from "lucide-react";
+import { Copy, Check } from "lucide-react";
+import { ArrowButton } from "@/components/ui/arrow-button";
 
 export function HomeInfoGrid() {
   const [copied, setCopied] = useState(false);
@@ -32,12 +33,7 @@ export function HomeInfoGrid() {
       {/* Contact Info - Left column */}
       <div className="flex flex-col gap-3 justify-center items-start order-1">
         <div className="flex flex-col gap-3 w-fit">
-          <button className="glass-texture font-heading z-10 cursor-pointer text-sm pl-6 rounded-full text-foreground hover:opacity-80 transition-opacity flex items-center justify-between gap-3">
-            <span className="mt-1">let's connect</span>
-            <div className="glass-texture rounded-full p-1 m-1">
-              <ArrowRight className="w-6 h-6" />
-            </div>
-          </button>
+          <ArrowButton>let's connect</ArrowButton>
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopy}
