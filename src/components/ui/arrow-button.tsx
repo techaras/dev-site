@@ -17,7 +17,6 @@ export function ArrowButton({ children }: ArrowButtonProps) {
     >
       {/* Expanding background circle (now vertically centred & anchored right) */}
       <motion.div
-        /* Tailwind arbitrary height — compiles without extra config */
         className="absolute right-1 top-1/2 -translate-y-1/2 h-[34px] bg-foreground rounded-full"
         initial={{ width: 34 }}
         animate={{ width: isHovered ? "calc(100% - 8px)" : 34 }}
@@ -37,7 +36,7 @@ export function ArrowButton({ children }: ArrowButtonProps) {
 
       {/* Arrow chip */}
       <motion.div
-        className="relative z-10 rounded-full p-1 m-1 bg-white"
+        className="relative z-10 rounded-full p-1 m-1"
         animate={{ x: isHovered ? -16 : 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
