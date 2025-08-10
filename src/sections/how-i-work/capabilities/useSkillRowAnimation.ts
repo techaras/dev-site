@@ -8,24 +8,41 @@ export function useSkillRowAnimation() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    // Select all skill rows
-    const rows = containerRef.current.querySelectorAll('.skill-row');
-    
-    rows.forEach((row, index) => {
-      // Middle row (index 1) goes left to right, others go right to left
-      const isMiddleRow = index === 1;
-      
-      gsap.fromTo(row, 
-        { xPercent: isMiddleRow ? -50 : 0 }, 
-        { 
-          xPercent: isMiddleRow ? 0 : -50,
+    const rows = Array.from(
+      containerRef.current.querySelectorAll<HTMLDivElement>(".skill-row")
+    );
+
+    const init = () => {
+      rows.forEach((row, index) => {
+        gsap.killTweensOf(row);
+
+        const singleWidth = row.scrollWidth / 2; // because I render [...row, ...row]
+        const dir = index === 1 ? 1 : -1;
+        const wrap = gsap.utils.wrap(-singleWidth, 0); // keep x in [-singleWidth, 0)
+
+        gsap.set(row, { x: 0, willChange: "transform", force3D: true });
+
+        gsap.to(row, {
+          x: dir * -singleWidth,
           duration: 50,
-          repeat: -1, 
-          ease: 'none',
-          delay: index * 0.5 // Stagger the start times
-        }
-      );
-    });
+          ease: "none",
+          repeat: -1,
+          modifiers: {
+            x: (v) => `${wrap(parseFloat(v))}px`,
+          },
+        });
+      });
+    };
+
+    init();
+
+    const ro = new ResizeObserver(() => init());
+    ro.observe(containerRef.current);
+
+    return () => {
+      ro.disconnect();
+      rows.forEach((row) => gsap.killTweensOf(row));
+    };
   }, { scope: containerRef });
 
   return containerRef;
