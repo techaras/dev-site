@@ -1,13 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { ServiceCard } from "./service-card";
 import { services } from "./constants";
+import { useHorizontalScroll } from "./useHorizontalScroll";
 
-interface ServicesProps {
-  servicesScrollRef: React.MutableRefObject<HTMLDivElement | null>;   // track
-  servicesViewportRef: React.MutableRefObject<HTMLDivElement | null>; // viewport
-}
+export function Services() {
+  const { trackRef, viewportRef } = useHorizontalScroll();
 
-export function Services({ servicesScrollRef, servicesViewportRef }: ServicesProps) {
   return (
     <div className="w-full h-full text-[#f2f2f2] flex flex-col">
       {/* Header */}
@@ -21,10 +19,10 @@ export function Services({ servicesScrollRef, servicesViewportRef }: ServicesPro
       </button>
 
       {/* Card container viewport (mask) */}
-      <div ref={servicesViewportRef} className="flex-1 min-h-0 overflow-hidden edge-to-edge">
+      <div ref={viewportRef} className="flex-1 min-h-0 overflow-hidden edge-to-edge">
         {/* Horizontal track */}
         <div
-          ref={servicesScrollRef}
+          ref={trackRef}
           className="flex gap-6 h-full w-max will-change-transform"
         >
           {services.map((service, index) => (
@@ -40,4 +38,4 @@ export function Services({ servicesScrollRef, servicesViewportRef }: ServicesPro
       </div>
     </div>
   );
-};
+}
