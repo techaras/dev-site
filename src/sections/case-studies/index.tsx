@@ -7,8 +7,8 @@ export function CaseStudies() {
       className="py-20 px-6 md:px-12 lg:px-16"
     >
       <div className="w-full max-w-7xl mx-auto">
-        {/* Section Title */}
-        <div className="mb-12 text-center">
+        {/* Section Title - Now gets pinned with the rest */}
+        <div className="text-center mb-16">
           <h2 className="font-body text-lg font-light text-foreground mb-4">
             CASE STUDIES
           </h2>
@@ -16,8 +16,6 @@ export function CaseStudies() {
             Curated Work
           </p>
         </div>
-
-        {/* Case Studies */}
         <TransitionLayout />
       </div>
     </section>

@@ -9,7 +9,7 @@ export type ActiveCaseStudy = 'design' | 'advertising';
 
 export function useScrollTransition() {
   // Refs for GSAP targeting
-  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);  // <- Changed from containerRef
   const designVideoRef = useRef<HTMLDivElement>(null);
   const advertisingVideoRef = useRef<HTMLDivElement>(null);
   const rightBarRef = useRef<HTMLDivElement>(null);
@@ -19,11 +19,11 @@ export function useScrollTransition() {
   const [activeCaseStudy, setActiveCaseStudy] = useState<ActiveCaseStudy>('design');
 
   useLayoutEffect(() => {
-    if (!containerRef.current || !designVideoRef.current || !advertisingVideoRef.current) {
+    if (!sectionRef.current || !designVideoRef.current || !advertisingVideoRef.current) {
       return;
     }
 
-    const container = containerRef.current;
+    const section = sectionRef.current;  // <- Changed from container
     const designVideo = designVideoRef.current;
     const advertisingVideo = advertisingVideoRef.current;
 
@@ -34,10 +34,10 @@ export function useScrollTransition() {
     // Create the main timeline
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: container,
+        trigger: section,  // <- Now targets the entire section content
         start: 'center center',
         end: '+=100%', // Scroll distance for the animation
-        pin: true,
+        pin: true,  // This will pin the entire section content
         scrub: 1,
         anticipatePin: 1,
         onUpdate: (self) => {
@@ -85,7 +85,7 @@ export function useScrollTransition() {
     return () => {
       // Kill the ScrollTrigger and timeline
       ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.trigger === container) {
+        if (trigger.trigger === section) {
           trigger.kill();
         }
       });
@@ -108,7 +108,7 @@ export function useScrollTransition() {
 
   return {
     // Refs for the components to use
-    containerRef,
+    sectionRef,  // <- Changed from containerRef
     designVideoRef,
     advertisingVideoRef,
     rightBarRef,

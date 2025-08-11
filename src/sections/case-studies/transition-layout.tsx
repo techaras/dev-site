@@ -7,7 +7,7 @@ import { useScrollTransition } from './useScrollTransition';
 
 export function TransitionLayout() {
   const {
-    containerRef,
+    sectionRef,  // <- Changed from containerRef
     designVideoRef,
     advertisingVideoRef,
     rightBarRef,
@@ -19,12 +19,12 @@ export function TransitionLayout() {
   const currentData = activeCaseStudy === 'design' ? designPlatformData : advertisingPlatformData;
 
   return (
-    <div className="flex flex-col gap-16">
-      {/* Transition Container - This gets pinned */}
-      <div 
-        ref={containerRef}
-        className="w-full h-[700px]"
-      >
+    <div 
+      ref={sectionRef}  // <- Now this targets the entire content
+      className="flex flex-col gap-16"
+    >
+      {/* Content Container */}
+      <div className="w-full h-[700px]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
           {/* Left side - Overlapping Videos and BottomBar */}
           <div className="lg:col-span-2 flex flex-col gap-6">
