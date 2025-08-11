@@ -1,4 +1,4 @@
-export function Video() {
+export function DesignPlatformVideo() {
     return (
       <div className="w-full h-full flex items-center justify-center">
         <div className="text-center">
@@ -19,5 +19,5 @@ export function Video() {
           </p>
         </div>
       </div>
-    )
+    );
   }

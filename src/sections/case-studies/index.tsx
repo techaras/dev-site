@@ -1,5 +1,4 @@
-import { DesignPlatform } from './design-platform'
-import { AdvertisingPlatform } from './advertising-platform'
+import { TransitionLayout } from './transition-layout';
 
 export function CaseStudies() {
   return (
@@ -18,15 +17,9 @@ export function CaseStudies() {
           </p>
         </div>
 
-        {/* Case Studies Grid */}
-        <div className="flex flex-col gap-16">
-          {/* Design Platform */}
-          <DesignPlatform />
-          
-          {/* Advertising Platform */}
-          <AdvertisingPlatform />
-        </div>
+        {/* Case Studies */}
+        <TransitionLayout />
       </div>
     </section>
-  )
+  );
 }
