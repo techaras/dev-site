@@ -24,7 +24,7 @@ export function useSkillRowAnimation() {
 
         gsap.to(row, {
           x: dir * -singleWidth,
-          duration: 50,
+          duration: 70,
           ease: "none",
           repeat: -1,
           modifiers: {

@@ -226,6 +226,33 @@
   margin-right: -2rem !important;
 }
 
+/* Services Infinite Scrolling Animation */
+.services-carousel {
+  display: flex;
+  overflow: hidden;
+}
+
+.services-group {
+  display: flex;
+  gap: 1.5rem;
+  padding-right: 1.5rem; /* This creates the gap between groups */
+  will-change: transform;
+  animation: scrolling-services 100s linear infinite;
+}
+
+.services-carousel:hover .services-group {
+  animation-play-state: paused;
+}
+
+@keyframes scrolling-services {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 /* 562px to 767px: Show 2-line version */
 @media (min-width: 562px) and (max-width: 767px) {
   .home-info-grid-text-medium {
