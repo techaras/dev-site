@@ -10,35 +10,25 @@ export function Services() {
         Request Service
         <ArrowRight className="w-7 h-7 mb-1" />
       </button>
-      
+
       {/* Card container with defined height */}
       <div className="flex-1 min-h-0">
-        {/* Infinite scrolling cards */}
-        <div className="services-carousel edge-to-edge h-full">
-          <div className="services-group">
-            {services.map((service, index) => (
-              <ServiceCard
-                key={index}
-                icon={service.icon}
-                iconBg={service.iconBg}
-                title={service.title}
-                description={service.description}
-              />
-            ))}
-          </div>
-          <div className="services-group" aria-hidden="true">
-            {services.map((service, index) => (
-              <ServiceCard
-                key={`duplicate-${index}`}
-                icon={service.icon}
-                iconBg={service.iconBg}
-                title={service.title}
-                description={service.description}
-              />
-            ))}
-          </div>
+        {/* Horizontal scrolling cards */}
+        <div
+          className="flex gap-6 overflow-x-auto scrollbar-none edge-to-edge h-full"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              icon={service.icon}
+              iconBg={service.iconBg}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
         </div>
       </div>
     </div>
   );
-}
+};
