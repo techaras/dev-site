@@ -1,17 +1,27 @@
 export function SkillGrid() {
-    return (
-      <div className="grid grid-cols-2 gap-2 text-sm">
-        <div className="font-body text-muted-foreground">• ML Pipelines</div>
-        <div className="font-body text-muted-foreground">• Multi-platform Integrations</div>
-        <div className="font-body text-muted-foreground">• RAG Systems</div>
-        <div className="font-body text-muted-foreground">• LangChain</div>
-        <div className="font-body text-muted-foreground">• Multi-tenant SaaS</div>
-        <div className="font-body text-muted-foreground">• Enterprise Data Governance</div>
-        <div className="font-body text-muted-foreground">• Full-stack Dev</div>
-        <div className="font-body text-muted-foreground">• ML Algorithms</div>
-        <div className="font-body text-muted-foreground">• Payment Processing</div>
-        <div className="font-body text-muted-foreground">• System Architecture</div>
-      </div>
-    );
-  }
-  
+  const skills = [
+    "ML Pipelines",
+    "Multi-platform Integrations", 
+    "RAG Systems",
+    "LangChain",
+    "Multi-tenant SaaS",
+    "Enterprise Data Governance",
+    "Full-stack Dev",
+    "ML Algorithms", 
+    "Payment Processing",
+    "System Architecture"
+  ];
+
+  return (
+    <div className="flex flex-col gap-3">
+      {skills.map((skill, index) => (
+        <div 
+          key={index}
+          className="px-4 py-2 border border-[#353739] rounded-full font-body text-sm text-muted-foreground w-fit whitespace-nowrap edge-to-edge"
+        >
+          {skill}
+        </div>
+      ))}
+    </div>
+  );
+}
