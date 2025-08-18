@@ -15,23 +15,23 @@ export const designPlatformData: CaseStudyData = {
       {
         title: "Problem",
         items: [
-          "• Small T-shirt brands don't know what to design or who to design for",
-          "• Traditional design process lacks market research and customer insights"
+          "• Brands lack design direction and targeting",
+          "• No market research backing decisions"
         ]
       },
       {
         title: "Solution",
         items: [
-          "• AI research engine analyses brands, owners, and target markets using LLMs",
-          "• Generates visual designs displayed on interactive 3D T-shirts",
-          "• Advanced editing tools with edge detection and shape segmentation"
+          "• AI generates designs from brand analysis",
+          "• 3D visualization with advanced editing",
+          "• LLM-powered market research integration"
         ]
       },
       {
-        title: "Achievements",
+        title: "Impact",
         items: [
           "• Won U.S. Patent #US10324916B2",
-          "• Secured elite AI Forge accelerator placement (12 of 500+ applicants)"
+          "• AI Forge accelerator (12 of 500+ applicants)"
         ]
       }
     ],

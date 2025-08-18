@@ -8,29 +8,29 @@ import type { CaseStudyData } from "../types";
 export const advertisingPlatformData: CaseStudyData = {
   projectData: {
     slug: "advertising-platform",
-    title: "Advertising Platform",
+    title: "Ad Platform",
     description: "Built in 6 weeks | Solo development",
     sections: [
       {
         title: "Problem",
         items: [
-          "• Manual campaign creation takes weeks and introduces human error",
-          "• Time-intensive processes delay campaign launches and reduce efficiency"
+          "• Manual campaign creation takes weeks",
+          "• Human error creates costly mistakes"
         ]
       },
       {
         title: "Solution",
         items: [
-          "• Intelligent form-to-email-to-campaign creation automation",
-          "• Multi-tenant architecture with automatic form routing",
-          "• Zero-touch campaign configuration eliminates manual setup"
+          "• Automated form-to-campaign pipeline",
+          "• Multi-tenant architecture with smart routing",
+          "• Near zero-touch automation for campaign setup",
         ]
       },
       {
         title: "Impact",
         items: [
-          "• Eliminates human error in campaign creation process",
-          "• Reduces setup time"
+          "• Eliminates campaign creation errors",
+          "• Dramatically reduces setup time"
         ]
       }
     ],
