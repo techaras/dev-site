@@ -7,6 +7,7 @@ import type { CaseStudyData } from "../types";
 
 export const advertisingPlatformData: CaseStudyData = {
   projectData: {
+    slug: "advertising-platform",
     title: "Advertising Platform",
     description: "Built in 6 weeks | Solo development",
     sections: [
@@ -32,7 +33,11 @@ export const advertisingPlatformData: CaseStudyData = {
           "• Reduces setup time"
         ]
       }
-    ]
+    ],
+    buttons: {
+      githubUrl: "https://github.com/stavros-symeonidis/advertising-platform",
+      detailPath: "/case-studies/advertising-platform"
+    }
   },
   techStack: [
     { icon: <TypescriptIcon className="w-12 h-12" />, name: "TypeScript" },

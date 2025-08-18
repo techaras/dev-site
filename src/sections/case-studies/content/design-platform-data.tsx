@@ -8,6 +8,7 @@ import type { CaseStudyData } from "../types";
 
 export const designPlatformData: CaseStudyData = {
   projectData: {
+    slug: "design-platform",
     title: "Design Platform",
     description: "Built in 6 months | Patent-winning innovation | AI Forge validated",
     sections: [
@@ -33,7 +34,11 @@ export const designPlatformData: CaseStudyData = {
           "• Secured elite AI Forge accelerator placement (12 of 500+ applicants)"
         ]
       }
-    ]
+    ],
+    buttons: {
+      githubUrl: "https://github.com/stavros-symeonidis/design-platform",
+      detailPath: "/case-studies/design-platform"
+    }
   },
   techStack: [
     { icon: <NextjsIcon className="w-12 h-12" />, name: "Next.js" },
