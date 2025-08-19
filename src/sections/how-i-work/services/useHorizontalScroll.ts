@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -7,6 +7,10 @@ gsap.registerPlugin(ScrollTrigger);
 export function useHorizontalScroll() {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const viewportRef = useRef<HTMLDivElement | null>(null);
+  
+  // Shadow states for horizontal scrolling
+  const [showLeftShadow, setShowLeftShadow] = useState(false);
+  const [showRightShadow, setShowRightShadow] = useState(true);
 
   useLayoutEffect(() => {
     if (!trackRef.current || !viewportRef.current) return;
@@ -39,6 +43,16 @@ export function useHorizontalScroll() {
       scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        // Calculate shadow visibility based on scroll progress
+        const progress = self.progress;
+        
+        // Show left shadow when we've scrolled (progress > 0)
+        setShowLeftShadow(progress > 0);
+        
+        // Show right shadow when not at the end (progress < 1)
+        setShowRightShadow(progress < 0.99); // Small buffer to account for precision
+      },
       // markers: true,
     });
 
@@ -63,5 +77,10 @@ export function useHorizontalScroll() {
     };
   }, []);
 
-  return { trackRef, viewportRef };
+  return { 
+    trackRef, 
+    viewportRef,
+    showLeftShadow,
+    showRightShadow
+  };
 }
