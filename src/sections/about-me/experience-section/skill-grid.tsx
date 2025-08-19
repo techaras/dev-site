@@ -13,11 +13,11 @@ export function SkillGrid() {
   ];
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 overflow-y-auto flex-1">
       {skills.map((skill, index) => (
         <div 
           key={index}
-          className="px-4 py-2 border border-[#353739] rounded-full font-body text-sm text-muted-foreground w-fit whitespace-nowrap edge-to-edge"
+          className="px-4 py-2 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full whitespace-nowrap text-center"
         >
           {skill}
         </div>
