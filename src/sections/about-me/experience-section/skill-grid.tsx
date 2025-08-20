@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 
-// Import SVG assets as URLs
 import gitBranchIcon from '../../../assets/gitBranchIcon.svg';
 import plugIcon from '../../../assets/plugIcon.svg';
 import ragDocIcon from '../../../assets/ragDocIcon.svg';
