@@ -7,6 +7,10 @@ import { ProfileSection } from './profile-section';
 import { FeatureCard } from './feature-card';
 import { AvailabilityCard } from './availability-card';
 
+// Import SVG assets
+import zapIcon from '../../assets/zapIcon.svg';
+import rocketIcon from '../../assets/rocketIcon.svg';
+
 export function AboutMe() {
   return (
     <section 
@@ -54,10 +58,10 @@ export function AboutMe() {
           <ProfileSection />
 
           {/* Column 5, Row 4 - Scalable solutions */}
-          <FeatureCard emoji="⚡" text="Scalable solutions" />
+          <FeatureCard icon={zapIcon} text="Scalable solutions" />
 
           {/* Column 5, Row 5 - Prototype to Production */}
-          <FeatureCard emoji="🚀" text="Prototype to Production" />
+          <FeatureCard icon={rocketIcon} text="Prototype to Production" />
 
           {/* Columns 2-4, Row 6 - Accepting 2 new clients */}
           <AvailabilityCard />
