@@ -73,7 +73,7 @@ export function SkillGrid() {
         {skills.map((skill, index) => (
           <div 
             key={index}
-            className="relative min-h-52 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full text-center flex items-center justify-center flex-shrink-0 flex-col gap-3"
+            className="relative min-h-52 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full text-center flex items-center justify-center flex-shrink-0 flex-col gap-3 pl-6"
           >
             {/* Left stripe with rotated text */}
             <div className="absolute -left-px -top-px -bottom-px w-8 bg-[#353739] rounded-l-[2rem] flex items-center justify-center">
@@ -87,7 +87,7 @@ export function SkillGrid() {
               alt={skill.text}
               className="w-24 h-24 flex-shrink-0"
             />
-            <span className="whitespace-nowrap">{skill.text}</span>
+            <span className="whitespace-nowrap mt-4">{skill.text}</span>
           </div>
         ))}
       </div>
