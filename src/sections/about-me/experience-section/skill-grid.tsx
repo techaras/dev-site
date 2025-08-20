@@ -73,7 +73,7 @@ export function SkillGrid() {
         {skills.map((skill, index) => (
           <div 
             key={index}
-            className="min-h-52 px-4 py-2 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full text-center flex items-center justify-center flex-shrink-0 flex-col gap-3"
+            className="min-h-52 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full text-center flex items-center justify-center flex-shrink-0 flex-col gap-3"
           >
             <img 
               src={skill.icon} 
