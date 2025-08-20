@@ -1,21 +1,38 @@
 import { useState, useEffect, useRef } from 'react';
 
+// Import SVG assets as URLs
+import gitBranchIcon from '../../../assets/gitBranchIcon.svg';
+import plugIcon from '../../../assets/plugIcon.svg';
+import ragDocIcon from '../../../assets/ragDocIcon.svg';
+import langchainIcon from '../../../assets/langachainIcon.svg';
+import layersIcon from '../../../assets/layersIcon.svg';
+import shieldCheckIcon from '../../../assets/shieldCheckIcon.svg';
+import codeIcon from '../../../assets/codeIcon.svg';
+import cpuIcon from '../../../assets/cpuIcon.svg';
+import creditCardIcon from '../../../assets/creditCardIcon.svg';
+import buildingIcon from '../../../assets/buildingIcon.svg';
+
+interface SkillItem {
+  text: string;
+  icon: string;
+}
+
 export function SkillGrid() {
   const [showTopShadow, setShowTopShadow] = useState(false);
   const [showBottomShadow, setShowBottomShadow] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const skills = [
-    "ML Pipelines",
-    "Multi-platform Integrations", 
-    "RAG Systems",
-    "LangChain",
-    "Multi-tenant SaaS",
-    "Enterprise Data Governance",
-    "Full-stack Dev",
-    "ML Algorithms", 
-    "Payment Processing",
-    "System Architecture"
+  const skills: SkillItem[] = [
+    { text: "ML Pipelines", icon: gitBranchIcon },
+    { text: "Multi-platform Integrations", icon: plugIcon },
+    { text: "RAG Systems", icon: ragDocIcon },
+    { text: "LangChain", icon: langchainIcon },
+    { text: "Multi-tenant SaaS", icon: layersIcon },
+    { text: "Enterprise Data Governance", icon: shieldCheckIcon },
+    { text: "Full-stack Dev", icon: codeIcon },
+    { text: "ML Algorithms", icon: cpuIcon },
+    { text: "Payment Processing", icon: creditCardIcon },
+    { text: "System Architecture", icon: buildingIcon },
   ];
 
   useEffect(() => {
@@ -56,9 +73,14 @@ export function SkillGrid() {
         {skills.map((skill, index) => (
           <div 
             key={index}
-            className="min-h-52 px-4 py-2 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full whitespace-nowrap text-center flex items-center justify-center flex-shrink-0"
+            className="min-h-52 px-4 py-2 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full text-center flex items-center justify-center flex-shrink-0 flex-col gap-3"
           >
-            {skill}
+            <img 
+              src={skill.icon} 
+              alt={skill.text}
+              className="w-8 h-8 flex-shrink-0"
+            />
+            <span className="whitespace-nowrap">{skill.text}</span>
           </div>
         ))}
       </div>
