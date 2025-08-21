@@ -1,5 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
-
 import gitBranchIcon from '../../../assets/gitBranchIcon.svg';
 import plugIcon from '../../../assets/plugIcon.svg';
 import ragDocIcon from '../../../assets/ragDocIcon.svg';
@@ -10,6 +8,7 @@ import codeIcon from '../../../assets/codeIcon.svg';
 import cpuIcon from '../../../assets/cpuIcon.svg';
 import creditCardIcon from '../../../assets/creditCardIcon.svg';
 import buildingIcon from '../../../assets/buildingIcon.svg';
+import { useVerticalScroll } from './useVerticalScroll';
 
 interface SkillItem {
   text: string;
@@ -17,9 +16,7 @@ interface SkillItem {
 }
 
 export function SkillGrid() {
-  const [showTopShadow, setShowTopShadow] = useState(false);
-  const [showBottomShadow, setShowBottomShadow] = useState(true);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { trackRef, viewportRef, showTopShadow, showBottomShadow } = useVerticalScroll();
 
   const skills: SkillItem[] = [
     { text: "ML Pipelines", icon: gitBranchIcon },
@@ -34,27 +31,6 @@ export function SkillGrid() {
     { text: "System Architecture", icon: buildingIcon },
   ];
 
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = container;
-      
-      // Show top shadow when scrolled down
-      setShowTopShadow(scrollTop > 0);
-      
-      // Show bottom shadow when not at bottom
-      setShowBottomShadow(scrollTop < scrollHeight - clientHeight - 1);
-    };
-
-    // Initial check
-    handleScroll();
-
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="relative flex flex-col gap-3 flex-1 max-h-[553px]">
       {/* Top scroll shadow */}
@@ -64,31 +40,34 @@ export function SkillGrid() {
         }`}
       />
       
-      {/* Scrollable content */}
-      <div 
-        ref={scrollContainerRef}
-        className="flex flex-col gap-3 overflow-y-auto flex-1"
-      >
-        {skills.map((skill, index) => (
-          <div 
-            key={index}
-            className="relative min-h-52 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full text-center flex items-center justify-center flex-shrink-0 flex-col gap-3 pl-6"
-          >
-            {/* Left stripe with rotated text */}
-            <div className="absolute -left-px -top-px -bottom-px w-8 bg-[#353739] rounded-l-[2rem] flex items-center justify-center">
-              <span className="text-white font-heading text-lg transform rotate-270 translate-x-1 whitespace-nowrap">
-                experience
-              </span>
+      {/* Scrollable viewport (mask) - overflow hidden to let GSAP control movement */}
+      <div ref={viewportRef} className="flex-1 overflow-hidden">
+        {/* Vertical track */}
+        <div
+          ref={trackRef}
+          className="flex flex-col gap-3 will-change-transform"
+        >
+          {skills.map((skill, index) => (
+            <div 
+              key={index}
+              className="relative min-h-52 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground w-full text-center flex items-center justify-center flex-shrink-0 flex-col gap-3 pl-6"
+            >
+              {/* Left stripe with rotated text */}
+              <div className="absolute -left-px -top-px -bottom-px w-8 bg-[#353739] rounded-l-[2rem] flex items-center justify-center">
+                <span className="text-white font-heading text-lg transform rotate-270 translate-x-1 whitespace-nowrap">
+                  experience
+                </span>
+              </div>
+              
+              <img 
+                src={skill.icon} 
+                alt={skill.text}
+                className="w-24 h-24 flex-shrink-0"
+              />
+              <span className="whitespace-nowrap mt-4">{skill.text}</span>
             </div>
-            
-            <img 
-              src={skill.icon} 
-              alt={skill.text}
-              className="w-24 h-24 flex-shrink-0"
-            />
-            <span className="whitespace-nowrap mt-4">{skill.text}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Bottom scroll shadow */}
