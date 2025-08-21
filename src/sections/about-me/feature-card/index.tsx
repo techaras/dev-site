@@ -18,25 +18,35 @@ export function FeatureCard({
   const isTextLeftIconRight = variant === 'text-left-icon-right';
   
   return (
-    <div className={`bg-black border border-[#353739] rounded-[2rem] transition-all duration-300 hover:border-[#555759] hover:transform hover:-translate-y-1 p-4 ${className}`}>
-      <div className="w-full h-full flex flex-col justify-between">
+    <div className={`bg-black border border-[#353739] rounded-[2rem] min-h-20 transition-all duration-300 p-4 overflow-hidden relative ${className}`}>
+
+      <div className="w-full h-full flex flex-col justify-between relative z-10">
+
         {/* Text positioning */}
-        <div className={`flex ${isTextLeftIconRight ? 'justify-start' : 'justify-end'} ${isTextLeftIconRight ? 'items-start' : 'items-end'}`}>
-          <span className={`font-heading text-md text-[#f2f2f2] ${isTextLeftIconRight ? 'text-left' : 'text-right'}`}>
-            {text}
-          </span>
-        </div>
+        {isTextLeftIconRight ? (
+          <div className="flex justify-start items-start">
+            <span className="font-heading text-md text-[#f2f2f2] text-left">
+              {text}
+            </span>
+          </div>
+        ) : (
+          <div className="absolute top-0 right-0 translate-y-8">
+            <span className="font-heading text-md text-[#f2f2f2] text-right">
+              {text}
+            </span>
+          </div>
+        )}
         
-        {/* Icon positioning */}
-        <div className={`flex ${isTextLeftIconRight ? 'justify-end' : 'justify-start'} ${isTextLeftIconRight ? 'items-end' : 'items-start'}`}>
+        {/* Icon positioning - now positioned to extend beyond container */}
+        <div className={`absolute ${isTextLeftIconRight ? 'bottom-0 right-0 translate-x-4 translate-y-8' : 'bottom-0 left-0 -translate-x-4 translate-y-0'}`}>
           {icon ? (
             <img 
               src={icon} 
               alt={altText || "Feature icon"}
-              className="w-8 h-8 flex-shrink-0"
+              className="w-28 h-28 flex-shrink-0"
             />
           ) : (
-            <span className="text-2xl">{emoji}</span>
+            <span className="text-6xl">{emoji}</span>
           )}
         </div>
       </div>
