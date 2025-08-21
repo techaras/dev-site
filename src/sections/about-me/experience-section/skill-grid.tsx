@@ -56,7 +56,7 @@ export function SkillGrid() {
   }, []);
 
   return (
-    <div className="relative flex flex-col gap-3 flex-1 max-h-[520px]">
+    <div className="relative flex flex-col gap-3 flex-1 max-h-[553px]">
       {/* Top scroll shadow */}
       <div 
         className={`absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-background to-transparent pointer-events-none z-10 transition-opacity duration-300 ${
