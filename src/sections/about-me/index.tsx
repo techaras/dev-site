@@ -58,10 +58,20 @@ export function AboutMe() {
           <ProfileSection />
 
           {/* Column 5, Row 4 - Scalable solutions */}
-          <FeatureCard icon={zapIcon} text="Scalable solutions" />
+          <FeatureCard 
+            icon={zapIcon} 
+            text={<>Scalable<br/>Solutions</>}
+            altText="Scalable solutions"
+            variant="text-left-icon-right"
+          />
 
           {/* Column 5, Row 5 - Prototype to Production */}
-          <FeatureCard icon={rocketIcon} text="Prototype to Production" />
+          <FeatureCard 
+            icon={rocketIcon} 
+            text={<>Prototype<br/>to Production</>}
+            altText="Prototype to Production"
+            variant="text-right-icon-left"
+          />
 
           {/* Columns 2-4, Row 6 - Accepting 2 new clients */}
           <AvailabilityCard />
