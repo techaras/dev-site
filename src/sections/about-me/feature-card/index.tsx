@@ -30,7 +30,7 @@ export function FeatureCard({
             </span>
           </div>
         ) : (
-          <div className="absolute top-0 right-0 translate-y-15">
+          <div className="flex justify-end items-start pt-15">
             <span className="font-heading text-lg text-[#f2f2f2] text-right">
               {text}
             </span>
