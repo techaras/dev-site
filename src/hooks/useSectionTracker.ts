@@ -39,8 +39,11 @@ export function useSectionTracker() {
               
               console.log(`📍 Section in viewport: ${sectionId}`);
               
-              // Only update store for sections we track in navigation (not footer)
-              if (sectionId !== 'footer') {
+              // Handle footer specially - set activeSection to null to hide all tab backgrounds
+              if (sectionId === 'footer') {
+                setActiveSection(null);
+              } else {
+                // For tracked navigation sections, update activeSection
                 setActiveSection(sectionId as SectionId);
               }
             }
