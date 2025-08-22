@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigationStore, type SectionId } from '@/stores/navigationStore';
 
 const SECTIONS = [
@@ -12,12 +12,27 @@ const SECTIONS = [
 
 export function useSectionTracker() {
   const setActiveSection = useNavigationStore(state => state.setActiveSection);
+  const isNavigating = useNavigationStore(state => state.isNavigating);
+  
+  // Use ref to ensure callback always has current navigation state
+  const isNavigatingRef = useRef(isNavigating);
+
+  // Update ref whenever navigation state changes
+  useEffect(() => {
+    isNavigatingRef.current = isNavigating;
+  }, [isNavigating]);
 
   useEffect(() => {
     // Wait for DOM to be ready and GSAP to initialize
     const timer = setTimeout(() => {
       const observer = new IntersectionObserver(
         (entries) => {
+          // Use ref to get current navigation state (avoids stale closure)
+          if (isNavigatingRef.current) {
+            console.log('🚫 Skipping section updates during navigation');
+            return;
+          }
+
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const sectionId = entry.target.id;
@@ -56,5 +71,5 @@ export function useSectionTracker() {
     }, 1000); // Wait 1 second for GSAP to initialize
 
     return () => clearTimeout(timer);
-  }, [setActiveSection]);
+  }, [setActiveSection]); // Removed isNavigating dependency since we use ref
 }

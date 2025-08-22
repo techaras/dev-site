@@ -17,15 +17,23 @@ const SECTION_TO_NAV_MAP: Record<SectionId, NavigationItem> = {
 
 interface NavigationState {
   activeSection: SectionId | null;
+  isNavigating: boolean;
   setActiveSection: (sectionId: SectionId) => void;
+  setIsNavigating: (navigating: boolean) => void;
   getActiveNavigationItem: () => NavigationItem | null;
 }
 
 export const useNavigationStore = create<NavigationState>((set, get) => ({
   activeSection: null,
+  isNavigating: false,
   
   setActiveSection: (sectionId: SectionId) => {
     set({ activeSection: sectionId });
+  },
+  
+  setIsNavigating: (navigating: boolean) => {
+    console.log(`🧭 Navigation state: ${navigating ? 'START' : 'END'}`);
+    set({ isNavigating: navigating });
   },
   
   getActiveNavigationItem: () => {
