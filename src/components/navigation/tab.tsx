@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import type { TabProps } from "./types";
 
-export const Tab = ({ children, setPosition, href }: TabProps) => {
+export const Tab = ({ children, setPosition, href, isActive }: TabProps) => {
   const ref = useRef<HTMLLIElement>(null);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -36,7 +36,9 @@ export const Tab = ({ children, setPosition, href }: TabProps) => {
           opacity: 1,
         });
       }}
-      className="relative z-10"
+      className={`relative z-10 rounded-full transition-colors duration-200 ${
+        isActive ? 'bg-primary/20' : ''
+      }`}
     >
       <a
         href={href}

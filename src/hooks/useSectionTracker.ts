@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigationStore, type SectionId } from '@/stores/navigationStore';
 
 const SECTIONS = [
   'home',
@@ -10,6 +11,8 @@ const SECTIONS = [
 ] as const;
 
 export function useSectionTracker() {
+  const setActiveSection = useNavigationStore(state => state.setActiveSection);
+
   useEffect(() => {
     // Wait for DOM to be ready and GSAP to initialize
     const timer = setTimeout(() => {
@@ -17,7 +20,14 @@ export function useSectionTracker() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              console.log(`📍 Section in viewport: ${entry.target.id}`);
+              const sectionId = entry.target.id;
+              
+              console.log(`📍 Section in viewport: ${sectionId}`);
+              
+              // Only update store for sections we track in navigation (not footer)
+              if (sectionId !== 'footer') {
+                setActiveSection(sectionId as SectionId);
+              }
             }
           });
         },
@@ -46,5 +56,5 @@ export function useSectionTracker() {
     }, 1000); // Wait 1 second for GSAP to initialize
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [setActiveSection]);
 }

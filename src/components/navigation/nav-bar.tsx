@@ -4,6 +4,7 @@ import { navigationItems } from "@/constants/index";
 import { Tab } from "./tab";
 import { Cursor } from "./cursor";
 import { Sidebar } from "./sidebar/sidebar";
+import { useNavigationStore } from "@/stores/navigationStore";
 import type { Position } from "./types";
 
 export function NavBar() {
@@ -12,6 +13,9 @@ export function NavBar() {
     width: 0,
     opacity: 0,
   });
+
+  // Get active navigation item using optimized selector
+  const activeNavigationItem = useNavigationStore(state => state.getActiveNavigationItem());
 
   return (
     <>
@@ -27,7 +31,12 @@ export function NavBar() {
           className="glass-texture rounded-full flex items-center justify-center gap-2 px-2 py-2 relative"
         >
           {navigationItems.map((item) => (
-            <Tab key={item.name} setPosition={setPosition} href={item.link}>
+            <Tab 
+              key={item.name} 
+              setPosition={setPosition} 
+              href={item.link}
+              isActive={activeNavigationItem === item.name}
+            >
               {item.name === "Contact" && <Globe className="w-4 h-4" />}
               {item.name}
             </Tab>
