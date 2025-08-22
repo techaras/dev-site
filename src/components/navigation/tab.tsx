@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { motion } from "framer-motion";
 import type { TabProps } from "./types";
 
 export const Tab = ({ children, setPosition, href, isActive }: TabProps) => {
@@ -23,7 +24,7 @@ export const Tab = ({ children, setPosition, href, isActive }: TabProps) => {
   };
 
   return (
-    <li
+    <motion.li
       ref={ref}
       onMouseEnter={() => {
         if (!ref?.current) return;
@@ -36,19 +37,25 @@ export const Tab = ({ children, setPosition, href, isActive }: TabProps) => {
           opacity: 1,
         });
       }}
-      className={`relative z-10 rounded-full transition-colors duration-200 ${
-        isActive ? 'bg-primary/20' : ''
-      }`}
+      className="relative z-10 rounded-full"
+      animate={{
+        backgroundColor: isActive ? "rgba(255, 255, 255, 0.1)" : "rgba(255, 255, 255, 0)"
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 350,
+        damping: 25,
+      }}
     >
       <a
         href={href}
         onClick={handleClick}
-        className="relative z-10 block cursor-pointer px-4 py-2 text-sm font-medium text-foreground mix-blend-difference transition-colors whitespace-nowrap"
+        className="relative z-10 block cursor-pointer px-4 py-2 text-sm font-medium text-foreground mix-blend-difference whitespace-nowrap"
       >
         <span className="flex items-center gap-2">
           {children}
         </span>
       </a>
-    </li>
+    </motion.li>
   );
 };
