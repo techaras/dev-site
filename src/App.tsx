@@ -8,8 +8,11 @@ import { Skills } from "@/sections/skills";
 import { AboutMe } from "@/sections/about-me";
 import { Footer } from "@/sections/footer";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { useSectionTracker } from "@/hooks/useSectionTracker";
 
 function DesktopApp() {
+  useSectionTracker();
+
   return (
     <div className="flex min-h-svh flex-col">
       <NavBar />
