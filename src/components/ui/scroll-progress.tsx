@@ -1,8 +1,7 @@
-'use client';
-
-import { motion, SpringOptions, useScroll, useSpring } from 'motion/react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import type { SpringOptions } from 'framer-motion';
+import type { RefObject } from 'react';
 import { cn } from '@/lib/utils';
-import { RefObject } from 'react';
 
 export type ScrollProgressProps = {
   className?: string;
@@ -23,7 +22,7 @@ export function ScrollProgress({
 }: ScrollProgressProps) {
   const { scrollYProgress } = useScroll({
     container: containerRef,
-    layoutEffect: Boolean(containerRef?.current),
+    // Removed layoutEffect as it doesn't exist in current Framer Motion API
   });
 
   const scaleX = useSpring(scrollYProgress, {
