@@ -2,12 +2,46 @@ import { ArrowRight } from "lucide-react";
 import { ServiceCard } from "./service-card";
 import { services } from "./constants";
 import { useHorizontalScroll } from "./useHorizontalScroll";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Services() {
-  const { trackRef, viewportRef, showLeftShadow, showRightShadow } = useHorizontalScroll();
+  const { 
+    trackRef, 
+    viewportRef, 
+    showLeftShadow, 
+    showRightShadow,
+    scrollProgress,
+    isScrolling
+  } = useHorizontalScroll();
 
   return (
-    <div className="w-full h-full text-[#f2f2f2] flex flex-col">
+    <div className="w-full h-full text-[#f2f2f2] flex flex-col relative">
+      {/* Horizontal Scroll Progress Bar - positioned right under top border */}
+      <AnimatePresence>
+        {isScrolling && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-[-31px] left-[-2rem] right-[-2rem] z-20 px-8"
+          >
+            <div className="h-1 bg-gray-800 rounded-full">
+              <ScrollProgress
+                progress={scrollProgress}
+                className="h-1 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-full"
+                springOptions={{
+                  stiffness: 280,
+                  damping: 25,
+                  restDelta: 0.001
+                }}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <button
         type="button"

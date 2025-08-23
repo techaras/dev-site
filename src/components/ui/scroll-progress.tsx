@@ -1,12 +1,14 @@
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, useMotionValue } from 'framer-motion';
 import type { SpringOptions } from 'framer-motion';
 import type { RefObject } from 'react';
+import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 export type ScrollProgressProps = {
   className?: string;
   springOptions?: SpringOptions;
   containerRef?: RefObject<HTMLDivElement>;
+  progress?: number; // New: manual progress override (0 to 1)
 };
 
 const DEFAULT_SPRING_OPTIONS: SpringOptions = {
@@ -19,13 +21,27 @@ export function ScrollProgress({
   className,
   springOptions,
   containerRef,
+  progress,
 }: ScrollProgressProps) {
+  // Use manual progress if provided, otherwise use scroll-based progress
   const { scrollYProgress } = useScroll({
     container: containerRef,
-    // Removed layoutEffect as it doesn't exist in current Framer Motion API
   });
 
-  const scaleX = useSpring(scrollYProgress, {
+  // Create a motion value for manual progress
+  const manualProgress = useMotionValue(progress ?? 0);
+
+  // Update manual progress when prop changes
+  useEffect(() => {
+    if (progress !== undefined) {
+      manualProgress.set(progress);
+    }
+  }, [progress, manualProgress]);
+
+  // Choose which progress value to use
+  const activeProgress = progress !== undefined ? manualProgress : scrollYProgress;
+
+  const scaleX = useSpring(activeProgress, {
     ...DEFAULT_SPRING_OPTIONS,
     ...(springOptions ?? {}),
   });

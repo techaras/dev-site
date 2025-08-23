@@ -11,6 +11,10 @@ export function useHorizontalScroll() {
   // Shadow states for horizontal scrolling
   const [showLeftShadow, setShowLeftShadow] = useState(false);
   const [showRightShadow, setShowRightShadow] = useState(true);
+  
+  // New: Progress tracking states
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useLayoutEffect(() => {
     if (!trackRef.current || !viewportRef.current) return;
@@ -47,11 +51,27 @@ export function useHorizontalScroll() {
         // Calculate shadow visibility based on scroll progress
         const progress = self.progress;
         
+        // Update progress tracking
+        setScrollProgress(progress);
+        setIsScrolling(progress > 0 && progress < 1);
+        
         // Show left shadow when we've scrolled (progress > 0)
         setShowLeftShadow(progress > 0);
         
         // Show right shadow when not at the end (progress < 1)
         setShowRightShadow(progress < 0.99); // Small buffer to account for precision
+      },
+      onEnter: () => {
+        setIsScrolling(true);
+      },
+      onLeave: () => {
+        setIsScrolling(false);
+      },
+      onEnterBack: () => {
+        setIsScrolling(true);
+      },
+      onLeaveBack: () => {
+        setIsScrolling(false);
       },
       // markers: true,
     });
@@ -81,6 +101,8 @@ export function useHorizontalScroll() {
     trackRef, 
     viewportRef,
     showLeftShadow,
-    showRightShadow
+    showRightShadow,
+    scrollProgress, // New: 0 to 1 progress of horizontal scroll
+    isScrolling     // New: whether horizontal scrolling is active
   };
 }
