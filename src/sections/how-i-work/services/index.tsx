@@ -25,7 +25,7 @@ export function Services() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-[-31px] left-[-2rem] right-[-2rem] z-20 px-8"
+            className="absolute top-[-32px] left-[-2rem] right-[-2rem] z-20 px-8"
           >
             <div className="h-1 bg-gray-800 rounded-full">
               <ScrollProgress
