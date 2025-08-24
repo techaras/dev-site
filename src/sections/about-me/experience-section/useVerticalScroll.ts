@@ -12,6 +12,10 @@ export function useVerticalScroll() {
   const [showTopShadow, setShowTopShadow] = useState(false);
   const [showBottomShadow, setShowBottomShadow] = useState(true);
 
+  // New: Progress tracking states
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+
   useLayoutEffect(() => {
     if (!trackRef.current || !viewportRef.current) return;
 
@@ -47,11 +51,35 @@ export function useVerticalScroll() {
         // Calculate shadow visibility based on scroll progress
         const progress = self.progress;
         
+        // Update progress tracking
+        setScrollProgress(progress);
+        setIsScrolling(progress > 0 && progress < 1);
+        
+        // Log progress tracking
+        console.log('📊 Vertical Scroll Progress:', progress);
+        console.log('🔄 Vertical Scrolling Active:', progress > 0 && progress < 1);
+        
         // Show top shadow when we've scrolled (progress > 0)
         setShowTopShadow(progress > 0);
         
         // Show bottom shadow when not at the end (progress < 1)
         setShowBottomShadow(progress < 0.99); // Small buffer to account for precision
+      },
+      onEnter: () => {
+        console.log('🔥 Vertical scroll: onEnter');
+        setIsScrolling(true);
+      },
+      onLeave: () => {
+        console.log('🚪 Vertical scroll: onLeave');
+        setIsScrolling(false);
+      },
+      onEnterBack: () => {
+        console.log('🔄 Vertical scroll: onEnterBack');
+        setIsScrolling(true);
+      },
+      onLeaveBack: () => {
+        console.log('⬅️ Vertical scroll: onLeaveBack');
+        setIsScrolling(false);
       },
       // markers: true, // Uncomment for debugging
     });
@@ -81,6 +109,8 @@ export function useVerticalScroll() {
     trackRef, 
     viewportRef,
     showTopShadow,
-    showBottomShadow
+    showBottomShadow,
+    scrollProgress,     // New: 0 to 1 progress of vertical scroll
+    isScrolling         // New: whether vertical scrolling is active
   };
 }

@@ -16,7 +16,12 @@ interface SkillItem {
 }
 
 export function SkillGrid() {
-  const { trackRef, viewportRef, showTopShadow, showBottomShadow } = useVerticalScroll();
+  const { 
+    trackRef, 
+    viewportRef, 
+    showTopShadow, 
+    showBottomShadow 
+  } = useVerticalScroll();
 
   const skills: SkillItem[] = [
     { text: "ML Pipelines", icon: gitBranchIcon },
