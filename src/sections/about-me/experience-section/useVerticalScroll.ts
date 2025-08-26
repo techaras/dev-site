@@ -12,7 +12,7 @@ export function useVerticalScroll() {
   const [showTopShadow, setShowTopShadow] = useState(false);
   const [showBottomShadow, setShowBottomShadow] = useState(true);
 
-  // New: Progress tracking states
+  // Progress tracking states
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -55,7 +55,7 @@ export function useVerticalScroll() {
         setScrollProgress(progress);
         setIsScrolling(progress > 0 && progress < 1);
         
-        // Log progress tracking
+        // TEST: Log progress for vertical scroll testing
         console.log('📊 Vertical Scroll Progress:', progress);
         console.log('🔄 Vertical Scrolling Active:', progress > 0 && progress < 1);
         
@@ -110,7 +110,7 @@ export function useVerticalScroll() {
     viewportRef,
     showTopShadow,
     showBottomShadow,
-    scrollProgress,     // New: 0 to 1 progress of vertical scroll
-    isScrolling         // New: whether vertical scrolling is active
+    scrollProgress,     // Now exposed for testing
+    isScrolling         // Now exposed for testing
   };
 }

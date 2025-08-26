@@ -9,6 +9,7 @@ export type ScrollProgressProps = {
   springOptions?: SpringOptions;
   containerRef?: RefObject<HTMLDivElement>;
   progress?: number; // New: manual progress override (0 to 1)
+  orientation?: 'horizontal' | 'vertical'; // New: orientation support
 };
 
 const DEFAULT_SPRING_OPTIONS: SpringOptions = {
@@ -22,6 +23,7 @@ export function ScrollProgress({
   springOptions,
   containerRef,
   progress,
+  orientation = 'horizontal', // Default to horizontal for backward compatibility
 }: ScrollProgressProps) {
   // Use manual progress if provided, otherwise use scroll-based progress
   const { scrollYProgress } = useScroll({
@@ -41,17 +43,25 @@ export function ScrollProgress({
   // Choose which progress value to use
   const activeProgress = progress !== undefined ? manualProgress : scrollYProgress;
 
-  const scaleX = useSpring(activeProgress, {
+  const scale = useSpring(activeProgress, {
     ...DEFAULT_SPRING_OPTIONS,
     ...(springOptions ?? {}),
   });
 
+  // Default classes based on orientation
+  const defaultClasses = orientation === 'horizontal' 
+    ? 'inset-x-0 top-0 h-1 origin-left'
+    : 'inset-y-0 left-0 w-1 origin-top';
+
+  // Motion style based on orientation  
+  const motionStyle = orientation === 'horizontal'
+    ? { scaleX: scale }
+    : { scaleY: scale };
+
   return (
     <motion.div
-      className={cn('inset-x-0 top-0 h-1 origin-left', className)}
-      style={{
-        scaleX,
-      }}
+      className={cn(defaultClasses, className)}
+      style={motionStyle}
     />
   );
 }
