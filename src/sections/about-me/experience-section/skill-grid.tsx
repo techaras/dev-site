@@ -9,7 +9,8 @@ import cpuIcon from '../../../assets/cpuIcon.svg';
 import creditCardIcon from '../../../assets/creditCardIcon.svg';
 import buildingIcon from '../../../assets/buildingIcon.svg';
 import { useVerticalScroll } from './useVerticalScroll';
-import { ScrollProgress } from '@/components/ui/scroll-progress'; // Add this import
+import { ScrollProgress } from '@/components/ui/scroll-progress';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface SkillItem {
   text: string;
@@ -22,8 +23,8 @@ export function SkillGrid() {
     viewportRef, 
     showTopShadow, 
     showBottomShadow,
-    scrollProgress,  // Add this from the hook
-    isScrolling      // Add this from the hook
+    scrollProgress,
+    isScrolling
   } = useVerticalScroll();
 
   // Add console logging to test vertical progress
@@ -44,21 +45,31 @@ export function SkillGrid() {
 
   return (
     <div className="relative flex flex-col gap-3 flex-1 max-h-[553px]">
-      {/* TEST: Vertical Scroll Progress Bar */}
-      <div className="absolute right-0 top-0 bottom-0 w-2 z-20">
-        <div className="h-full w-1 bg-gray-800 rounded-full">
-          <ScrollProgress
-            orientation="vertical"
-            progress={scrollProgress}
-            className="h-full w-1 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded-full"
-            springOptions={{
-              stiffness: 280,
-              damping: 25,
-              restDelta: 0.001
-            }}
-          />
-        </div>
-      </div>
+      {/* Vertical Scroll Progress Bar - appears when scrolling */}
+      <AnimatePresence>
+        {isScrolling && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute -right-[14px] top-0 bottom-0 w-2 z-20"
+          >
+            <div className="h-full w-1 bg-gray-800 rounded-full">
+              <ScrollProgress
+                orientation="vertical"
+                progress={scrollProgress}
+                className="h-full w-1 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded-full"
+                springOptions={{
+                  stiffness: 280,
+                  damping: 25,
+                  restDelta: 0.001
+                }}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Top scroll shadow */}
       <div 
