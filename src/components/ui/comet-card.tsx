@@ -9,8 +9,8 @@ import {
 import { cn } from "@/lib/utils";
 
 export const CometCard = ({
-  rotateDepth = 17.5,
-  translateDepth = 20,
+  rotateDepth = 6,
+  translateDepth = 6,
   className,
   children,
 }: {
