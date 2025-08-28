@@ -5,7 +5,7 @@ export function ProfileSection() {
   return (
     <div className="bento-no-min col-span-3 row-span-3 flex items-center gap-6">
       {/* Profile Image with CometCard - left side */}
-      <CometCard className="w-60 h-60 flex-shrink-0">
+      <CometCard className="w-64 flex-shrink-0 ml-4">
         <img 
           src="/profile-dev.jpg" 
           alt="Stavros Symeonidis" 
@@ -14,7 +14,7 @@ export function ProfileSection() {
       </CometCard>
       
       {/* Text - right side */}
-      <div className="flex flex-col">
+      <div className="flex flex-col ml-4">
         <h3 className="font-heading text-2xl text-foreground mb-2">
           Stavros Symeonidis
         </h3>
