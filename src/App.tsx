@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { NavBar } from "@/components/navigation/nav-bar";
 import { SvgFilters } from "@/components/ui/svg-filters";
+import { GlobalDrawer } from "@/components/drawer/global-drawer";
 import { Home } from "@/sections/home";
 import { HowIWork } from "@/sections/how-i-work";
 import { CaseStudies } from "@/sections/case-studies";
@@ -49,6 +50,9 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <SvgFilters />
       {isMobile ? <MobileApp /> : <DesktopApp />}
+      
+      {/* Global Drawer - available on all screens */}
+      <GlobalDrawer />
     </ThemeProvider>
   );
 }
