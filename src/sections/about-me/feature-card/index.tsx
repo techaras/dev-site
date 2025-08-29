@@ -18,7 +18,7 @@ export function FeatureCard({
   const isTextLeftIconRight = variant === 'text-left-icon-right';
   
   return (
-    <div className={`bg-black border border-[#353739] rounded-[2rem] h-36 transition-all duration-300 p-4 overflow-hidden relative ${className}`}>
+    <div className={`bg-black border border-[#353739] rounded-[2rem] h-36 transition-all duration-300 p-4 overflow-hidden relative hover:border-[#555759] hover:-translate-y-0.5 ${className}`}>
 
       <div className="w-full h-full flex flex-col justify-between relative z-10">
 
