@@ -36,7 +36,7 @@ export const designPlatformData: CaseStudyData = {
       }
     ],
     buttons: {
-      githubUrl: "https://github.com/stavros-symeonidis/design-platform",
+      githubUrl: "https://github.com/techaras/lasi-ai-app",
       detailPath: "/case-studies/design-platform"
     }
   },

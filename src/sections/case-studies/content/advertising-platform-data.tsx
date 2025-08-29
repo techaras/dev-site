@@ -35,7 +35,7 @@ export const advertisingPlatformData: CaseStudyData = {
       }
     ],
     buttons: {
-      githubUrl: "https://github.com/stavros-symeonidis/advertising-platform",
+      githubUrl: "https://github.com/techaras/form-automation-dev/",
       detailPath: "/case-studies/advertising-platform"
     }
   },

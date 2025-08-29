@@ -2,12 +2,28 @@ import { GithubIcon } from '../../../components/icons/socials/github-icon';
 import { LinkedinIcon } from '../../../components/icons/socials/linkedin-icon';
 
 export function SocialLinks() {
+  const handleGithubClick = () => {
+    window.open('https://github.com/techaras', '_blank', 'noopener,noreferrer');
+  };
+
+  const handleLinkedInClick = () => {
+    window.open('https://www.linkedin.com/in/stav-symeonidis/', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="flex gap-3">
-      <button className="w-8 h-8 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+      <button 
+        onClick={handleGithubClick}
+        className="w-8 h-8 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
+        aria-label="Visit GitHub profile"
+      >
         <GithubIcon className="w-6 h-6" />
       </button>
-      <button className="w-8 h-8 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity">
+      <button 
+        onClick={handleLinkedInClick}
+        className="w-8 h-8 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
+        aria-label="Visit LinkedIn profile"
+      >
         <LinkedinIcon className="w-6 h-6" />
       </button>
     </div>
