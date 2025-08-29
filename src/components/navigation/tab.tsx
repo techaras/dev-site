@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigationStore, type SectionId } from "@/stores/navigationStore";
+import { useDrawerStore } from "@/stores/drawerStore";
 import type { TabProps } from "./types";
 
 // Mapping from href to section IDs
@@ -15,12 +16,20 @@ const HREF_TO_SECTION_MAP: Record<string, SectionId> = {
 export const Tab = ({ children, setPosition, href, isActive }: TabProps) => {
   const ref = useRef<HTMLLIElement>(null);
   const { setIsNavigating, setActiveSection } = useNavigationStore();
+  const { open: openDrawer } = useDrawerStore();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Only handle smooth scrolling for section links, not contact
-    if (href.startsWith('#') && href !== '#contact') {
-      e.preventDefault();
-      
+    e.preventDefault(); // Always prevent default for all navigation items
+    
+    // Handle Contact button specifically
+    if (href === '#contact') {
+      console.log('🎯 Opening contact drawer');
+      openDrawer();
+      return;
+    }
+    
+    // Handle section navigation for other links
+    if (href.startsWith('#')) {
       const targetId = href.substring(1); // Remove the #
       const targetElement = document.getElementById(targetId);
       const targetSectionId = HREF_TO_SECTION_MAP[href];
@@ -47,7 +56,6 @@ export const Tab = ({ children, setPosition, href, isActive }: TabProps) => {
         }, 1000); // 1 second should be enough for smooth scroll
       }
     }
-    // Contact button (#contact) will do nothing for now - popup functionality comes later
   };
 
   return (
