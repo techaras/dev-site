@@ -2,9 +2,16 @@ import { ArrowRight } from "lucide-react";
 import { SkillPill } from "./skill-pill";
 import { skillRows } from "./constants";
 import { useSkillRowAnimation } from "./useSkillRowAnimation";
+import { useDrawerStore } from "@/stores/drawerStore";
 
 export function Capabilities() {
   const containerRef = useSkillRowAnimation();
+  const { open: openDrawer } = useDrawerStore();
+
+  const handleLetsTalkClick = () => {
+    console.log('🎯 Opening contact drawer from capabilities section');
+    openDrawer();
+  };
 
   return (
     <div className="w-full h-full text-[#f2f2f2] flex flex-col">
@@ -47,7 +54,10 @@ export function Capabilities() {
         <p className="font-body font-light text-sm text-[#b3b3b3] mb-2">
           Don't see your stack?
         </p>
-        <button className="font-heading text-[#f2f2f2] hover:opacity-80 transition-opacity flex items-center gap-2 cursor-pointer">
+        <button 
+          onClick={handleLetsTalkClick}
+          className="font-heading text-[#f2f2f2] hover:opacity-80 transition-opacity flex items-center gap-2 cursor-pointer"
+        >
           Let's Talk
           <ArrowRight className="w-5 h-5 mb-1" />
         </button>

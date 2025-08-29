@@ -4,8 +4,16 @@ import { TeamsIcon } from "@/components/icons/methodology/teams-icon";
 import { SlackIcon } from "@/components/icons/methodology/slack-icon";
 import { AsanaIcon } from "@/components/icons/methodology/asana-icon";
 import { TrelloIcon } from "@/components/icons/methodology/trello-icon";
+import { useDrawerStore } from "@/stores/drawerStore";
 
 export function Methodology() {
+  const { open: openDrawer } = useDrawerStore();
+
+  const handleRequestChannelClick = () => {
+    console.log('🎯 Opening contact drawer from methodology section');
+    openDrawer();
+  };
+
   return (
     <div className="w-full h-full text-[#f2f2f2] flex flex-col">
       <h3 className="font-heading text-xl mb-2">Methodology</h3>
@@ -46,7 +54,10 @@ export function Methodology() {
       
       {/* Request Channel Button */}
       <div className="mt-4">
-        <button className="w-full px-6 py-2 border border-[#353739] rounded-full font-heading text-sm text-[#f2f2f2] hover:border-[#555759] transition-colors duration-300 cursor-pointer hover:opacity-80">
+        <button 
+          onClick={handleRequestChannelClick}
+          className="w-full px-6 py-2 border border-[#353739] rounded-full font-heading text-sm text-[#f2f2f2] hover:border-[#555759] transition-colors duration-300 cursor-pointer hover:opacity-80"
+        >
           Request Channel
         </button>
       </div>

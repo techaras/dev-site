@@ -4,6 +4,7 @@ import { services } from "./constants";
 import { useHorizontalScroll } from "./useHorizontalScroll";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { motion, AnimatePresence } from "framer-motion";
+import { useDrawerStore } from "@/stores/drawerStore";
 
 export function Services() {
   const { 
@@ -14,6 +15,12 @@ export function Services() {
     scrollProgress,
     isScrolling
   } = useHorizontalScroll();
+  const { open: openDrawer } = useDrawerStore();
+
+  const handleRequestServiceClick = () => {
+    console.log('🎯 Opening contact drawer from services section');
+    openDrawer();
+  };
 
   return (
     <div className="w-full h-full text-[#f2f2f2] flex flex-col relative">
@@ -45,6 +52,7 @@ export function Services() {
       {/* Header */}
       <button
         type="button"
+        onClick={handleRequestServiceClick}
         className="font-heading text-xl mb-8 text-[#f2f2f2] hover:opacity-80 transition-opacity flex items-center gap-2 cursor-pointer"
         aria-label="Request Service"
       >
