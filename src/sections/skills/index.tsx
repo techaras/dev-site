@@ -1,7 +1,15 @@
 import { SkillCard } from "./skill-card";
 import { skillsData } from "./constants";
+import { useDrawerStore } from "@/stores/drawerStore";
 
 export function Skills() {
+  const { open: openDrawer } = useDrawerStore();
+
+  const handleLetsTalkClick = () => {
+    console.log('🎯 Opening contact drawer from skills section');
+    openDrawer();
+  };
+
   return (
     <section 
       id="skills" 
@@ -38,7 +46,10 @@ export function Skills() {
           <p className="font-body font-light text-[#b3b3b3] text-base">
             Don't see your stack?
           </p>
-          <button className="px-6 pt-2 pb-1 border border-[#353739] rounded-full font-heading text-sm text-foreground hover:border-[#555759] transition-colors duration-300 cursor-pointer hover:opacity-80">
+          <button 
+            onClick={handleLetsTalkClick}
+            className="px-6 pt-2 pb-1 border border-[#353739] rounded-full font-heading text-sm text-foreground hover:border-[#555759] transition-colors duration-300 cursor-pointer hover:opacity-80"
+          >
             LET'S TALK
           </button>
         </div>
