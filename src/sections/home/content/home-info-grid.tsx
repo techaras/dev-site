@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Copy, Check } from "lucide-react";
 import { ArrowButton } from "@/components/ui/arrow-button";
+import { useDrawerStore } from "@/stores/drawerStore";
 
 export function HomeInfoGrid() {
   const [copied, setCopied] = useState(false);
+  const { open: openDrawer } = useDrawerStore();
 
   // Original email for copy functionality
   const originalEmail = "info@stavrossymeonidis.dev";
@@ -21,6 +23,11 @@ export function HomeInfoGrid() {
     }
   };
 
+  const handleConnectClick = () => {
+    console.log('🎯 Opening contact drawer from home section');
+    openDrawer();
+  };
+
   return (
     <div className="grid grid-cols-2 gap-8 px-16 items-center">
       {/* Description - Right column */}
@@ -33,7 +40,7 @@ export function HomeInfoGrid() {
       {/* Contact Info - Left column */}
       <div className="flex flex-col gap-3 justify-center items-start order-1">
         <div className="flex flex-col gap-3 w-fit">
-          <ArrowButton>let's connect</ArrowButton>
+          <ArrowButton onClick={handleConnectClick}>let's connect</ArrowButton>
           <div className="flex items-center gap-2">
             <button
               onClick={handleCopy}

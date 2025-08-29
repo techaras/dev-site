@@ -4,9 +4,10 @@ import { ArrowRight } from "lucide-react";
 
 interface ArrowButtonProps {
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-export function ArrowButton({ children }: ArrowButtonProps) {
+export function ArrowButton({ children, onClick }: ArrowButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -14,6 +15,7 @@ export function ArrowButton({ children }: ArrowButtonProps) {
       className="relative overflow-hidden font-heading z-10 cursor-pointer text-sm pl-6 rounded-full glass-texture flex items-center justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       {/* Expanding background circle (now vertically centred & anchored right) */}
       <motion.div
