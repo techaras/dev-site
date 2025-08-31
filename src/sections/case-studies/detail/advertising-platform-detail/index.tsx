@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { GithubIcon } from "@/components/icons/socials/github-icon";
-import { advertisingPlatformData } from "../content/advertising-platform-data";
+import { advertisingPlatformData } from "../../content/advertising-platform-data";
 
 export function AdvertisingPlatformDetail() {
   const { projectData, techStack } = advertisingPlatformData;

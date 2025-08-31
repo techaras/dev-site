@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { GithubIcon } from "@/components/icons/socials/github-icon";
-import { designPlatformData } from "../content/design-platform-data";
+import { designPlatformData } from "../../content/design-platform-data";
 
 export function DesignPlatformDetail() {
   const { projectData, techStack } = designPlatformData;
