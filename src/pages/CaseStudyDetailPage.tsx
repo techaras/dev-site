@@ -18,9 +18,9 @@ export function CaseStudyDetailPage() {
           <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">
               <h1 className="text-2xl font-heading mb-4">Case Study Not Found</h1>
-              <Link to="/#case-studies" className="inline-flex items-center gap-2 text-primary hover:underline">
+              <Link to="/" className="inline-flex items-center gap-2 text-primary hover:underline">
                 <ArrowLeft className="w-4 h-4" />
-                Back to Case Studies
+                Back to Home
               </Link>
             </div>
           </div>
