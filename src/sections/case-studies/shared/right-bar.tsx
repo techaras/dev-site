@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router";
 import gsap from "gsap";
 import { ArrowRight } from "lucide-react";
 import { GithubIcon } from "@/components/icons/socials/github-icon";
@@ -9,6 +10,7 @@ interface RightBarProps {
 }
 
 export function RightBar({ projectData }: RightBarProps) {
+  const navigate = useNavigate();
   const contentRef = useRef<HTMLDivElement>(null);
   const prevProjectDataRef = useRef<ProjectData | null>(null);
 
@@ -68,22 +70,7 @@ export function RightBar({ projectData }: RightBarProps) {
   };
 
   const handleLearnMoreClick = () => {
-    // Hash routing approach - easily switchable to other routing solutions later
-    window.location.hash = projectData.buttons.detailPath;
-    
-    // Future options (commented for easy switching):
-    
-    // Option A: React Router
-    // navigate(projectData.buttons.detailPath);
-    
-    // Option B: Next.js routing
-    // router.push(projectData.buttons.detailPath);
-    
-    // Option C: State-based approach
-    // setActiveDetailView(projectData.slug);
-    
-    // Option D: Modal approach
-    // setShowDetailModal(true);
+    navigate(projectData.buttons.detailPath);
   };
 
   return (
