@@ -93,7 +93,7 @@ export function DesignPlatformDetail() {
       </p>
 
       {/* Two Column Grid Layout */}
-      <div className="grid grid-cols-5 gap-8">
+      <div className="grid grid-cols-6 gap-8">
         {/* Left Column - Main Content (80%) */}
         <div className="col-span-4 space-y-16">
           {designPlatformContent.sections.map((section) => (
@@ -139,7 +139,7 @@ export function DesignPlatformDetail() {
         </div>
 
         {/* Right Column - Navigation (20%) */}
-        <div className="col-span-1">
+        <div className="col-span-2 col-start-6">
           <nav className="sticky top-8 space-y-2">
             {designPlatformContent.sections.map((section) => (
               <a 
@@ -147,7 +147,7 @@ export function DesignPlatformDetail() {
                 href={`#${section.id}`} 
                 className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                {section.title.split(' ')[0]} {section.title.split(' ')[1]}
+                {section.title}
               </a>
             ))}
           </nav>
