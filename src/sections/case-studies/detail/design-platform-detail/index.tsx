@@ -2,10 +2,13 @@ import { useNavigate } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { GithubIcon } from "@/components/icons/socials/github-icon";
 import { VideoContainer } from "../../shared/video-container";
+import { NextStepsButton } from "@/components/ui/next-steps-button";
+import { useDrawerStore } from "@/stores/drawerStore";
 import { designPlatformContent } from "./content";
 
 export function DesignPlatformDetail() {
   const navigate = useNavigate();
+  const { open: openDrawer } = useDrawerStore();
 
   const handleBackClick = () => {
     navigate("/");
@@ -24,6 +27,28 @@ export function DesignPlatformDetail() {
 
   const handleGithubClick = () => {
     window.open("https://github.com/techaras/lasi-ai-app", '_blank', 'noopener,noreferrer');
+  };
+
+  const handleGetInTouchClick = () => {
+    console.log('🎯 Opening contact drawer from case study detail');
+    openDrawer();
+  };
+
+  // Custom component renderer
+  const renderCustomComponent = (section: typeof designPlatformContent.sections[0]) => {
+    if (section.customComponent === 'next-steps-cta') {
+      return (
+        <div className="text-left">
+          <h2 className="font-body text-xl text-foreground mb-6">
+            {section.content}
+          </h2>
+          <NextStepsButton onClick={handleGetInTouchClick}>
+            Get In Touch
+          </NextStepsButton>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -77,31 +102,37 @@ export function DesignPlatformDetail() {
                 {section.title}
               </h2>
               
-              {section.content && (
-                <div className="font-body text-sm text-muted-foreground leading-relaxed mb-6">
-                  {section.content}
-                </div>
-              )}
-
-              {section.subsections && (
-                <div className="space-y-6">
-                  {section.subsections.map((subsection, index) => (
-                    <div key={index}>
-                      <h3 className="font-heading text-lg text-foreground mb-3">
-                        {subsection.title}
-                      </h3>
-                      <div className="font-body text-sm text-muted-foreground leading-relaxed">
-                        {subsection.content.split('\n').map((line, lineIndex) => (
-                          <p key={lineIndex} className="mb-1">
-                            {line.split('**').map((part, partIndex) => 
-                              partIndex % 2 === 1 ? <strong key={partIndex}>{part}</strong> : part
-                            )}
-                          </p>
-                        ))}
-                      </div>
+              {section.customComponent ? (
+                renderCustomComponent(section)
+              ) : (
+                <>
+                  {section.content && (
+                    <div className="font-body text-sm text-muted-foreground leading-relaxed mb-6">
+                      {section.content}
                     </div>
-                  ))}
-                </div>
+                  )}
+
+                  {section.subsections && (
+                    <div className="space-y-6">
+                      {section.subsections.map((subsection, index) => (
+                        <div key={index}>
+                          <h3 className="font-heading text-lg text-foreground mb-3">
+                            {subsection.title}
+                          </h3>
+                          <div className="font-body text-sm text-muted-foreground leading-relaxed">
+                            {subsection.content.split('\n').map((line, lineIndex) => (
+                              <p key={lineIndex} className="mb-1">
+                                {line.split('**').map((part, partIndex) => 
+                                  partIndex % 2 === 1 ? <strong key={partIndex}>{part}</strong> : part
+                                )}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
             </section>
           ))}
