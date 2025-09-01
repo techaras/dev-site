@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { GithubIcon } from "@/components/icons/socials/github-icon";
 import { VideoContainer } from "../../shared/video-container";
+import { designPlatformContent } from "./content";
 
 export function DesignPlatformDetail() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export function DesignPlatformDetail() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-12 px-6">
+    <div className="max-w-5xl mx-auto py-12 px-6">
       {/* Back Button and GitHub Button */}
       <div className="flex items-center justify-between mb-8">
         <button 
@@ -62,9 +63,65 @@ export function DesignPlatformDetail() {
       </p>
 
       {/* Tech Stack */}
-      <p className="font-body text-sm text-muted-foreground">
+      <p className="font-body text-sm text-muted-foreground mb-12">
         Next.js • React 19 • Three.js • OpenAI GPT-4 • Replicate API • OpenCV • Fabric.js • TypeScript • MongoDB • Stripe • Clerk Auth
       </p>
+
+      {/* Two Column Grid Layout */}
+      <div className="grid grid-cols-5 gap-8">
+        {/* Left Column - Main Content (80%) */}
+        <div className="col-span-4 space-y-16">
+          {designPlatformContent.sections.map((section) => (
+            <section key={section.id} id={section.id}>
+              <h2 className="font-heading text-2xl text-foreground mb-6">
+                {section.title}
+              </h2>
+              
+              {section.content && (
+                <div className="font-body text-sm text-muted-foreground leading-relaxed mb-6">
+                  {section.content}
+                </div>
+              )}
+
+              {section.subsections && (
+                <div className="space-y-6">
+                  {section.subsections.map((subsection, index) => (
+                    <div key={index}>
+                      <h3 className="font-heading text-lg text-foreground mb-3">
+                        {subsection.title}
+                      </h3>
+                      <div className="font-body text-sm text-muted-foreground leading-relaxed">
+                        {subsection.content.split('\n').map((line, lineIndex) => (
+                          <p key={lineIndex} className="mb-1">
+                            {line.split('**').map((part, partIndex) => 
+                              partIndex % 2 === 1 ? <strong key={partIndex}>{part}</strong> : part
+                            )}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          ))}
+        </div>
+
+        {/* Right Column - Navigation (20%) */}
+        <div className="col-span-1">
+          <nav className="sticky top-8 space-y-2">
+            {designPlatformContent.sections.map((section) => (
+              <a 
+                key={section.id}
+                href={`#${section.id}`} 
+                className="block font-body text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {section.title.split(' ')[0]} {section.title.split(' ')[1]}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
     </div>
   );
 }
