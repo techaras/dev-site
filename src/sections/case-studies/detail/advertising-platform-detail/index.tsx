@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { GithubIcon } from "@/components/icons/socials/github-icon";
 import { VideoContainer } from "../../shared/video-container";
@@ -9,6 +10,11 @@ import { advertisingPlatformContent } from "./content";
 export function AdvertisingPlatformDetail() {
   const navigate = useNavigate();
   const { open: openDrawer } = useDrawerStore();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleBackClick = () => {
     navigate("/");
