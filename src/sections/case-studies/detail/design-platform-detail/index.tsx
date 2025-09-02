@@ -72,10 +72,7 @@ export function DesignPlatformDetail() {
         </button>
       </div>
 
-      {/* Video Container */}
-      <div className="bento-square mb-8">
-        <VideoContainer activeVideo="design" />
-      </div>
+
 
       {/* Title */}
       <h1 className="font-heading text-3xl text-foreground mb-4">
@@ -83,9 +80,14 @@ export function DesignPlatformDetail() {
       </h1>
 
       {/* Description */}
-      <p className="font-body text-lg text-muted-foreground leading-relaxed mb-4">
+      <p className="font-body text-sm text-muted-foreground leading-relaxed mb-8">
         AI-powered design solution that transforms how small T-shirt brands create market-driven designs by combining intelligent brand research, customer analysis, and visual generation with interactive 3D visualisation.
       </p>
+
+      {/* Video Container */}
+      <div className="bento-square mb-8">
+        <VideoContainer activeVideo="design" />
+      </div>
 
       {/* Tech Stack */}
       <p className="font-body text-sm text-muted-foreground mb-12">
@@ -116,7 +118,7 @@ export function DesignPlatformDetail() {
                     <div className="space-y-6">
                       {section.subsections.map((subsection, index) => (
                         <div key={index}>
-                          <h3 className="font-heading text-lg text-foreground mb-3">
+                          <h3 className="font-body text-lg text-foreground mb-3">
                             {subsection.title}
                           </h3>
                           <div className="font-body text-sm text-muted-foreground leading-relaxed">
