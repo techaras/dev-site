@@ -142,7 +142,7 @@ export function DesignPlatformDetail() {
 
         {/* Right Column - Navigation (20%) */}
         <div className="col-span-2 col-start-6">
-          <nav className="sticky top-8 space-y-2">
+          <nav className="sticky top-8 space-y-3">
             {designPlatformContent.sections.map((section) => (
               <a 
                 key={section.id}
