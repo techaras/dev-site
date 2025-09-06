@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { useVideoViewport } from '@/hooks/useVideoViewport';
 
 interface CustomVideoPlayerProps {
@@ -10,8 +10,6 @@ interface CustomVideoPlayerProps {
   loop?: boolean;
   poster?: string;
   customControls?: {
-    playButton?: React.ReactNode;
-    pauseButton?: React.ReactNode;
     muteButton?: React.ReactNode;
     unmuteButton?: React.ReactNode;
   };
@@ -46,7 +44,8 @@ export function CustomVideoPlayer({
   const [isLoading, setIsLoading] = useState(true);
 
   // Initialize the autoplay hook
-  const { isInViewport } = useVideoViewport(videoRef, {    threshold: 0.5,
+  const { isInViewport } = useVideoViewport(videoRef, {
+    threshold: 0.5,
     rootMargin: '0px',
     enabled: true
   });
@@ -120,25 +119,32 @@ export function CustomVideoPlayer({
     };
   }, [onPlay, onPause, onTimeUpdate, onVolumeChange, loop]);
 
-  const togglePlay = async () => {
+  // Auto-play based on viewport visibility
+  useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || isLoading) return;
 
-    console.log('🎬 CustomVideoPlayer: Manual toggle play requested', { 
-      currentlyPlaying: isPlaying,
-      isInViewport
+    console.log('🎬 CustomVideoPlayer: Viewport change detected', { 
+      isInViewport, 
+      currentlyPlaying: isPlaying 
     });
 
-    try {
-      if (isPlaying) {
-        await video.pause();
-      } else {
-        await video.play();
+    const handleAutoPlay = async () => {
+      try {
+        if (isInViewport && !isPlaying) {
+          console.log('🎬 CustomVideoPlayer: Auto-playing video (entered viewport)');
+          await video.play();
+        } else if (!isInViewport && isPlaying) {
+          console.log('🎬 CustomVideoPlayer: Auto-pausing video (left viewport)');
+          await video.pause();
+        }
+      } catch (error) {
+        console.error('🎬 CustomVideoPlayer: Auto-play error:', error);
       }
-    } catch (error) {
-      console.error('🎬 CustomVideoPlayer: Manual play/pause error:', error);
-    }
-  };
+    };
+
+    handleAutoPlay();
+  }, [isInViewport, isPlaying, isLoading]);
 
   const toggleMute = () => {
     const video = videoRef.current;
@@ -196,7 +202,6 @@ export function CustomVideoPlayer({
         playsInline
         preload="metadata"
         className="w-full h-full object-cover"
-        onClick={togglePlay}
       />
 
       {/* Loading Spinner */}
@@ -208,21 +213,6 @@ export function CustomVideoPlayer({
 
       {/* Custom Controls Overlay */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-        {/* Center Play/Pause Button */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <button
-            onClick={togglePlay}
-            className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
-            disabled={isLoading}
-          >
-            {customControls?.playButton && customControls?.pauseButton ? (
-              isPlaying ? customControls.pauseButton : customControls.playButton
-            ) : (
-              isPlaying ? <Pause className="w-6 h-6 text-white" /> : <Play className="w-6 h-6 text-white ml-1" />
-            )}
-          </button>
-        </div>
-
         {/* Bottom Controls */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
           {/* Progress Bar */}
@@ -240,19 +230,6 @@ export function CustomVideoPlayer({
           {/* Controls Row */}
           <div className="flex items-center justify-between text-white text-sm">
             <div className="flex items-center gap-3">
-              {/* Play/Pause */}
-              <button
-                onClick={togglePlay}
-                className="hover:opacity-80 transition-opacity"
-                disabled={isLoading}
-              >
-                {customControls?.playButton && customControls?.pauseButton ? (
-                  isPlaying ? customControls.pauseButton : customControls.playButton
-                ) : (
-                  isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />
-                )}
-              </button>
-
               {/* Volume */}
               <div className="flex items-center gap-2">
                 <button
