@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { useVideoViewport } from '@/hooks/useVideoViewport';
 
 interface CustomVideoPlayerProps {
   publicId: string;
@@ -44,6 +45,12 @@ export function CustomVideoPlayer({
   const [volume, setVolume] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Initialize the autoplay hook
+  const { isInViewport } = useVideoViewport(videoRef, {    threshold: 0.5,
+    rootMargin: '0px',
+    enabled: true
+  });
+
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
   
   // Generate Cloudinary video URL with optimizations
@@ -54,7 +61,10 @@ export function CustomVideoPlayer({
     const video = videoRef.current;
     if (!video) return;
 
+    console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
+
     const handleLoadedData = () => {
+      console.log('🎬 CustomVideoPlayer: Video loaded');
       setIsLoading(false);
       setDuration(video.duration);
     };
@@ -66,11 +76,13 @@ export function CustomVideoPlayer({
     };
 
     const handlePlay = () => {
+      console.log('🎬 CustomVideoPlayer: Video play event');
       setIsPlaying(true);
       onPlay?.();
     };
 
     const handlePause = () => {
+      console.log('🎬 CustomVideoPlayer: Video pause event');
       setIsPlaying(false);
       onPause?.();
     };
@@ -83,6 +95,7 @@ export function CustomVideoPlayer({
     };
 
     const handleEnded = () => {
+      console.log('🎬 CustomVideoPlayer: Video ended');
       setIsPlaying(false);
       if (!loop) {
         setCurrentTime(0);
@@ -97,6 +110,7 @@ export function CustomVideoPlayer({
     video.addEventListener('ended', handleEnded);
 
     return () => {
+      console.log('🎬 CustomVideoPlayer: Cleaning up video event listeners');
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('play', handlePlay);
@@ -110,6 +124,11 @@ export function CustomVideoPlayer({
     const video = videoRef.current;
     if (!video) return;
 
+    console.log('🎬 CustomVideoPlayer: Manual toggle play requested', { 
+      currentlyPlaying: isPlaying,
+      isInViewport
+    });
+
     try {
       if (isPlaying) {
         await video.pause();
@@ -117,7 +136,7 @@ export function CustomVideoPlayer({
         await video.play();
       }
     } catch (error) {
-      console.error('Video play/pause error:', error);
+      console.error('🎬 CustomVideoPlayer: Manual play/pause error:', error);
     }
   };
 
