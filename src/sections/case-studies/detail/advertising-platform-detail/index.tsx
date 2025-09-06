@@ -89,7 +89,7 @@ export function AdvertisingPlatformDetail() {
       </p>
 
       {/* Video Container */}
-      <div className="bento-square mb-8">
+      <div className="mb-8">
         <VideoContainer activeVideo="advertising" />
       </div>
 
