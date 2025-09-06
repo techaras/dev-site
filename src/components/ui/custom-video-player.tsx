@@ -26,7 +26,7 @@ export function CustomVideoPlayer({
   className = '',
   autoPlay = false,
   muted = false,
-  loop = false,
+  loop = true,
   poster,
   customControls,
   onPlay,
