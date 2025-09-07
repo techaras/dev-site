@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { SvgFilters } from "@/components/ui/svg-filters";
 import { GlobalDrawer } from "@/components/drawer/global-drawer";
 import { HomePage } from "@/pages/HomePage";
@@ -8,10 +9,12 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 function DesktopApp() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
-    </Routes>
+    <SmoothScrollProvider>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
+      </Routes>
+    </SmoothScrollProvider>
   );
 }
 
