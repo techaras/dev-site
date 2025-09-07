@@ -1,3 +1,5 @@
+import { ContactMethods } from '../contact-methods';
+
 export function FooterHero() {
     return (
       <div className="flex flex-col">
@@ -7,6 +9,7 @@ export function FooterHero() {
         <p className="font-body text-2xl font-light text-muted-foreground leading-relaxed">
           Turn your vision into reality with a partner who<br />truly understands what your business needs.
         </p>
+        <ContactMethods />
       </div>
     );
   }
