@@ -25,9 +25,9 @@ export function TransitionLayout() {
     >
       {/* Content Container */}
       <div className="w-full h-[700px]">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
+        <div className="grid grid-cols-1 [@media(min-width:1390px)]:grid-cols-3 gap-6 h-full">
           {/* Left side - Overlapping Videos and BottomBar */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
+          <div className="[@media(min-width:1390px)]:col-span-2 flex flex-col gap-6">
             {/* Video Container - Overlapping videos with transitions */}
             <div className="bento-square flex-[3] relative overflow-hidden">
               {/* Design Platform Video */}
