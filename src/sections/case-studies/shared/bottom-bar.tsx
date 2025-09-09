@@ -62,7 +62,7 @@ export function BottomBar({ techStack }: BottomBarProps) {
   }, [techStack]);
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-6">
+    <div className="w-full h-full flex items-center justify-center p-4 [@media(min-width:1390px)]:p-6">
       <div ref={contentRef} className="flex items-center justify-between w-full max-w-4xl">
         {techStack.map((tech, index) => (
           <div key={`${tech.name}-${index}`} className="flex flex-col items-center gap-4">

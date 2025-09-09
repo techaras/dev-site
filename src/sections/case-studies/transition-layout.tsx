@@ -50,7 +50,7 @@ export function TransitionLayout() {
             {/* Bottom Bar - Minimal height on small screens, flex-1 on large screens */}
             <div 
               ref={bottomBarRef}
-              className="bento-square flex-none [@media(min-width:1390px)]:flex-1"
+              className="bg-black border border-[#353739] rounded-[2rem] p-8 max-h-[120px] transition-all duration-300 ease-in-out hover:border-[#555759] hover:-translate-y-0.5 [@media(min-width:1390px)]:bg-black [@media(min-width:1390px)]:border [@media(min-width:1390px)]:border-[#353739] [@media(min-width:1390px)]:rounded-[2rem] [@media(min-width:1390px)]:p-8 [@media(min-width:1390px)]:min-h-[200px] [@media(min-width:1390px)]:transition-all [@media(min-width:1390px)]:duration-300 [@media(min-width:1390px)]:ease-in-out [@media(min-width:1390px)]:hover:border-[#555759] [@media(min-width:1390px)]:hover:-translate-y-0.5 flex-none [@media(min-width:1390px)]:flex-1"
             >
               <BottomBar techStack={currentData.techStack} />
             </div>

@@ -41,11 +41,11 @@ export const designPlatformData: CaseStudyData = {
     }
   },
   techStack: [
-    { icon: <NextjsIcon className="w-12 h-12" />, name: "Next.js" },
-    { icon: <ThreejsIcon className="w-12 h-12" />, name: "Three.js" },
-    { icon: <OpencvIcon className="w-12 h-12" />, name: "OpenCV" },
-    { icon: <LlmsIcon className="w-12 h-12" />, name: "LLMs" },
-    { icon: <PythonIcon className="w-12 h-12" />, name: "Python" },
-    { icon: <MongodbIcon className="w-12 h-12" />, name: "MongoDB" }
+    { icon: <NextjsIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "Next.js" },
+    { icon: <ThreejsIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "Three.js" },
+    { icon: <OpencvIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "OpenCV" },
+    { icon: <LlmsIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "LLMs" },
+    { icon: <PythonIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "Python" },
+    { icon: <MongodbIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "MongoDB" }
   ]
 };

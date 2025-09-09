@@ -40,10 +40,10 @@ export const advertisingPlatformData: CaseStudyData = {
     }
   },
   techStack: [
-    { icon: <TypescriptIcon className="w-12 h-12" />, name: "TypeScript" },
-    { icon: <NextjsIcon className="w-12 h-12" />, name: "Next.js" },
-    { icon: <GoogleAdsIcon className="w-12 h-12" />, name: "GoogleAdsAPI" },
-    { icon: <MetaIcon className="w-12 h-12" />, name: "MetaAPI" },
-    { icon: <SupabaseIcon className="w-12 h-12" />, name: "Supabase" }
+    { icon: <TypescriptIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "TypeScript" },
+    { icon: <NextjsIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "Next.js" },
+    { icon: <GoogleAdsIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "GoogleAdsAPI" },
+    { icon: <MetaIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "MetaAPI" },
+    { icon: <SupabaseIcon className="[@media(min-width:1390px)]:w-12 [@media(min-width:1390px)]:h-12 w-10 h-10" />, name: "Supabase" }
   ]
 };
