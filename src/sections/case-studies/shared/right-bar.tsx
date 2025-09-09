@@ -76,8 +76,8 @@ export function RightBar({ projectData }: RightBarProps) {
   return (
     <div className="w-full h-full flex flex-col overflow-y-auto">
       <div ref={contentRef} className="flex flex-col h-full">
-        {/* Header */}
-        <div className="mb-6">
+        {/* Header - Hidden on screens < 1390px */}
+        <div className="mb-6 hidden [@media(min-width:1390px)]:block">
           <h3 className="font-heading text-2xl text-foreground mb-2">
             {projectData.title}
           </h3>
@@ -86,8 +86,8 @@ export function RightBar({ projectData }: RightBarProps) {
           </p>
         </div>
 
-        {/* Dynamic Sections */}
-        <div className="flex-1">
+        {/* Dynamic Sections - Hidden on screens < 1390px */}
+        <div className="flex-1 hidden [@media(min-width:1390px)]:block">
           {projectData.sections.map((section, index) => (
             <div key={`${projectData.title}-${section.title}-${index}`} className={index === projectData.sections.length - 1 ? "" : "mb-6"}>
               <h4 className="font-heading text-lg text-foreground mb-2">
@@ -104,8 +104,8 @@ export function RightBar({ projectData }: RightBarProps) {
           ))}
         </div>
 
-        {/* Buttons */}
-        <div className="flex items-center gap-6 mt-6">
+        {/* Buttons - Always visible, but positioning adjusts based on screen size */}
+        <div className="flex items-center gap-6 mt-0 [@media(min-width:1390px)]:mt-6 justify-start">
           <button
             onClick={handleGithubClick}
             className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg font-body text-sm text-foreground hover:border-ring transition-colors cursor-pointer"

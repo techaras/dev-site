@@ -28,8 +28,8 @@ export function TransitionLayout() {
         <div className="grid grid-cols-1 [@media(min-width:1390px)]:grid-cols-3 gap-6 h-full">
           {/* Left side - Overlapping Videos and BottomBar */}
           <div className="[@media(min-width:1390px)]:col-span-2 flex flex-col gap-6">
-            {/* Video Container - Overlapping videos with transitions */}
-            <div className="bento-square flex-[3] relative overflow-hidden">
+            {/* Video Container - Takes most height on small screens, flex-[3] on large screens */}
+            <div className="bento-square flex-1 [@media(min-width:1390px)]:flex-[3] relative overflow-hidden">
               {/* Design Platform Video */}
               <div 
                 ref={designVideoRef}
@@ -47,19 +47,19 @@ export function TransitionLayout() {
               </div>
             </div>
 
-            {/* Bottom Bar - Content changes based on activeCaseStudy */}
+            {/* Bottom Bar - Minimal height on small screens, flex-1 on large screens */}
             <div 
               ref={bottomBarRef}
-              className="bento-square flex-1"
+              className="bento-square flex-none [@media(min-width:1390px)]:flex-1"
             >
               <BottomBar techStack={currentData.techStack} />
             </div>
           </div>
 
-          {/* Right side - RightBar content changes based on activeCaseStudy */}
+          {/* Right side - RightBar with conditional bento-square styling and minimal height on small screens */}
           <div 
             ref={rightBarRef}
-            className="bento-square"
+            className="flex-none [@media(min-width:1390px)]:bg-black [@media(min-width:1390px)]:border [@media(min-width:1390px)]:border-[#353739] [@media(min-width:1390px)]:rounded-[2rem] [@media(min-width:1390px)]:p-8 [@media(min-width:1390px)]:min-h-[200px] [@media(min-width:1390px)]:transition-all [@media(min-width:1390px)]:duration-300 [@media(min-width:1390px)]:ease-in-out [@media(min-width:1390px)]:hover:border-[#555759] [@media(min-width:1390px)]:hover:-translate-y-0.5"
           >
             <RightBar projectData={currentData.projectData} />
           </div>
