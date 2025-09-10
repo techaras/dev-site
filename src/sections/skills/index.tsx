@@ -26,10 +26,10 @@ export function Skills() {
           </p>
         </div>
 
-        {/* Skills Grid - 6x3 with rounded corners */}
+        {/* Skills Grid - Responsive: 3 columns on smaller screens, 6 on larger */}
         <div className="mb-12">
           <div className="w-full max-w-6xl mx-auto bg-[#353739] p-[1px] rounded-2xl">
-            <div className="grid grid-cols-6 gap-[1px] bg-[#353739] rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-3 [@media(min-width:937px)]:grid-cols-6 gap-[1px] bg-[#353739] rounded-2xl overflow-hidden">
               {skillsData.map((skill, index) => (
                 <SkillCard 
                   key={index}
