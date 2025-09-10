@@ -7,7 +7,7 @@ import { useScrollTransition } from './useScrollTransition';
 
 export function TransitionLayout() {
   const {
-    sectionRef,  // <- Changed from containerRef
+    sectionRef,
     designVideoRef,
     advertisingVideoRef,
     rightBarRef,
@@ -20,16 +20,16 @@ export function TransitionLayout() {
 
   return (
     <div 
-      ref={sectionRef}  // <- Now this targets the entire content
+      ref={sectionRef}
       className="flex flex-col gap-16"
     >
       {/* Content Container */}
       <div className="w-full h-[700px]">
-        <div className="grid grid-cols-1 [@media(min-width:1390px)]:grid-cols-3 gap-6 h-full">
+        <div className="grid grid-cols-1 [@media(min-width:1390px)]:grid-cols-3 grid-rows-[1fr_auto] [@media(min-width:1390px)]:grid-rows-none gap-2 [@media(min-width:1390px)]:gap-6 h-full">
           {/* Left side - Overlapping Videos and BottomBar */}
-          <div className="[@media(min-width:1390px)]:col-span-2 flex flex-col gap-6">
+          <div className="[@media(min-width:1390px)]:col-span-2 flex flex-col gap-6 h-full">
             {/* Video Container - Takes most height on small screens, flex-[3] on large screens */}
-            <div className="bento-square flex-1 [@media(min-width:1390px)]:flex-[3] relative overflow-hidden">
+            <div className="bento-square flex-[4] [@media(min-width:1390px)]:flex-[3] relative overflow-hidden">
               {/* Design Platform Video */}
               <div 
                 ref={designVideoRef}
@@ -50,7 +50,7 @@ export function TransitionLayout() {
             {/* Bottom Bar - Minimal height on small screens, flex-1 on large screens */}
             <div 
               ref={bottomBarRef}
-              className="bg-black border border-[#353739] rounded-[2rem] p-8 max-h-[120px] transition-all duration-300 ease-in-out hover:border-[#555759] hover:-translate-y-0.5 [@media(min-width:1390px)]:bg-black [@media(min-width:1390px)]:border [@media(min-width:1390px)]:border-[#353739] [@media(min-width:1390px)]:rounded-[2rem] [@media(min-width:1390px)]:p-8 [@media(min-width:1390px)]:min-h-[200px] [@media(min-width:1390px)]:transition-all [@media(min-width:1390px)]:duration-300 [@media(min-width:1390px)]:ease-in-out [@media(min-width:1390px)]:hover:border-[#555759] [@media(min-width:1390px)]:hover:-translate-y-0.5 flex-none [@media(min-width:1390px)]:flex-1"
+              className="bg-black border border-[#353739] rounded-[2rem] p-4 [@media(min-width:1390px)]:p-8[@media(min-width:1390px)]:h-auto [@media(min-width:1390px)]:min-h-[200px] transition-all duration-300 ease-in-out hover:border-[#555759] hover:-translate-y-0.5 flex-none [@media(min-width:1390px)]:flex-1 [@media(min-width:1390px)]:mb-0 mb-3"
             >
               <BottomBar techStack={currentData.techStack} />
             </div>
@@ -59,7 +59,7 @@ export function TransitionLayout() {
           {/* Right side - RightBar with conditional bento-square styling and minimal height on small screens */}
           <div 
             ref={rightBarRef}
-            className="flex-none [@media(min-width:1390px)]:bg-black [@media(min-width:1390px)]:border [@media(min-width:1390px)]:border-[#353739] [@media(min-width:1390px)]:rounded-[2rem] [@media(min-width:1390px)]:p-8 [@media(min-width:1390px)]:min-h-[200px] [@media(min-width:1390px)]:transition-all [@media(min-width:1390px)]:duration-300 [@media(min-width:1390px)]:ease-in-out [@media(min-width:1390px)]:hover:border-[#555759] [@media(min-width:1390px)]:hover:-translate-y-0.5"
+            className="[@media(min-width:1390px)]:h-auto [@media(min-width:1390px)]:bg-black [@media(min-width:1390px)]:border [@media(min-width:1390px)]:border-[#353739] [@media(min-width:1390px)]:rounded-[2rem] [@media(min-width:1390px)]:p-8 [@media(min-width:1390px)]:min-h-[200px] [@media(min-width:1390px)]:transition-all [@media(min-width:1390px)]:duration-300 [@media(min-width:1390px)]:ease-in-out [@media(min-width:1390px)]:hover:border-[#555759] [@media(min-width:1390px)]:hover:-translate-y-0.5 flex-none"
           >
             <RightBar projectData={currentData.projectData} />
           </div>
