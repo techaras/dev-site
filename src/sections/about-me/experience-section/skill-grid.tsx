@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import gitBranchIcon from '../../../assets/gitBranchIcon.svg';
 import plugIcon from '../../../assets/plugIcon.svg';
 import ragDocIcon from '../../../assets/ragDocIcon.svg';
@@ -18,17 +19,21 @@ interface SkillItem {
 }
 
 export function SkillGrid() {
-  const { 
-    trackRef, 
-    viewportRef, 
-    showTopShadow, 
-    showBottomShadow,
-    scrollProgress,
-    isScrolling
-  } = useVerticalScroll();
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
 
-  // Add console logging to test vertical progress
-  console.log('🔍 Vertical Scroll Test - Progress:', scrollProgress, 'Is Scrolling:', isScrolling);
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= 1381);
+    };
+
+    // Check initial size
+    checkScreenSize();
+
+    // Add resize listener
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const skills: SkillItem[] = [
     { text: "ML Pipelines", icon: gitBranchIcon },
@@ -42,6 +47,27 @@ export function SkillGrid() {
     { text: "Payment Processing", icon: creditCardIcon },
     { text: "System Architecture", icon: buildingIcon },
   ];
+
+  if (isLargeScreen) {
+    return <VerticalSkillGrid skills={skills} />;
+  }
+
+  return <HorizontalSkillGrid skills={skills} />;
+}
+
+// Vertical version for large screens (>= 1381px) - existing implementation
+function VerticalSkillGrid({ skills }: { skills: SkillItem[] }) {
+  const { 
+    trackRef, 
+    viewportRef, 
+    showTopShadow, 
+    showBottomShadow,
+    scrollProgress,
+    isScrolling
+  } = useVerticalScroll();
+
+  // Add console logging to test vertical progress
+  console.log('🔍 Vertical Scroll Test - Progress:', scrollProgress, 'Is Scrolling:', isScrolling);
 
   return (
     <div className="relative flex flex-col gap-3 flex-1 max-h-[553px]">
@@ -114,6 +140,39 @@ export function SkillGrid() {
           showBottomShadow ? 'opacity-100' : 'opacity-0'
         }`}
       />
+    </div>
+  );
+}
+
+// Horizontal version for smaller screens (< 1381px) - new implementation
+function HorizontalSkillGrid({ skills }: { skills: SkillItem[] }) {
+  return (
+    <div className="relative flex flex-col gap-3 flex-1">
+      {/* Horizontal scrollable container */}
+      <div className="overflow-x-auto overflow-y-hidden">
+        <div className="flex gap-3 pb-4">
+          {skills.map((skill, index) => (
+            <div 
+              key={index}
+              className="relative min-h-52 min-w-60 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground text-center flex items-center justify-center flex-shrink-0 flex-col gap-3 pb-6"
+            >
+              {/* Bottom stripe with horizontal text */}
+              <div className="absolute -left-px -right-px -bottom-px h-8 bg-[#353739] rounded-b-[2rem] flex items-center justify-center">
+                <span className="text-white font-heading text-lg whitespace-nowrap">
+                  experience
+                </span>
+              </div>
+              
+              <img 
+                src={skill.icon} 
+                alt={skill.text}
+                className="w-24 h-24 flex-shrink-0"
+              />
+              <span className="whitespace-nowrap mt-4">{skill.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
