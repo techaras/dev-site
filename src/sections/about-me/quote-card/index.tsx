@@ -1,6 +1,6 @@
 export function QuoteCard() {
     return (
-      <div className="bento-no-min row-span-3 flex flex-col">
+      <div className="bento-no-min row-span-3 flex flex-col h-full">
         <h3 className="font-heading text-lg text-foreground mb-4">
           Business-First Tech Leader
         </h3>
