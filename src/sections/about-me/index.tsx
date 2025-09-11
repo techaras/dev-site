@@ -138,7 +138,7 @@ export function AboutMe() {
           <div className="grid grid-cols-3 gap-4">
             <FeatureCard 
               icon={rocketIcon} 
-              text={<>Prototype<br/>to Production</>}
+              text={<>Prototype to<br/>Production</>}
               altText="Prototype to Production"
               variant="text-right-icon-left"
             />
