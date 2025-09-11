@@ -91,7 +91,7 @@ export function FeatureCard({
         
         {/* Text on the right */}
         <div className="flex items-center justify-center flex-1">
-          <span className="font-heading text-2xl text-[#f2f2f2] text-left">
+          <span className="font-heading text-xl [@media(min-width:789px)]:text-2xl text-[#f2f2f2] text-left">
             {text}
           </span>
         </div>

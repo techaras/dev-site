@@ -135,20 +135,31 @@ export function AboutMe() {
           </div>
 
           {/* Row 3: 2 FeatureCards + 1 SimpleTextCard */}
-          <div className="grid grid-cols-3 gap-4">
-            <FeatureCard 
-              icon={rocketIcon} 
-              text={<>Prototype to<br/>Production</>}
-              altText="Prototype to Production"
-              variant="text-right-icon-left"
-            />
-            <FeatureCard 
-              icon={zapIcon} 
-              text={<>Scalable<br/>Solutions</>}
-              altText="Scalable solutions"
-              variant="text-left-icon-right"
-            />
-            <SimpleTextCard text="Enterprise Compliance Standards" />
+          <div className="flex flex-col gap-4">
+            {/* FeatureCards row */}
+            <div className="grid grid-cols-2 [@media(min-width:1175px)]:grid-cols-3 gap-4">
+              <FeatureCard 
+                icon={rocketIcon} 
+                text={<>Prototype to<br/>Production</>}
+                altText="Prototype to Production"
+                variant="text-right-icon-left"
+              />
+              <FeatureCard 
+                icon={zapIcon} 
+                text={<>Scalable<br/>Solutions</>}
+                altText="Scalable solutions"
+                variant="text-left-icon-right"
+              />
+              {/* SimpleTextCard only shows in this row on screens >= 1175px */}
+              <div className="hidden [@media(min-width:1175px)]:block">
+                <SimpleTextCard text="Enterprise Compliance Standards" />
+              </div>
+            </div>
+            
+            {/* SimpleTextCard on its own row for screens < 1175px */}
+            <div className="[@media(min-width:1175px)]:hidden">
+              <SimpleTextCard text="Enterprise Compliance Standards" />
+            </div>
           </div>
 
           {/* Row 4: Complex 2x3 grid */}
