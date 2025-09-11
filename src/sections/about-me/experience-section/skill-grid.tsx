@@ -10,6 +10,7 @@ import cpuIcon from '../../../assets/cpuIcon.svg';
 import creditCardIcon from '../../../assets/creditCardIcon.svg';
 import buildingIcon from '../../../assets/buildingIcon.svg';
 import { useVerticalScroll } from './useVerticalScroll';
+import { useHorizontalScrollSkills } from './useHorizontalScrollSkills';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -144,34 +145,89 @@ function VerticalSkillGrid({ skills }: { skills: SkillItem[] }) {
   );
 }
 
-// Horizontal version for smaller screens (< 1381px) - new implementation
+// Horizontal version for smaller screens (< 1381px) - updated with GSAP horizontal scroll
 function HorizontalSkillGrid({ skills }: { skills: SkillItem[] }) {
+  const { 
+    trackRef, 
+    viewportRef, 
+    showLeftShadow, 
+    showRightShadow,
+    scrollProgress,
+    isScrolling
+  } = useHorizontalScrollSkills();
+
   return (
-    <div className="relative flex flex-col gap-3 flex-1">
-      {/* Horizontal scrollable container */}
-      <div className="overflow-x-auto overflow-y-hidden">
-        <div className="flex gap-3 pb-4">
-          {skills.map((skill, index) => (
-            <div 
-              key={index}
-              className="relative min-h-52 min-w-60 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground text-center flex items-center justify-center flex-shrink-0 flex-col gap-3 pb-6"
-            >
-              {/* Bottom stripe with horizontal text */}
-              <div className="absolute -left-px -right-px -bottom-px h-8 bg-[#353739] rounded-b-[2rem] flex items-center justify-center">
-                <span className="text-white font-heading text-lg whitespace-nowrap">
-                  experience
-                </span>
-              </div>
-              
-              <img 
-                src={skill.icon} 
-                alt={skill.text}
-                className="w-24 h-24 flex-shrink-0"
+    <div className="w-full h-full flex flex-col relative">
+      {/* Horizontal Scroll Progress Bar - positioned above the content */}
+      <AnimatePresence>
+        {isScrolling && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-[-10px] left-0 right-0 z-20"
+          >
+            <div className="h-1 bg-gray-800 rounded-full">
+              <ScrollProgress
+                progress={scrollProgress}
+                className="h-1 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-full"
+                springOptions={{
+                  stiffness: 280,
+                  damping: 25,
+                  restDelta: 0.001
+                }}
               />
-              <span className="whitespace-nowrap mt-4">{skill.text}</span>
             </div>
-          ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Skill cards container with scroll shadows */}
+      <div className="flex-1 min-h-0 relative">
+        {/* Left scroll shadow */}
+        <div 
+          className={`absolute top-0 left-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none z-10 transition-opacity duration-300 ${
+            showLeftShadow ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+
+        {/* Scrollable viewport (mask) */}
+        <div ref={viewportRef} className="w-full h-full overflow-hidden">
+          {/* Horizontal track */}
+          <div
+            ref={trackRef}
+            className="flex gap-3 h-full w-max will-change-transform pb-4"
+          >
+            {skills.map((skill, index) => (
+              <div 
+                key={index}
+                className="relative min-h-52 min-w-60 border border-[#353739] rounded-[2rem] font-body text-sm text-muted-foreground text-center flex items-center justify-center flex-shrink-0 flex-col gap-3 pb-6"
+              >
+                {/* Bottom stripe with horizontal text */}
+                <div className="absolute -left-px -right-px -bottom-px h-8 bg-[#353739] rounded-b-[2rem] flex items-center justify-center">
+                  <span className="text-white font-heading text-lg whitespace-nowrap">
+                    experience
+                  </span>
+                </div>
+                
+                <img 
+                  src={skill.icon} 
+                  alt={skill.text}
+                  className="w-24 h-24 flex-shrink-0"
+                />
+                <span className="whitespace-nowrap mt-4">{skill.text}</span>
+              </div>
+            ))}
+          </div>
         </div>
+
+        {/* Right scroll shadow */}
+        <div 
+          className={`absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none z-10 transition-opacity duration-300 ${
+            showRightShadow ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
       </div>
     </div>
   );
