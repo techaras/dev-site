@@ -1,3 +1,5 @@
+import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+
 export function MobileHome() {
     return (
       <section 
@@ -5,12 +7,17 @@ export function MobileHome() {
         className="relative min-h-screen w-full flex flex-col items-center px-6 pt-32"
       >
         {/* Header */}
-        <h1 className="font-heading text-center text-[clamp(2.3rem,8vw,3rem)] leading-[1] text-foreground mb-1">
-          STREAMLINED<br />OPERATIONS
+        <h1 className="font-heading text-center text-[clamp(2.3rem,8vw,3rem)] leading-[1] mb-1">
+            <AnimatedShinyText 
+                className="block"
+                shimmerWidth={120}
+            >
+                STREAMLINED<br />OPERATIONS
+            </AnimatedShinyText>
         </h1>
   
         {/* Title */}
-        <h2 className="font-body font-light text-[#b3b3b3] text-center text-[clamp(0.7rem,3vw,1rem)] tracking-[0.3em] mb-6 uppercase">
+        <h2 className="font-body font-light text-[#b3b3b3] text-center text-[clamp(0.7rem,3vw,1rem)] tracking-[0.4em] mb-6 uppercase">
           FULL-STACK DEVELOPER
         </h2>
   
