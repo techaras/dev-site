@@ -1,10 +1,11 @@
-import { Routes, Route } from "react-router";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { SvgFilters } from "@/components/ui/svg-filters";
 import { GlobalDrawer } from "@/components/drawer/global-drawer";
+import { Sidebar } from "@/components/navigation/sidebar/sidebar";
+import { Routes, Route } from "react-router";
 import { HomePage } from "@/pages/HomePage";
 import { CaseStudyDetailPage } from "@/pages/CaseStudyDetailPage";
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 function DesktopApp() {
@@ -21,12 +22,8 @@ function DesktopApp() {
 function MobileApp() {
   return (
     <div className="flex min-h-svh flex-col">
-      <div className="p-6">
-        <h1 className="text-2xl font-heading text-center">Mobile Version Coming Soon</h1>
-        <p className="text-center text-muted-foreground mt-4">
-          Building a mobile-optimized experience...
-        </p>
-      </div>
+      {/* Add the existing Sidebar component */}
+      <Sidebar />
     </div>
   );
 }
