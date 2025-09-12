@@ -2,7 +2,7 @@ export function MobileHome() {
     return (
       <section 
         id="home" 
-        className="relative h-screen w-full flex flex-col justify-center items-center px-6"
+        className="relative h-screen w-full flex flex-col justify-top mt-30 items-center px-6"
       >
         {/* Header */}
         <h1 className="font-heading text-center text-[clamp(2.3rem,8vw,3rem)] leading-[1] text-foreground mb-1">
