@@ -7,6 +7,7 @@ import { HomePage } from "@/pages/HomePage";
 import { CaseStudyDetailPage } from "@/pages/CaseStudyDetailPage";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { MobileHome } from "@/sections/home-mobile";
 
 function DesktopApp() {
   return (
@@ -24,6 +25,9 @@ function MobileApp() {
     <div className="flex min-h-svh flex-col">
       {/* Add the existing Sidebar component */}
       <Sidebar />
+      
+      {/* Mobile Home Section */}
+      <MobileHome />
     </div>
   );
 }
