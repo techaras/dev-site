@@ -1,4 +1,4 @@
-import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 
 export function MobileHome() {
     return (
@@ -8,12 +8,14 @@ export function MobileHome() {
       >
         {/* Header */}
         <h1 className="font-heading text-center text-[clamp(2.3rem,8vw,3rem)] leading-[1] mb-1">
-            <AnimatedShinyText 
-                className="block"
-                shimmerWidth={120}
+            <TextShimmer 
+                as="span"
+                className="block dark:[--base-color:#f2f2f2] dark:[--base-gradient-color:#71717a]"
+                duration={1}
+                spread={3}
             >
-                STREAMLINED<br />OPERATIONS
-            </AnimatedShinyText>
+                STREAMLINED OPERATIONS
+            </TextShimmer>
         </h1>
   
         {/* Title */}
