@@ -270,6 +270,24 @@
   margin-right: -2rem !important;
 }
 
+.mobile-home-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid #353739;
+  border-radius: 2rem;
+  background-color: #000000;
+  background-image: 
+    linear-gradient(rgba(53, 55, 57) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53, 55, 57) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: -20px 30px;
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 100%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 100%, #000 60%, transparent 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* 562px to 767px: Show 2-line version */
 @media (min-width: 562px) and (max-width: 767px) {
   .home-info-grid-text-medium {
