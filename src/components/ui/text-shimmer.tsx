@@ -41,6 +41,7 @@ function TextShimmerComponent({
         repeat: Infinity,
         duration,
         ease: 'linear',
+        repeatDelay: 3,
       }}
       style={
         {
