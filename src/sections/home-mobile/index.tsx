@@ -21,7 +21,7 @@ export function MobileHome() {
         </h1>
   
         {/* Title */}
-        <h2 className="font-body font-light text-[#b3b3b3] text-center text-[clamp(0.7rem,3vw,1rem)] tracking-[0.4em] mb-8 uppercase">
+        <h2 className="font-body font-light text-[#b3b3b3] text-center text-[clamp(0.7rem,3vw,1rem)] tracking-[0.4em] mb-6 uppercase">
           FULL-STACK DEVELOPER
         </h2>
   
@@ -31,7 +31,7 @@ export function MobileHome() {
         </p>
 
         {/* Connect Button */}
-        <button className="relative overflow-hidden rounded-full backdrop-blur-sm font-heading border px-10 py-2 text-foreground mb-10">
+        <button className="relative overflow-hidden rounded-full backdrop-blur-sm font-heading border px-10 py-2 text-foreground mb-14">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
           <div className="mt-0.5">let's connect</div>
         </button>
