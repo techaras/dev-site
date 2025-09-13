@@ -56,7 +56,17 @@ export function AvailabilityStatus() {
         />
       </div>
       
-      <div className="flex items-center gap-2">
+      {/* Mobile version (< 768px) */}
+      <div className="flex items-center gap-2 md:hidden text-xs font-light">
+        <span>UK Based</span>
+        <span>•</span>
+        <span>Available everywhere</span>
+        <span>•</span>
+        <span>{currentTime}</span>
+      </div>
+
+      {/* Desktop version (>= 768px) */}
+      <div className="hidden md:flex items-center gap-2">
         <span>Available now</span>
         <span>•</span>
         <span>UK</span>
