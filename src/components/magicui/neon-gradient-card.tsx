@@ -1,12 +1,14 @@
 "use client";
 
 import {
-  CSSProperties,
-  ReactElement,
-  ReactNode,
   useEffect,
   useRef,
   useState,
+} from "react";
+import type {
+  CSSProperties,
+  ReactElement,
+  ReactNode,
 } from "react";
 
 import { cn } from "@/lib/utils";
@@ -64,7 +66,7 @@ interface NeonGradientCardProps {
    * */
   neonColors?: NeonColorsProps;
 
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export const NeonGradientCard: React.FC<NeonGradientCardProps> = ({
