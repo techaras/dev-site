@@ -282,8 +282,8 @@
     linear-gradient(90deg, rgba(53, 55, 57) 1px, transparent 1px);
   background-size: 60px 60px;
   background-position: -20px 30px;
-  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 100%, #000 60%, transparent 100%);
-  mask-image: radial-gradient(ellipse 100% 100% at 50% 100%, #000 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 100%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 100%, #000 60%, transparent 100%);
   z-index: -1;
   pointer-events: none;
 }
