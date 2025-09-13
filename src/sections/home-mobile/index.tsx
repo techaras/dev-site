@@ -10,9 +10,9 @@ export function MobileHome() {
         <h1 className="font-heading text-center text-[clamp(2.3rem,8vw,3rem)] leading-[1] mb-1">
             <TextShimmer 
                 as="span"
-                className="block dark:[--base-color:#f2f2f2] dark:[--base-gradient-color:#71717a]"
-                duration={1}
-                spread={3}
+                className="block dark:[--base-color:#f2f2f2] dark:[--base-gradient-color:#B2B2B2]"
+                duration={1.5}
+                spread={5}
             >
                 STREAMLINED OPERATIONS
             </TextShimmer>
