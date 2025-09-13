@@ -6,38 +6,47 @@ export function MobileHome() {
     return (
       <section 
         id="home" 
-        className="relative min-h-screen w-full flex flex-col items-center px-6 pt-32"
+        className="relative min-h-screen w-full flex flex-col items-center justify-top mt-30 px-2.5"
       >
-        {/* Header */}
-        <h1 className="font-heading text-center text-[clamp(2.3rem,8vw,3rem)] leading-[1] mb-1">
-            <TextShimmer 
-                as="span"
-                className="block dark:[--base-color:#f2f2f2] dark:[--base-gradient-color:#B2B2B2]"
-                duration={1.5}
-                spread={5}
-            >
-                STREAMLINED OPERATIONS
-            </TextShimmer>
-        </h1>
-  
-        {/* Title */}
-        <h2 className="font-body font-light text-[#b3b3b3] text-center text-[clamp(0.7rem,3vw,1rem)] tracking-[0.4em] mb-6 uppercase">
-          FULL-STACK DEVELOPER
-        </h2>
-  
-        {/* Description Paragraph */}
-        <p className="font-body text-center text-base leading-relaxed text-[#b3b3b3] max-w-sm mb-10">
-          Patent-winning full-stack developer who combines technical expertise with deep business understanding.
-        </p>
+        {/* Container with border and margin */}
+        <div 
+          className="w-full mx-4 p-8 flex flex-col items-center"
+          style={{
+            border: '1px solid #353739',
+            borderRadius: '2rem'
+          }}
+        >
+          {/* Header */}
+          <h1 className="font-heading text-center text-[clamp(2.3rem,8vw,3rem)] leading-[1] mb-1">
+              <TextShimmer 
+                  as="span"
+                  className="block dark:[--base-color:#f2f2f2] dark:[--base-gradient-color:#B2B2B2]"
+                  duration={1.5}
+                  spread={5}
+              >
+                  STREAMLINED OPERATIONS
+              </TextShimmer>
+          </h1>
+    
+          {/* Title */}
+          <h2 className="font-body font-light text-[#b3b3b3] text-center text-[clamp(0.7rem,3vw,1rem)] tracking-[0.4em] mb-6 uppercase">
+            FULL-STACK DEVELOPER
+          </h2>
+    
+          {/* Description Paragraph */}
+          <p className="font-body text-center text-base leading-relaxed text-[#b3b3b3] max-w-sm mb-10">
+            Patent-winning full-stack developer who combines technical expertise with deep business understanding.
+          </p>
 
-        {/* Connect Button */}
-        <button className="relative overflow-hidden rounded-full backdrop-blur-sm font-heading border px-10 py-2 text-foreground mb-14">
-          <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
-          <div className="mt-0.5">let's connect</div>
-        </button>
+          {/* Connect Button */}
+          <button className="relative overflow-hidden rounded-full backdrop-blur-sm font-heading border px-10 py-2 text-foreground mb-14">
+            <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+            <div className="mt-0.5">let's connect</div>
+          </button>
 
-        {/* Availability Status */}
-        <AvailabilityStatus />
+          {/* Availability Status */}
+          <AvailabilityStatus />
+        </div>
       </section>
     );
-  }
+}
