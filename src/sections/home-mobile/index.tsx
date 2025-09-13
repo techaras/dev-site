@@ -1,4 +1,5 @@
 import { TextShimmer } from "@/components/ui/text-shimmer";
+import { ShineBorder } from "@/components/magicui/shine-border";
 
 export function MobileHome() {
     return (
@@ -24,9 +25,15 @@ export function MobileHome() {
         </h2>
   
         {/* Description Paragraph */}
-        <p className="font-body text-center text-base leading-relaxed text-[#b3b3b3] max-w-sm">
+        <p className="font-body text-center text-base leading-relaxed text-[#b3b3b3] max-w-sm mb-8">
           Patent-winning full-stack developer who combines technical expertise with deep business understanding.
         </p>
+
+        {/* Connect Button */}
+        <button className="relative overflow-hidden rounded-full backdrop-blur-sm font-heading border px-10 py-2 text-foreground">
+          <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+          <div className="mt-0.5">let's connect</div>
+        </button>
       </section>
     );
   }
