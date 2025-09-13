@@ -13,7 +13,14 @@ export function MobileHome() {
           className="w-full mx-4 p-8 flex flex-col items-center"
           style={{
             border: '1px solid #353739',
-            borderRadius: '2rem'
+            borderRadius: '2rem',
+            backgroundColor: '#000000',
+            backgroundImage: `
+            linear-gradient(rgba(53, 55, 57) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(53, 55, 57) 1px, transparent 1px)
+          `,
+            backgroundSize: '60px 60px',
+            backgroundPosition: '-20px 0'
           }}
         >
           {/* Header */}
