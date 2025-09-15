@@ -10,6 +10,10 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
   const node2Ref = useRef<HTMLDivElement>(null);
   const verticalNode1Ref = useRef<HTMLDivElement>(null);
   const verticalNode2Ref = useRef<HTMLDivElement>(null);
+  const verticalNode3Ref = useRef<HTMLDivElement>(null);
+  const verticalNode4Ref = useRef<HTMLDivElement>(null);
+  const verticalNode5Ref = useRef<HTMLDivElement>(null);
+  const verticalNode6Ref = useRef<HTMLDivElement>(null);
   
   const [positions, setPositions] = useState({ node1: 0, node2: 300 });
 
@@ -58,7 +62,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         }}
       />
 
-      {/* Vertical grid anchor points */}
+      {/* First vertical grid anchor points */}
       <div
         ref={verticalNode1Ref}
         className="absolute w-4 h-4 bg-blue-500 border-2 border-white z-20"
@@ -76,6 +80,42 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         }}
       />
 
+      {/* Second vertical grid anchor points - 120px to the right */}
+      <div
+        ref={verticalNode3Ref}
+        className="absolute w-4 h-4 bg-purple-500 border-2 border-white z-20"
+        style={{ 
+          left: '153.5px',
+          top: '100px'
+        }}
+      />
+      <div
+        ref={verticalNode4Ref}
+        className="absolute w-4 h-4 bg-orange-500 border-2 border-white z-20"
+        style={{ 
+          left: '153.5px',
+          top: '430px'
+        }}
+      />
+
+      {/* Third vertical grid anchor points - 120px to the right */}
+      <div
+        ref={verticalNode5Ref}
+        className="absolute w-4 h-4 bg-amber-500 border-2 border-white z-20"
+        style={{ 
+          left: '273.5px',
+          top: '100px'
+        }}
+      />
+      <div
+        ref={verticalNode6Ref}
+        className="absolute w-4 h-4 bg-teal-500 border-2 border-white z-20"
+        style={{ 
+          left: '273.5px',
+          top: '430px'
+        }}
+      />
+
       {/* Horizontal Animated Beam */}
       <AnimatedBeam
         containerRef={containerRef}
@@ -89,11 +129,38 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         gradientStopColor="#FE8FB5"
       />
 
-      {/* Vertical Animated Beam */}
+      {/* First Vertical Animated Beam */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={verticalNode1Ref}
         toRef={verticalNode2Ref}
+        curvature={0}
+        duration={5}
+        pathColor="rgba(53, 55, 57, 0.8)"
+        pathWidth={2}
+        gradientStartColor="#A07CFE"
+        gradientStopColor="#FE8FB5"
+      />
+
+      {/* Second Vertical Animated Beam - fires from down upwards */}
+      <AnimatedBeam
+        containerRef={containerRef}
+        fromRef={verticalNode3Ref}
+        toRef={verticalNode4Ref}
+        curvature={0}
+        duration={5}
+        reverse={true}
+        pathColor="rgba(53, 55, 57, 0.8)"
+        pathWidth={2}
+        gradientStartColor="#A07CFE"
+        gradientStopColor="#FE8FB5"
+      />
+
+      {/* Third Vertical Animated Beam - fires from up downwards */}
+      <AnimatedBeam
+        containerRef={containerRef}
+        fromRef={verticalNode5Ref}
+        toRef={verticalNode6Ref}
         curvature={0}
         duration={5}
         pathColor="rgba(53, 55, 57, 0.8)"
