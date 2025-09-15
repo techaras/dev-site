@@ -19,12 +19,17 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
   const verticalNode5Ref = useRef<HTMLDivElement>(null);
   const verticalNode6Ref = useRef<HTMLDivElement>(null);
   
-  // New refs for conditional 4th vertical pair
+  // Refs for conditional 4th vertical pair
   const verticalNode7Ref = useRef<HTMLDivElement>(null);
   const verticalNode8Ref = useRef<HTMLDivElement>(null);
   
+  // Refs for conditional 5th vertical pair
+  const verticalNode9Ref = useRef<HTMLDivElement>(null);
+  const verticalNode10Ref = useRef<HTMLDivElement>(null);
+  
   const [positions, setPositions] = useState({ node1: 0, node2: 300 });
   const [showFourthVertical, setShowFourthVertical] = useState(false);
+  const [showFifthVertical, setShowFifthVertical] = useState(false);
 
   useEffect(() => {
     const updatePositions = () => {
@@ -35,8 +40,11 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
           node2: width - 10 // 10px from right (accounting for node width)
         });
         
-        // Check if width is 449px or higher for conditional nodes
+        // Check if width is 449px or higher for conditional 4th vertical nodes
         setShowFourthVertical(width >= 449);
+        
+        // Check if width is 552px or higher for conditional 5th vertical nodes
+        setShowFifthVertical(width >= 552);
       }
     };
 
@@ -164,7 +172,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         }}
       />
 
-      {/* Fourth vertical grid anchor points - CONDITIONAL (only if width >= 449px*/}
+      {/* Fourth vertical grid anchor points - CONDITIONAL (only if width >= 449px) */}
       {showFourthVertical && (
         <>
           <div
@@ -180,6 +188,28 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
             className="absolute w-4 h-4 bg-lime-500 border-2 border-white z-20"
             style={{ 
               left: '393.5px',
+              top: '430px'
+            }}
+          />
+        </>
+      )}
+
+      {/* Fifth vertical grid anchor points - CONDITIONAL (only if width >= 552px) */}
+      {showFifthVertical && (
+        <>
+          <div
+            ref={verticalNode9Ref}
+            className="absolute w-4 h-4 bg-violet-500 border-2 border-white z-20"
+            style={{ 
+              left: '513.5px',
+              top: '100px'
+            }}
+          />
+          <div
+            ref={verticalNode10Ref}
+            className="absolute w-4 h-4 bg-sky-500 border-2 border-white z-20"
+            style={{ 
+              left: '513.5px',
               top: '430px'
             }}
           />
@@ -266,7 +296,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         gradientStopColor="#FE8FB5"
       />
 
-      {/* Fourth Vertical Animated Beam - CONDITIONAL (only if width >= 449px)*/}
+      {/* Fourth Vertical Animated Beam - CONDITIONAL (only if width >= 449px) */}
       {showFourthVertical && (
         <AnimatedBeam
           containerRef={containerRef}
@@ -275,6 +305,21 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
           curvature={0}
           duration={5}
           reverse={true}
+          pathColor="rgba(53, 55, 57, 0.8)"
+          pathWidth={2}
+          gradientStartColor="#A07CFE"
+          gradientStopColor="#FE8FB5"
+        />
+      )}
+
+      {/* Fifth Vertical Animated Beam - CONDITIONAL (only if width >= 552px) */}
+      {showFifthVertical && (
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={verticalNode9Ref}
+          toRef={verticalNode10Ref}
+          curvature={0}
+          duration={5}
           pathColor="rgba(53, 55, 57, 0.8)"
           pathWidth={2}
           gradientStartColor="#A07CFE"
