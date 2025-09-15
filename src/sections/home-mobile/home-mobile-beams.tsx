@@ -8,6 +8,10 @@ interface HomeMobileBeamsProps {
 export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
   const node1Ref = useRef<HTMLDivElement>(null);
   const node2Ref = useRef<HTMLDivElement>(null);
+  const node3Ref = useRef<HTMLDivElement>(null);
+  const node4Ref = useRef<HTMLDivElement>(null);
+  const node5Ref = useRef<HTMLDivElement>(null);
+  const node6Ref = useRef<HTMLDivElement>(null);
   const verticalNode1Ref = useRef<HTMLDivElement>(null);
   const verticalNode2Ref = useRef<HTMLDivElement>(null);
   const verticalNode3Ref = useRef<HTMLDivElement>(null);
@@ -44,7 +48,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
 
   return (
     <>
-      {/* Horizontal grid anchor points - positioned dynamically */}
+      {/* Original horizontal grid anchor points */}
       <div
         ref={node1Ref}
         className="absolute w-4 h-4 bg-red-500 border-2 border-white z-20"
@@ -59,6 +63,42 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         style={{ 
           left: `${positions.node2}px`,
           top: '263.5px'
+        }}
+      />
+
+      {/* New horizontal grid anchor points - 120px above */}
+      <div
+        ref={node3Ref}
+        className="absolute w-4 h-4 bg-cyan-500 border-2 border-white z-20"
+        style={{ 
+          left: `${positions.node1}px`,
+          top: '143.5px'
+        }}
+      />
+      <div
+        ref={node4Ref}
+        className="absolute w-4 h-4 bg-pink-500 border-2 border-white z-20"
+        style={{ 
+          left: `${positions.node2}px`,
+          top: '143.5px'
+        }}
+      />
+
+      {/* New horizontal grid anchor points - 120px below */}
+      <div
+        ref={node5Ref}
+        className="absolute w-4 h-4 bg-indigo-500 border-2 border-white z-20"
+        style={{ 
+          left: `${positions.node1}px`,
+          top: '383.5px'
+        }}
+      />
+      <div
+        ref={node6Ref}
+        className="absolute w-4 h-4 bg-emerald-500 border-2 border-white z-20"
+        style={{ 
+          left: `${positions.node2}px`,
+          top: '383.5px'
         }}
       />
 
@@ -116,11 +156,38 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         }}
       />
 
-      {/* Horizontal Animated Beam */}
+      {/* Original Horizontal Animated Beam */}
       <AnimatedBeam
         containerRef={containerRef}
         fromRef={node1Ref}
         toRef={node2Ref}
+        curvature={0}
+        duration={5}
+        reverse={true}
+        pathColor="rgba(53, 55, 57, 0.8)"
+        pathWidth={2}
+        gradientStartColor="#A07CFE"
+        gradientStopColor="#FE8FB5"
+      />
+
+      {/* New Horizontal Animated Beam - 120px above */}
+      <AnimatedBeam
+        containerRef={containerRef}
+        fromRef={node3Ref}
+        toRef={node4Ref}
+        curvature={0}
+        duration={5}
+        pathColor="rgba(53, 55, 57, 0.8)"
+        pathWidth={2}
+        gradientStartColor="#A07CFE"
+        gradientStopColor="#FE8FB5"
+      />
+
+      {/* New Horizontal Animated Beam - 120px below */}
+      <AnimatedBeam
+        containerRef={containerRef}
+        fromRef={node5Ref}
+        toRef={node6Ref}
         curvature={0}
         duration={5}
         pathColor="rgba(53, 55, 57, 0.8)"
