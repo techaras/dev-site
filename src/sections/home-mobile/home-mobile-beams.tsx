@@ -27,9 +27,14 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
   const verticalNode9Ref = useRef<HTMLDivElement>(null);
   const verticalNode10Ref = useRef<HTMLDivElement>(null);
   
+  // Refs for conditional 6th vertical pair
+  const verticalNode11Ref = useRef<HTMLDivElement>(null);
+  const verticalNode12Ref = useRef<HTMLDivElement>(null);
+  
   const [positions, setPositions] = useState({ node1: 0, node2: 300 });
   const [showFourthVertical, setShowFourthVertical] = useState(false);
   const [showFifthVertical, setShowFifthVertical] = useState(false);
+  const [showSixthVertical, setShowSixthVertical] = useState(false);
 
   useEffect(() => {
     const updatePositions = () => {
@@ -45,6 +50,9 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         
         // Check if width is 552px or higher for conditional 5th vertical nodes
         setShowFifthVertical(width >= 552);
+        
+        // Check if width is 672px or higher for conditional 6th vertical nodes
+        setShowSixthVertical(width >= 672);
       }
     };
 
@@ -216,6 +224,28 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         </>
       )}
 
+      {/* Sixth vertical grid anchor points - CONDITIONAL (only if width >= 672px) */}
+      {showSixthVertical && (
+        <>
+          <div
+            ref={verticalNode11Ref}
+            className="absolute w-4 h-4 bg-slate-500 border-2 border-white z-20"
+            style={{ 
+              left: '633.5px',
+              top: '100px'
+            }}
+          />
+          <div
+            ref={verticalNode12Ref}
+            className="absolute w-4 h-4 bg-gray-500 border-2 border-white z-20"
+            style={{ 
+              left: '633.5px',
+              top: '430px'
+            }}
+          />
+        </>
+      )}
+
       {/* Original Horizontal Animated Beam */}
       <AnimatedBeam
         containerRef={containerRef}
@@ -320,6 +350,22 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
           toRef={verticalNode10Ref}
           curvature={0}
           duration={5}
+          pathColor="rgba(53, 55, 57, 0.8)"
+          pathWidth={2}
+          gradientStartColor="#A07CFE"
+          gradientStopColor="#FE8FB5"
+        />
+      )}
+
+      {/* Sixth Vertical Animated Beam - CONDITIONAL (only if width >= 672px) */}
+      {showSixthVertical && (
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={verticalNode11Ref}
+          toRef={verticalNode12Ref}
+          curvature={0}
+          duration={5}
+          reverse={true}
           pathColor="rgba(53, 55, 57, 0.8)"
           pathWidth={2}
           gradientStartColor="#A07CFE"
