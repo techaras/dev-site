@@ -75,7 +75,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       {/* Original horizontal grid anchor points */}
       <div
         ref={node1Ref}
-        className="absolute w-4 h-4 bg-red-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: `${positions.node1}px`,
           top: '263.5px'
@@ -83,7 +83,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       />
       <div
         ref={node2Ref}
-        className="absolute w-4 h-4 bg-green-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: `${positions.node2}px`,
           top: '263.5px'
@@ -93,7 +93,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       {/* New horizontal grid anchor points - 120px above */}
       <div
         ref={node3Ref}
-        className="absolute w-4 h-4 bg-cyan-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: `${positions.node1}px`,
           top: '143.5px'
@@ -101,7 +101,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       />
       <div
         ref={node4Ref}
-        className="absolute w-4 h-4 bg-pink-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: `${positions.node2}px`,
           top: '143.5px'
@@ -111,7 +111,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       {/* New horizontal grid anchor points - 120px below */}
       <div
         ref={node5Ref}
-        className="absolute w-4 h-4 bg-indigo-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: `${positions.node1}px`,
           top: '383.5px'
@@ -119,7 +119,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       />
       <div
         ref={node6Ref}
-        className="absolute w-4 h-4 bg-emerald-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: `${positions.node2}px`,
           top: '383.5px'
@@ -129,7 +129,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       {/* First vertical grid anchor points */}
       <div
         ref={verticalNode1Ref}
-        className="absolute w-4 h-4 bg-blue-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: '33.5px',
           top: '100px'
@@ -137,7 +137,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       />
       <div
         ref={verticalNode2Ref}
-        className="absolute w-4 h-4 bg-yellow-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: '33.5px',
           top: '430px'
@@ -147,7 +147,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       {/* Second vertical grid anchor points - 120px to the right */}
       <div
         ref={verticalNode3Ref}
-        className="absolute w-4 h-4 bg-purple-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: '153.5px',
           top: '100px'
@@ -155,7 +155,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       />
       <div
         ref={verticalNode4Ref}
-        className="absolute w-4 h-4 bg-orange-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: '153.5px',
           top: '430px'
@@ -165,7 +165,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       {/* Third vertical grid anchor points - 120px to the right */}
       <div
         ref={verticalNode5Ref}
-        className="absolute w-4 h-4 bg-amber-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: '273.5px',
           top: '100px'
@@ -173,7 +173,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
       />
       <div
         ref={verticalNode6Ref}
-        className="absolute w-4 h-4 bg-teal-500 border-2 border-white z-20"
+        className="absolute w-4 h-4"
         style={{ 
           left: '273.5px',
           top: '430px'
@@ -185,7 +185,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         <>
           <div
             ref={verticalNode7Ref}
-            className="absolute w-4 h-4 bg-rose-500 border-2 border-white z-20"
+            className="absolute w-4 h-4"
             style={{ 
               left: '393.5px',
               top: '100px'
@@ -193,7 +193,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
           />
           <div
             ref={verticalNode8Ref}
-            className="absolute w-4 h-4 bg-lime-500 border-2 border-white z-20"
+            className="absolute w-4 h-4"
             style={{ 
               left: '393.5px',
               top: '430px'
@@ -207,7 +207,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         <>
           <div
             ref={verticalNode9Ref}
-            className="absolute w-4 h-4 bg-violet-500 border-2 border-white z-20"
+            className="absolute w-4 h-4"
             style={{ 
               left: '513.5px',
               top: '100px'
@@ -215,7 +215,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
           />
           <div
             ref={verticalNode10Ref}
-            className="absolute w-4 h-4 bg-sky-500 border-2 border-white z-20"
+            className="absolute w-4 h-4"
             style={{ 
               left: '513.5px',
               top: '430px'
@@ -229,7 +229,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         <>
           <div
             ref={verticalNode11Ref}
-            className="absolute w-4 h-4 bg-slate-500 border-2 border-white z-20"
+            className="absolute w-4 h-4"
             style={{ 
               left: '633.5px',
               top: '100px'
@@ -237,7 +237,7 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
           />
           <div
             ref={verticalNode12Ref}
-            className="absolute w-4 h-4 bg-gray-500 border-2 border-white z-20"
+            className="absolute w-4 h-4"
             style={{ 
               left: '633.5px',
               top: '430px'
