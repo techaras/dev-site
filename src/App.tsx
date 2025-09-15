@@ -8,6 +8,7 @@ import { CaseStudyDetailPage } from "@/pages/CaseStudyDetailPage";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { MobileHome } from "@/sections/home-mobile";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 function DesktopApp() {
   return (
@@ -23,6 +24,13 @@ function DesktopApp() {
 function MobileApp() {
   return (
     <div className="flex min-h-svh flex-col">
+      {/* Global Progressive Blur at top of screen */}
+      <ProgressiveBlur
+        direction="top"
+        className="fixed top-0 left-0 w-full h-32 z-40 pointer-events-none"
+        blurIntensity={1}
+      />
+      
       {/* Add the existing Sidebar component */}
       <Sidebar />
       
