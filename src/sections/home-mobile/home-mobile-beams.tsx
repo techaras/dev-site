@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { AnimatedBeam } from "@/components/magicui/animated-beam";
 
 interface HomeMobileBeamsProps {
@@ -8,24 +8,51 @@ interface HomeMobileBeamsProps {
 export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
   const node1Ref = useRef<HTMLDivElement>(null);
   const node2Ref = useRef<HTMLDivElement>(null);
+  
+  const [positions, setPositions] = useState({ node1: 0, node2: 300 });
+
+  useEffect(() => {
+    const updatePositions = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth;
+        setPositions({
+          node1: 0, // 0px from left (at the edge)
+          node2: width - 10 // 10px from right (accounting for node width)
+        });
+      }
+    };
+
+    // Initial calculation
+    updatePositions();
+
+    // Handle resize with ResizeObserver
+    const resizeObserver = new ResizeObserver(updatePositions);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [containerRef]);
 
   return (
     <>
-      {/* Grid anchor points - positioned to create beam along grid line */}
+      {/* Grid anchor points - positioned dynamically */}
       <div
         ref={node1Ref}
         className="absolute w-4 h-4 bg-red-500 border-2 border-white z-20"
         style={{ 
-          left: '0px',  // Grid intersection
-          top: '263.5px'    // Grid intersection
+          left: `${positions.node1}px`,
+          top: '263.5px'
         }}
       />
       <div
         ref={node2Ref}
         className="absolute w-4 h-4 bg-green-500 border-2 border-white z-20"
         style={{ 
-          left: '390px', // Same grid line horizontally
-          top: '263.5px'    // SAME Y - travels horizontally along grid line
+          left: `${positions.node2}px`,
+          top: '263.5px'
         }}
       />
 
