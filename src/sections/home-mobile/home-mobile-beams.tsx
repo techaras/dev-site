@@ -19,7 +19,12 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
   const verticalNode5Ref = useRef<HTMLDivElement>(null);
   const verticalNode6Ref = useRef<HTMLDivElement>(null);
   
+  // New refs for conditional 4th vertical pair
+  const verticalNode7Ref = useRef<HTMLDivElement>(null);
+  const verticalNode8Ref = useRef<HTMLDivElement>(null);
+  
   const [positions, setPositions] = useState({ node1: 0, node2: 300 });
+  const [showFourthVertical, setShowFourthVertical] = useState(false);
 
   useEffect(() => {
     const updatePositions = () => {
@@ -29,6 +34,9 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
           node1: 0, // 0px from left (at the edge)
           node2: width - 10 // 10px from right (accounting for node width)
         });
+        
+        // Check if width is 449px or higher for conditional nodes
+        setShowFourthVertical(width >= 449);
       }
     };
 
@@ -156,6 +164,28 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         }}
       />
 
+      {/* Fourth vertical grid anchor points - CONDITIONAL (only if width >= 449px*/}
+      {showFourthVertical && (
+        <>
+          <div
+            ref={verticalNode7Ref}
+            className="absolute w-4 h-4 bg-rose-500 border-2 border-white z-20"
+            style={{ 
+              left: '393.5px',
+              top: '100px'
+            }}
+          />
+          <div
+            ref={verticalNode8Ref}
+            className="absolute w-4 h-4 bg-lime-500 border-2 border-white z-20"
+            style={{ 
+              left: '393.5px',
+              top: '430px'
+            }}
+          />
+        </>
+      )}
+
       {/* Original Horizontal Animated Beam */}
       <AnimatedBeam
         containerRef={containerRef}
@@ -235,6 +265,22 @@ export function HomeMobileBeams({ containerRef }: HomeMobileBeamsProps) {
         gradientStartColor="#A07CFE"
         gradientStopColor="#FE8FB5"
       />
+
+      {/* Fourth Vertical Animated Beam - CONDITIONAL (only if width >= 449px)*/}
+      {showFourthVertical && (
+        <AnimatedBeam
+          containerRef={containerRef}
+          fromRef={verticalNode7Ref}
+          toRef={verticalNode8Ref}
+          curvature={0}
+          duration={5}
+          reverse={true}
+          pathColor="rgba(53, 55, 57, 0.8)"
+          pathWidth={2}
+          gradientStartColor="#A07CFE"
+          gradientStopColor="#FE8FB5"
+        />
+      )}
     </>
   );
 }
