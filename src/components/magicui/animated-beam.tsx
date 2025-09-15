@@ -47,21 +47,38 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   const id = useId();
   const [pathD, setPathD] = useState("");
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
+  const [isVertical, setIsVertical] = useState(false);
 
-  // Calculate the gradient coordinates based on the reverse prop
-  const gradientCoordinates = reverse
-    ? {
-        x1: ["90%", "-10%"],
-        x2: ["100%", "0%"],
-        y1: ["0%", "0%"],
-        y2: ["0%", "0%"],
-      }
-    : {
-        x1: ["10%", "110%"],
-        x2: ["0%", "100%"],
-        y1: ["0%", "0%"],
-        y2: ["0%", "0%"],
-      };
+  // Calculate the gradient coordinates based on path orientation and reverse prop
+  const gradientCoordinates = isVertical
+    ? // Vertical path
+      reverse
+      ? {
+          x1: ["0%", "0%"],
+          x2: ["0%", "0%"],
+          y1: ["90%", "-10%"],
+          y2: ["100%", "0%"],
+        }
+      : {
+          x1: ["0%", "0%"],
+          x2: ["0%", "0%"],
+          y1: ["10%", "110%"],
+          y2: ["0%", "100%"],
+        }
+    : // Horizontal path (original behavior)
+      reverse
+      ? {
+          x1: ["90%", "-10%"],
+          x2: ["100%", "0%"],
+          y1: ["0%", "0%"],
+          y2: ["0%", "0%"],
+        }
+      : {
+          x1: ["10%", "110%"],
+          x2: ["0%", "100%"],
+          y1: ["0%", "0%"],
+          y2: ["0%", "0%"],
+        };
 
   useEffect(() => {
     const updatePath = () => {
@@ -82,6 +99,20 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
           rectB.left - containerRect.left + rectB.width / 2 + endXOffset;
         const endY =
           rectB.top - containerRect.top + rectB.height / 2 + endYOffset;
+
+        // Determine if path is more vertical than horizontal
+        const deltaX = Math.abs(endX - startX);
+        const deltaY = Math.abs(endY - startY);
+        const pathIsVertical = deltaY > deltaX;
+        setIsVertical(pathIsVertical);
+
+        console.log('🔍 Path analysis:', {
+          deltaX,
+          deltaY,
+          isVertical: pathIsVertical,
+          from: { x: startX, y: startY },
+          to: { x: endX, y: endY }
+        });
 
         const controlY = startY - curvature;
         const d = `M ${startX},${startY} Q ${
