@@ -15,17 +15,17 @@ export function Capabilities() {
 
   return (
     <div className="w-full h-full text-[#f2f2f2] flex flex-col">
-      <h3 className="font-heading text-xl">Capabilities</h3>
+      <h3 className="font-heading text-xl mb-4 md:mb-0">Capabilities</h3>
       
       {/* Skills Pills - 3 rows with horizontal overflow, extending edge-to-edge */}
-      <div className="flex-1 flex flex-col gap-11 justify-center mb-1 edge-to-edge relative">
+      <div className="py-6 md:flex-1 flex flex-col gap-6 md:gap-11 md:justify-center mb-6 md:mb-1 edge-to-edge relative">
         {/* Left scroll shadow - always visible */}
         <div className="absolute top-0 left-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />
         
         {/* Scrolling content container */}
         <div 
           ref={containerRef}
-          className="flex flex-col gap-11 overflow-hidden justify-center"
+          className="flex flex-col gap-6 md:gap-11 overflow-hidden justify-center"
         >
           {skillRows.map((row, rowIndex) => (
             <div
