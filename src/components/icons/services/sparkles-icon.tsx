@@ -2,8 +2,8 @@ import { useMemo } from "react";
 
 export function SparklesIcon({ className }: { className?: string }) {
   // Generate unique gradient ID for this instance
-  const gradientId = useMemo(() => `sparkles-gradient-${Math.random().toString(36).substr(2, 9)}`, []);
-  
+  const gradientId = useMemo(() => `sparkles-gradient-${Math.random().toString(36).slice(2, 11)}`, []);
+   
   return (
     <svg 
       className={className} 
