@@ -3,7 +3,7 @@ import { Focus } from '../how-i-work/focus'
 import { Capabilities } from '../how-i-work/capabilities'
 import { ResponseTime } from '../how-i-work/response-time'
 import { Contact } from '../how-i-work/contact'
-import { Services } from '../how-i-work/services'
+import { ServicesMobile } from './services-mobile'
 
 export function HowIWorkMobile() {
   return (
@@ -32,7 +32,7 @@ export function HowIWorkMobile() {
       </div>
 
       <div className="bento-square w-full mt-6">
-        <Services />
+        <ServicesMobile />
       </div>
     </section>
   )
