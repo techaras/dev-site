@@ -1,6 +1,9 @@
 import { Methodology } from '../how-i-work/methodology'
 import { Focus } from '../how-i-work/focus'
 import { Capabilities } from '../how-i-work/capabilities'
+import { ResponseTime } from '../how-i-work/response-time'
+import { Contact } from '../how-i-work/contact'
+import { Services } from '../how-i-work/services'
 
 export function HowIWorkMobile() {
   return (
@@ -18,6 +21,18 @@ export function HowIWorkMobile() {
 
       <div className="bento-square w-full mt-6">
         <Capabilities />
+      </div>
+
+      <div className="w-full mt-6">
+        <ResponseTime />
+      </div>
+
+      <div className="bento-square w-full mt-6">
+        <Contact />
+      </div>
+
+      <div className="bento-square w-full mt-6">
+        <Services />
       </div>
     </section>
   )
