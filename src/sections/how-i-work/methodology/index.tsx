@@ -21,8 +21,8 @@ export function Methodology() {
         I use lightweight Agile delivery designed for SMEs and I'm available in
       </p>
       
-      {/* 3x2 Grid of Icons */}
-      <div className="grid grid-cols-3 gap-4 mb-4 flex-1 content-center">
+      {/* 2x3 Grid for < 353px, 3x2 Grid for >= 353px */}
+      <div className="grid grid-cols-2 [@media(min-width:353px)]:grid-cols-3 gap-4 mb-4 flex-1 content-center">
         {/* First Row */}
         <div className="flex flex-col items-center justify-center gap-2 w-full h-22 border border-[#353739] rounded-2xl hover:border-[#555759] transition-colors duration-300">
           <EmailIcon className="w-9 h-9" />

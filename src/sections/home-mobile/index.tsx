@@ -10,7 +10,7 @@ export function MobileHome() {
     return (
       <section 
         id="home" 
-        className="relative min-h-screen w-full flex flex-col items-center justify-top mt-26 px-2.5"
+        className="relative w-full flex flex-col items-center justify-top mt-26 px-2.5"
       >
         {/* Container with CSS class for pseudo-element background */}
         <div 
