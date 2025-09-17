@@ -60,9 +60,3 @@ export function SupabaseIcon({ className }: { className?: string }) {
     </svg>
   )
 }
-
-  //
-
-  //
-
-  //
