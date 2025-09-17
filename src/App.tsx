@@ -9,6 +9,7 @@ import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provi
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { MobileHome } from "@/sections/home-mobile";
 import { HowIWorkMobile } from "@/sections/how-i-work-mobile";
+import { CaseStudiesMobile } from "@/sections/case-studies-mobile";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 function DesktopApp() {
@@ -40,6 +41,9 @@ function MobileApp() {
       
       {/* Mobile How I Work Section */}
       <HowIWorkMobile />
+      
+      {/* Mobile Case Studies Section */}
+      <CaseStudiesMobile />
     </div>
   );
 }
