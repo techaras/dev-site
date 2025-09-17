@@ -11,6 +11,7 @@ import { MobileHome } from "@/sections/home-mobile";
 import { HowIWorkMobile } from "@/sections/how-i-work-mobile";
 import { CaseStudiesMobile } from "@/sections/case-studies-mobile";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
+import { SkillsMobile } from "./sections/skills-mobile";
 
 function DesktopApp() {
   return (
@@ -44,6 +45,9 @@ function MobileApp() {
       
       {/* Mobile Case Studies Section */}
       <CaseStudiesMobile />
+
+      {/* Skills Section */}
+      <SkillsMobile />
     </div>
   );
 }
