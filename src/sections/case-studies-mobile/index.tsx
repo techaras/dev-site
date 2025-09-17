@@ -1,4 +1,4 @@
-import { TransitionLayout } from '../case-studies/transition-layout';
+import { DesignMobile } from './design';
 
 export function CaseStudiesMobile() {
   return (
@@ -16,7 +16,9 @@ export function CaseStudiesMobile() {
             Curated Work
           </p>
         </div>
-        <TransitionLayout />
+        
+        {/* Design Component */}
+        <DesignMobile />
       </div>
     </section>
   );
