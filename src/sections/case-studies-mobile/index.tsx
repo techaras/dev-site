@@ -1,3 +1,4 @@
+import { AdvertisingMobile } from './advertising';
 import { DesignMobile } from './design';
 
 export function CaseStudiesMobile() {
@@ -17,8 +18,15 @@ export function CaseStudiesMobile() {
           </p>
         </div>
         
-        {/* Design Component */}
-        <DesignMobile />
+        {/* Design Case Study */}
+        <div className="mb-10">
+          <DesignMobile />
+        </div>
+        
+        {/* Advertising Case Study */}
+        <div>
+          <AdvertisingMobile />
+        </div>
       </div>
     </section>
   );
