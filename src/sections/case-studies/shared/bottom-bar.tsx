@@ -96,7 +96,7 @@ export function BottomBar({ techStack }: BottomBarProps) {
         {/* Mobile Layout (screens <600px) - Two rows with justify-around */}
         <div className="flex min-[600px]:hidden flex-col gap-6 w-full">
           {/* First Row */}
-          <div className="flex items-center justify-around w-full">
+          <div className="flex items-center justify-between w-full">
             {mobileRows[0].map((tech, index) => (
               <div key={`${tech.name}-row1-${index}`} className="flex flex-col items-center gap-4">
                 {tech.icon}
@@ -108,7 +108,7 @@ export function BottomBar({ techStack }: BottomBarProps) {
           </div>
 
           {/* Second Row */}
-          <div className="flex items-center justify-around w-full">
+          <div className="flex items-center justify-between w-full">
             {mobileRows[1].map((tech, index) => (
               <div key={`${tech.name}-row2-${index}`} className="flex flex-col items-center gap-4">
                 {tech.icon}
