@@ -61,17 +61,65 @@ export function BottomBar({ techStack }: BottomBarProps) {
     prevTechStackRef.current = techStack;
   }, [techStack]);
 
+  // Split tech stack for mobile layout
+  const getRowsForMobile = (items: TechStackItem[]) => {
+    if (items.length === 6) {
+      // Design platform: 3 + 3
+      return [items.slice(0, 3), items.slice(3, 6)];
+    } else if (items.length === 5) {
+      // Advertising platform: 3 + 2
+      return [items.slice(0, 3), items.slice(3, 5)];
+    }
+    // Fallback: split roughly in half
+    const mid = Math.ceil(items.length / 2);
+    return [items.slice(0, mid), items.slice(mid)];
+  };
+
+  const mobileRows = getRowsForMobile(techStack);
+
   return (
     <div className="w-full h-full flex items-center justify-center p-4 [@media(min-width:1390px)]:p-6">
-      <div ref={contentRef} className="flex items-center justify-between w-full max-w-4xl">
-        {techStack.map((tech, index) => (
-          <div key={`${tech.name}-${index}`} className="flex flex-col items-center gap-4">
-            {tech.icon}
-            <span className="font-body text-sm font-light text-foreground">
-              {tech.name}
-            </span>
+      <div ref={contentRef} className="w-full max-w-4xl">
+        
+        {/* Desktop Layout (screens ≥600px) - Single row with justify-between */}
+        <div className="hidden min-[600px]:flex items-center justify-between w-full">
+          {techStack.map((tech, index) => (
+            <div key={`${tech.name}-${index}`} className="flex flex-col items-center gap-4">
+              {tech.icon}
+              <span className="font-body text-sm font-light text-foreground">
+                {tech.name}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Layout (screens <600px) - Two rows with justify-around */}
+        <div className="flex min-[600px]:hidden flex-col gap-6 w-full">
+          {/* First Row */}
+          <div className="flex items-center justify-around w-full">
+            {mobileRows[0].map((tech, index) => (
+              <div key={`${tech.name}-row1-${index}`} className="flex flex-col items-center gap-4">
+                {tech.icon}
+                <span className="font-body text-sm font-light text-foreground">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
+
+          {/* Second Row */}
+          <div className="flex items-center justify-around w-full">
+            {mobileRows[1].map((tech, index) => (
+              <div key={`${tech.name}-row2-${index}`} className="flex flex-col items-center gap-4">
+                {tech.icon}
+                <span className="font-body text-sm font-light text-foreground">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
