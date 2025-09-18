@@ -13,6 +13,7 @@ import { CaseStudiesMobile } from "@/sections/case-studies-mobile";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { SkillsMobile } from "./sections/skills-mobile";
 import { AboutMeMobile } from "./sections/about-me-mobile";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function DesktopApp() {
   return (
@@ -64,6 +65,7 @@ function App() {
       <SvgFilters />
       {isMobile ? <MobileApp /> : <DesktopApp />}
       <GlobalDrawer />
+      <SpeedInsights />
     </ThemeProvider>
   );
 }
