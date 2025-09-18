@@ -14,6 +14,7 @@ import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { SkillsMobile } from "./sections/skills-mobile";
 import { AboutMeMobile } from "./sections/about-me-mobile";
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { MobileFooter } from "./sections/footer-mobile";
 
 function DesktopApp() {
   return (
@@ -53,6 +54,10 @@ function MobileApp() {
 
       {/* Mobile About Me Section */}
       <AboutMeMobile />
+
+      {/* Mobile Footer Section */}
+      <MobileFooter />
+
     </div>
   );
 }
