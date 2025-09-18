@@ -8,6 +8,7 @@ import { QuoteCard } from '../about-me/quote-card';
 // Import SVG assets
 import zapIcon from '../../assets/zapIcon.svg';
 import rocketIcon from '../../assets/rocketIcon.svg';
+import { ExperienceMobile } from './experience-mobile';
 
 export function AboutMeMobile() {
   return (
@@ -69,8 +70,13 @@ export function AboutMeMobile() {
         </div>
 
         {/* Second row: QuoteCard */}
-        <div className="w-full">
+        <div className="w-full mb-4">
           <QuoteCard />
+        </div>
+
+        {/* Second row: QuoteCard */}
+        <div className="bento-square w-full">
+          <ExperienceMobile />
         </div>
       </div>
     </section>
