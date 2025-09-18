@@ -2,6 +2,8 @@ import { AchievementCard } from '../about-me/achievement-card';
 import { ProfileSection } from '../about-me/profile-section';
 import { FeatureCard } from '../about-me/feature-card';
 import { SimpleTextCard } from '../about-me/simple-text-card';
+import { TrustIndicator } from '../about-me/trust-indicator';
+import { QuoteCard } from '../about-me/quote-card';
 
 // Import SVG assets
 import zapIcon from '../../assets/zapIcon.svg';
@@ -56,8 +58,19 @@ export function AboutMeMobile() {
         </div>
 
         {/* Simple Text Card */}
-        <div className="w-full">
+        <div className="w-full mb-4">
           <SimpleTextCard text="Enterprise Compliance Standards" />
+        </div>
+
+        {/* First row: SimpleTextCard and TrustIndicator */}
+        <div className="grid grid-cols-1 [@media(min-width:510px)]:grid-cols-2 gap-4 mb-4">
+          <TrustIndicator />
+          <SimpleTextCard text="Streamline Processes" />
+        </div>
+
+        {/* Second row: QuoteCard */}
+        <div className="w-full">
+          <QuoteCard />
         </div>
       </div>
     </section>
