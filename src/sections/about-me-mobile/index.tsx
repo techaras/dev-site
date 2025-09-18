@@ -30,7 +30,7 @@ export function AboutMeMobile() {
         </div>
 
         {/* Bottom row: 1 achievement card */}
-        <div className="grid grid-cols-1 mb-6">
+        <div className="grid grid-cols-1 mb-4">
           <AchievementCard 
             title={<>AI Forge Cohort 5 Alumnus</>}
             description="12 out of 500+"
@@ -38,7 +38,7 @@ export function AboutMeMobile() {
         </div>
 
         {/* Profile Section */}
-        <div className="w-full mb-6">
+        <div className="w-full mb-4">
           <ProfileSection />
         </div>
 
