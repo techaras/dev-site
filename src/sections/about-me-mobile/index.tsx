@@ -1,5 +1,11 @@
 import { AchievementCard } from '../about-me/achievement-card';
 import { ProfileSection } from '../about-me/profile-section';
+import { FeatureCard } from '../about-me/feature-card';
+import { SimpleTextCard } from '../about-me/simple-text-card';
+
+// Import SVG assets
+import zapIcon from '../../assets/zapIcon.svg';
+import rocketIcon from '../../assets/rocketIcon.svg';
 
 export function AboutMeMobile() {
   return (
@@ -29,8 +35,29 @@ export function AboutMeMobile() {
         </div>
 
         {/* Profile Section */}
-        <div className="w-full">
+        <div className="w-full mb-6">
           <ProfileSection />
+        </div>
+
+        {/* Feature Cards - stacked on small screens, side by side on 663px+ */}
+        <div className="grid grid-cols-1 [@media(min-width:663px)]:grid-cols-2 gap-4 mb-4">
+          <FeatureCard 
+            icon={rocketIcon} 
+            text={<>Prototype to <br className="[@media(min-width:477px)]:hidden" />Production</>}
+            altText="Prototype to Production"
+            variant="text-right-icon-left"
+          />
+          <FeatureCard 
+            icon={zapIcon} 
+            text={<>Scalable <br className="[@media(min-width:477px)]:hidden" />Solutions</>}
+            altText="Scalable solutions"
+            variant="text-left-icon-right"
+          />
+        </div>
+
+        {/* Simple Text Card */}
+        <div className="w-full">
+          <SimpleTextCard text="Enterprise Compliance Standards" />
         </div>
       </div>
     </section>
