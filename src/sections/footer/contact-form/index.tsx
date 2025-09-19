@@ -1,3 +1,5 @@
+import RainbowButton from '@/components/magicui/rainbow-button';
+
 export function ContactForm() {
     return (
       <div className="flex flex-col gap-6">
@@ -37,10 +39,14 @@ export function ContactForm() {
           />
         </div>
   
-        {/* Send Button */}
-        <button className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-body font-medium cursor-pointer hover:bg-primary/90 transition-colors">
+        {/* Send Button - Now using RainbowButton */}
+        <RainbowButton 
+          size="lg" 
+          className="w-ful font-heading pt-0.5"
+          variant="outline"
+        >
           Send a message
-        </button>
+        </RainbowButton>
       </div>
     );
   }

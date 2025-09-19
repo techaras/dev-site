@@ -8,6 +8,7 @@ import {
 import { motion, type Variants } from "framer-motion";
 import { X } from "lucide-react";
 import { useDrawerStore } from "@/stores/drawerStore";
+import RainbowButton from '@/components/magicui/rainbow-button';
 
 const drawerVariants: Variants = {
   hidden: {
@@ -129,11 +130,15 @@ export function GlobalDrawer() {
               />
             </motion.div>
 
-            {/* Send Button */}
+            {/* Send Button - Now using RainbowButton */}
             <motion.div variants={itemVariants}>
-              <button className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-body font-medium cursor-pointer hover:bg-primary/90 transition-colors mb-10">
+              <RainbowButton 
+                size="lg" 
+                className="w-full font-heading pt-0.5 mb-10"
+                variant="outline"
+              >
                 Send a message
-              </button>
+              </RainbowButton>
             </motion.div>
           </motion.div>
         </motion.div>
