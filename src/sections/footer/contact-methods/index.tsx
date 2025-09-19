@@ -1,4 +1,3 @@
-// src/sections/footer/contact-methods/index.tsx
 import { useState } from "react";
 import { Copy, Check, ExternalLink } from "lucide-react";
 import { GithubIcon } from '@/components/icons/socials/github-icon';
@@ -31,8 +30,8 @@ export function ContactMethods() {
   return (
     <div className="flex flex-col gap-4 mt-8">
       {/* Email Row */}
-      <div className="flex items-center gap-4 p-4 rounded-2xl border border-border transition-colors">
-        <div className="w-12 h-12 rounded-lg border border-border flex items-center justify-center flex-shrink-0">
+      <div className="group flex items-center gap-4 p-4 rounded-2xl border border-border transition-all hover:border-[#555759] hover:transform hover:-translate-y-0.5">
+        <div className="w-12 h-12 rounded-lg border border-border group-hover:border-[#555759] transition-colors flex items-center justify-center flex-shrink-0">
           <img src={emailIcon} alt="Email" className="w-6 h-6" />
         </div>
         <span className="font-body text-foreground flex-1">
@@ -52,8 +51,8 @@ export function ContactMethods() {
       </div>
 
       {/* LinkedIn Row */}
-      <div className="flex items-center gap-4 p-4 rounded-2xl border border-border transition-colors">
-        <div className="w-12 h-12 rounded-lg border border-border flex items-center justify-center flex-shrink-0">
+      <div className="group flex items-center gap-4 p-4 rounded-2xl border border-border transition-all hover:border-[#555759] hover:transform hover:-translate-y-0.5">
+        <div className="w-12 h-12 rounded-lg border border-border group-hover:border-[#555759] transition-colors flex items-center justify-center flex-shrink-0">
           <LinkedinIcon className="w-6 h-6 text-background" />
         </div>
         <span className="font-body text-foreground flex-1 text-left">
@@ -69,8 +68,8 @@ export function ContactMethods() {
       </div>
 
       {/* GitHub Row */}
-      <div className="flex items-center gap-4 p-4 rounded-2xl border border-border transition-colors">
-        <div className="w-12 h-12 rounded-lg border border-border flex items-center justify-center flex-shrink-0">
+      <div className="group flex items-center gap-4 p-4 rounded-2xl border border-border transition-all hover:border-[#555759] hover:transform hover:-translate-y-0.5">
+        <div className="w-12 h-12 rounded-lg border border-border group-hover:border-[#555759] transition-colors flex items-center justify-center flex-shrink-0">
           <GithubIcon className="w-6 h-6 text-background" />
         </div>
         <span className="font-body text-foreground flex-1 text-left">
