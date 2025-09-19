@@ -9,9 +9,17 @@ import {
   MorphingPopoverTrigger,
 } from "@/components/ui/morphing-popover";
 import { useState } from "react";
+import RainbowButton from '@/components/magicui/rainbow-button';
+import { useDrawerStore } from "@/stores/drawerStore";
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { open: openDrawer } = useDrawerStore();
+
+  const handleContactClick = () => {
+    openDrawer();
+    setIsOpen(false); // Close the sidebar when contact is clicked
+  };
 
   return (
     <div className="fixed top-7 right-6 z-50 md:hidden">
@@ -55,15 +63,33 @@ export function Sidebar() {
           
           {/* Navigation Links */}
           <nav className="flex flex-col gap-2 flex-1 p-4">
-            {navigationItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.link}
-                className="flex items-center gap-3 py-3 text-xl font-heading text-foreground rounded-lg transition-all hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent/50 focus:text-accent-foreground focus:outline-none"
-              >
-                <span>{item.name}</span>
-              </a>
-            ))}
+            {navigationItems.map((item) => {
+              // Special handling for Contact item
+              if (item.name === "Contact") {
+                return (
+                  <RainbowButton
+                    key={item.name}
+                    onClick={handleContactClick}
+                    size="lg"
+                    className="w-full font-heading pt-0.5 text-md mt-2"
+                    variant="outline"
+                  >
+                    {item.name}
+                  </RainbowButton>
+                );
+              }
+
+              // Regular navigation items
+              return (
+                <a
+                  key={item.name}
+                  href={item.link}
+                  className="flex items-center gap-3 py-3 text-xl font-heading text-foreground rounded-lg transition-all hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent/50 focus:text-accent-foreground focus:outline-none"
+                >
+                  <span>{item.name}</span>
+                </a>
+              );
+            })}
           </nav>
         </MorphingPopoverContent>
       </MorphingPopover>
