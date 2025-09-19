@@ -197,6 +197,17 @@ function MorphingPopoverContent({
     <AnimatePresence>
       {context.isOpen && (
         <>
+          {/* Overlay */}
+          <motion.div
+            className="fixed inset-0 z-40 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={context.close}
+            aria-hidden="true"
+          />
+          
+          {/* Popover Content */}
           <motion.div
             {...props}
             ref={ref}
@@ -206,7 +217,7 @@ function MorphingPopoverContent({
             role='dialog'
             aria-modal='true'
             className={cn(
-              'absolute overflow-hidden rounded-md border border-zinc-950/10 bg-white p-2 text-zinc-950 shadow-md dark:border-[#353739] dark:bg-black dark:text-[#f2f2f2]',
+              'absolute z-50 overflow-hidden rounded-md border border-zinc-950/10 bg-white p-2 text-zinc-950 shadow-md dark:border-[#353739] dark:bg-black dark:text-[#f2f2f2]',
               className
             )}
             initial='initial'
