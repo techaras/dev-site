@@ -35,7 +35,8 @@ export function Sidebar() {
         >
           {/* Header */}
           <div className="p-4 flex items-center justify-between">
-            <h2 className="text-xs font-heading text-[#b3b3b3] mt-0.5">
+            <h2 className="text-xs font-heading text-[#b3b3b3] mt-0.5 flex items-center gap-2">
+              <span className="w-1 h-1 bg-[#b3b3b3] rounded-full"></span>
               MENU
             </h2>
             
