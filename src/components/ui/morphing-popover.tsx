@@ -13,17 +13,17 @@ import {
   AnimatePresence,
   MotionConfig,
   motion,
-  Transition,
-  Variants,
+  type Transition,
+  type Variants,
 } from 'motion/react';
 import useClickOutside from '@/hooks/useClickOutside';
 import { cn } from '@/lib/utils';
 
 const TRANSITION = {
-  type: 'spring',
+  type: 'spring' as const,
   bounce: 0.1,
   duration: 0.4,
-};
+} satisfies Transition;
 
 type MorphingPopoverContextValue = {
   isOpen: boolean;
@@ -125,20 +125,21 @@ function MorphingPopoverTrigger({
 
   if (asChild && isValidElement(children)) {
     const MotionComponent = motion.create(
-      children.type as React.ForwardRefExoticComponent<any>
+      children.type as React.ForwardRefExoticComponent<unknown>
     );
     const childProps = children.props as Record<string, unknown>;
 
+    const enhancedProps = {
+      ...childProps,
+      onClick: context.open,
+      layoutId: `popover-trigger-${context.uniqueId}`,
+      key: context.uniqueId,
+      'aria-expanded': context.isOpen,
+      'aria-controls': `popover-content-${context.uniqueId}`,
+    };
+
     return (
-      <MotionComponent
-        {...childProps}
-        onClick={context.open}
-        layoutId={`popover-trigger-${context.uniqueId}`}
-        className={childProps.className}
-        key={context.uniqueId}
-        aria-expanded={context.isOpen}
-        aria-controls={`popover-content-${context.uniqueId}`}
-      />
+      <MotionComponent {...enhancedProps} />
     );
   }
 
@@ -190,7 +191,7 @@ function MorphingPopoverContent({
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [context.isOpen, context.close]);
+  }, [context.isOpen, context.close, context]);
 
   return (
     <AnimatePresence>
