@@ -71,7 +71,7 @@ export function Sidebar() {
                     key={item.name}
                     onClick={handleContactClick}
                     size="lg"
-                    className="w-full font-heading pt-0.5 text-md mt-2"
+                    className="w-full font-heading pt-0.5 text-md mt-4"
                     variant="outline"
                   >
                     {item.name}
@@ -84,7 +84,7 @@ export function Sidebar() {
                 <a
                   key={item.name}
                   href={item.link}
-                  className="flex items-center gap-3 py-3 text-xl font-heading text-foreground rounded-lg transition-all hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent/50 focus:text-accent-foreground focus:outline-none"
+                  className="flex items-center gap-3 py-3 text-xl font-heading text-foreground rounded-lg transition-all hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent/50 focus:text-accent-foreground focus:outline-none border-b rounded-s-none rounded-e-none"
                 >
                   <span>{item.name}</span>
                 </a>
