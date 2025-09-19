@@ -3,9 +3,16 @@ import { TextShimmer } from "@/components/ui/text-shimmer";
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { AvailabilityStatus } from "@/sections/home/content/availability-status";
 import { HomeMobileBeams } from "./home-mobile-beams";
+import { useDrawerStore } from "@/stores/drawerStore";
 
 export function MobileHome() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const { open: openDrawer } = useDrawerStore();
+
+    const handleConnectClick = () => {
+      console.log('🎯 Opening contact drawer from mobile home section');
+      openDrawer();
+    };
 
     return (
       <section 
@@ -43,7 +50,10 @@ export function MobileHome() {
           </p>
 
           {/* Connect Button */}
-          <button className="relative overflow-hidden rounded-full backdrop-blur-sm font-heading border px-10 py-2 text-foreground mb-14 z-10">
+          <button 
+            onClick={handleConnectClick}
+            className="relative overflow-hidden rounded-full backdrop-blur-sm font-heading border px-10 py-2 text-foreground mb-14 z-10"
+          >
             <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
             <div className="mt-0.5">let's connect</div>
           </button>
