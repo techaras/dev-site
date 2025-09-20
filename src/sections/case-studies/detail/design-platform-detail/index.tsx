@@ -55,7 +55,7 @@ export function DesignPlatformDetail() {
           className="inline-flex items-center gap-2 text-primary hover:underline cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Case Studies
+          Back
         </button>
         
         <button
@@ -70,7 +70,7 @@ export function DesignPlatformDetail() {
 
 
       {/* Title */}
-      <h1 className="font-heading text-3xl text-foreground mb-4">
+      <h1 className="font-heading text-xl md:text-3xl text-foreground mb-4">
         Patent-Winning AI Print Design Platform
       </h1>
 
@@ -91,8 +91,8 @@ export function DesignPlatformDetail() {
 
       {/* Two Column Grid Layout */}
       <div className="grid grid-cols-6 gap-8">
-        {/* Left Column - Main Content (80%) */}
-        <div className="col-span-4 space-y-16">
+        {/* Left Column - Main Content (full width on mobile, 80% on desktop) */}
+        <div className="col-span-6 md:col-span-4 space-y-16">
           {designPlatformContent.sections.map((section) => (
             <section key={section.id} id={section.id}>
               <h2 className="font-heading text-2xl text-foreground mb-6">
@@ -135,8 +135,8 @@ export function DesignPlatformDetail() {
           ))}
         </div>
 
-        {/* Right Column - Navigation (20%) */}
-        <div className="col-span-2 col-start-6">
+        {/* Right Column - Navigation (hidden on mobile, 20% on desktop) */}
+        <div className="hidden md:block col-span-2 col-start-6">
           <nav className="sticky top-8 space-y-3">
             {designPlatformContent.sections.map((section) => (
               <a 

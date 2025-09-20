@@ -55,7 +55,7 @@ export function AdvertisingPlatformDetail() {
           className="inline-flex items-center gap-2 text-primary hover:underline cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Case Studies
+          Back
         </button>
         
         <button
@@ -68,7 +68,7 @@ export function AdvertisingPlatformDetail() {
       </div>
 
       {/* Title */}
-      <h1 className="font-heading text-3xl text-foreground mb-4">
+      <h1 className="font-heading text-xl md:text-3xl text-foreground mb-4">
         Automated Ad Campaign Creation Platform
       </h1>
 
@@ -89,8 +89,8 @@ export function AdvertisingPlatformDetail() {
 
       {/* Two Column Grid Layout */}
       <div className="grid grid-cols-6 gap-8">
-        {/* Left Column - Main Content (80%) */}
-        <div className="col-span-4 space-y-16">
+        {/* Left Column - Main Content (full width on mobile, 80% on desktop) */}
+        <div className="col-span-6 md:col-span-4 space-y-16">
           {advertisingPlatformContent.sections.map((section) => (
             <section key={section.id} id={section.id}>
               <h2 className="font-heading text-2xl text-foreground mb-6">
@@ -133,8 +133,8 @@ export function AdvertisingPlatformDetail() {
           ))}
         </div>
 
-        {/* Right Column - Navigation (20%) */}
-        <div className="col-span-2 col-start-6">
+        {/* Right Column - Navigation (hidden on mobile, 20% on desktop) */}
+        <div className="hidden md:block col-span-2 col-start-6">
           <nav className="sticky top-8 space-y-3">
             {advertisingPlatformContent.sections.map((section) => (
               <a 
