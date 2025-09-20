@@ -2,23 +2,19 @@ import {
   Menu,
   X
 } from "lucide-react";
-import { navigationItems } from "@/constants/index";
 import {
   MorphingPopover,
   MorphingPopoverContent,
   MorphingPopoverTrigger,
 } from "@/components/ui/morphing-popover";
 import { useState } from "react";
-import RainbowButton from '@/components/magicui/rainbow-button';
-import { useDrawerStore } from "@/stores/drawerStore";
+import { MobileNav } from "./mobile-nav";
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { open: openDrawer } = useDrawerStore();
 
-  const handleContactClick = () => {
-    openDrawer();
-    setIsOpen(false); // Close the sidebar when contact is clicked
+  const handleNavigationClick = () => {
+    setIsOpen(false); // Close the sidebar when any navigation item is clicked
   };
 
   return (
@@ -61,36 +57,8 @@ export function Sidebar() {
             </button>
           </div>
           
-          {/* Navigation Links */}
-          <nav className="flex flex-col gap-2 flex-1 p-4">
-            {navigationItems.map((item) => {
-              // Special handling for Contact item
-              if (item.name === "Contact") {
-                return (
-                  <RainbowButton
-                    key={item.name}
-                    onClick={handleContactClick}
-                    size="lg"
-                    className="w-full font-heading pt-0.5 text-md mt-4"
-                    variant="outline"
-                  >
-                    {item.name}
-                  </RainbowButton>
-                );
-              }
-
-              // Regular navigation items
-              return (
-                <a
-                  key={item.name}
-                  href={item.link}
-                  className="flex items-center gap-3 py-3 text-xl font-heading text-foreground rounded-lg transition-all hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent/50 focus:text-accent-foreground focus:outline-none border-b rounded-s-none rounded-e-none"
-                >
-                  <span>{item.name}</span>
-                </a>
-              );
-            })}
-          </nav>
+          {/* Mobile Navigation */}
+          <MobileNav onNavigationClick={handleNavigationClick} />
         </MorphingPopoverContent>
       </MorphingPopover>
     </div>

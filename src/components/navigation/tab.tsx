@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { useNavigationStore, type SectionId } from "@/stores/navigationStore";
+import { useNavigationStore, type DesktopSectionId } from "@/stores/navigationStore";
 import { useDrawerStore } from "@/stores/drawerStore";
 import type { TabProps } from "./types";
 
-// Mapping from href to section IDs
-const HREF_TO_SECTION_MAP: Record<string, SectionId> = {
+// Mapping from desktop href to section IDs
+const DESKTOP_HREF_TO_SECTION_MAP: Record<string, DesktopSectionId> = {
   '#home': 'home',
   '#how-i-work': 'how-i-work',
   '#case-studies': 'case-studies',
@@ -28,11 +28,11 @@ export const Tab = ({ children, setPosition, href, isActive }: TabProps) => {
       return;
     }
     
-    // Handle section navigation for other links
+    // Handle section navigation for other links using desktop section IDs
     if (href.startsWith('#')) {
       const targetId = href.substring(1); // Remove the #
       const targetElement = document.getElementById(targetId);
-      const targetSectionId = HREF_TO_SECTION_MAP[href];
+      const targetSectionId = DESKTOP_HREF_TO_SECTION_MAP[href];
       
       if (targetElement && targetSectionId) {
         console.log(`🎯 Starting navigation to: ${targetSectionId}`);
