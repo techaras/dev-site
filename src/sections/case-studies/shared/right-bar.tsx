@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router";
 import gsap from "gsap";
 import { ArrowRight } from "lucide-react";
 import { GithubIcon } from "@/components/icons/socials/github-icon";
@@ -9,6 +10,7 @@ interface RightBarProps {
 }
 
 export function RightBar({ projectData }: RightBarProps) {
+  const navigate = useNavigate();
   const contentRef = useRef<HTMLDivElement>(null);
   const prevProjectDataRef = useRef<ProjectData | null>(null);
 
@@ -68,8 +70,16 @@ export function RightBar({ projectData }: RightBarProps) {
   };
 
   const handleLearnMoreClick = () => {
-    // Force a hard navigation that bypasses React Router's scroll restoration
-    window.location.href = projectData.buttons.detailPath;
+    // Check if we're on mobile (< 768px)
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // Use React Router navigation for mobile
+      navigate(projectData.buttons.detailPath);
+    } else {
+      // Use hard navigation for desktop to bypass scroll restoration issues
+      window.location.href = projectData.buttons.detailPath;
+    }
   };
 
   return (
