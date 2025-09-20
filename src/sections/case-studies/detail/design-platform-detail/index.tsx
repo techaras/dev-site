@@ -18,17 +18,6 @@ export function DesignPlatformDetail() {
 
   const handleBackClick = () => {
     navigate("/");
-    
-    // Wait for navigation to complete, then scroll to case studies
-    setTimeout(() => {
-      const caseStudiesSection = document.getElementById("case-studies");
-      if (caseStudiesSection) {
-        caseStudiesSection.scrollIntoView({ 
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    }, 100);
   };
 
   const handleGithubClick = () => {
