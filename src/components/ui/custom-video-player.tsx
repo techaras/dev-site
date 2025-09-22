@@ -42,6 +42,13 @@ export function CustomVideoPlayer({
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [debugLogs, setDebugLogs] = useState<string[]>([]);
+
+  // Debug logger that shows on screen
+  const addDebugLog = (message: string) => {
+    console.log(message);
+    setDebugLogs(prev => [...prev.slice(-4), `${new Date().toLocaleTimeString()}: ${message}`]);
+  };
 
   // Initialize the autoplay hook
   const { isInViewport } = useVideoViewport(videoRef, {
@@ -63,7 +70,7 @@ export function CustomVideoPlayer({
     console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
 
     const handleLoadedData = () => {
-      console.log('🎬 CustomVideoPlayer: Video loaded');
+      addDebugLog('🎬 Video loaded');
       setIsLoading(false);
       setDuration(video.duration);
     };
@@ -124,40 +131,23 @@ export function CustomVideoPlayer({
     const video = videoRef.current;
     if (!video || isLoading) return;
 
-    console.log('🎬 CustomVideoPlayer: Viewport change detected', { 
-      isInViewport, 
-      currentlyPlaying: isPlaying,
-      videoReadyState: video.readyState,
-      videoMuted: video.muted,
-      videoPlaysInline: video.playsInline,
-      userAgent: navigator.userAgent.includes('Mobile') ? 'MOBILE' : 'DESKTOP'
-    });
+    const isMobile = /Mobile|Android|iPhone|iPad/.test(navigator.userAgent);
+    addDebugLog(`🎬 Viewport: ${isInViewport ? 'IN' : 'OUT'} | Device: ${isMobile ? 'MOBILE' : 'DESKTOP'} | Playing: ${isPlaying}`);
 
     const handleAutoPlay = async () => {
       try {
         if (isInViewport && !isPlaying) {
-          console.log('🎬 📱 MOBILE AUTOPLAY ATTEMPT:', {
-            videoSrc: video.src,
-            videoMuted: video.muted,
-            videoPlaysInline: video.playsInline,
-            readyState: video.readyState
-          });
+          addDebugLog(`🎬 📱 AUTOPLAY ATTEMPT: muted=${video.muted} inline=${video.playsInline}`);
           
           await video.play();
-          console.log('🎬 ✅ MOBILE AUTOPLAY SUCCESS');
+          addDebugLog('🎬 ✅ AUTOPLAY SUCCESS');
         } else if (!isInViewport && isPlaying) {
-          console.log('🎬 CustomVideoPlayer: Auto-pausing video (left viewport)');
+          addDebugLog('🎬 Auto-pausing (left viewport)');
           await video.pause();
         }
       } catch (error) {
         const err = error as Error;
-        console.error('🎬 ❌ MOBILE AUTOPLAY FAILED:', {
-          error: err.message,
-          errorName: err.name,
-          videoSrc: video?.src,
-          videoMuted: video?.muted,
-          videoPlaysInline: video?.playsInline
-        });
+        addDebugLog(`🎬 ❌ AUTOPLAY FAILED: ${err.name} - ${err.message}`);
       }
     };
 
@@ -225,6 +215,16 @@ export function CustomVideoPlayer({
         x5-video-player-type="h5"
         x5-video-player-fullscreen="true"
       />
+
+      {/* On-Screen Debug Panel (Mobile Visible) */}
+      {debugLogs.length > 0 && (
+        <div className="absolute top-2 left-2 bg-black/80 text-white text-xs p-2 rounded max-w-xs z-50 font-mono">
+          <div className="font-bold mb-1">🎬 Debug Log:</div>
+          {debugLogs.map((log, i) => (
+            <div key={i} className="mb-1 break-words">{log}</div>
+          ))}
+        </div>
+      )}
 
       {/* Loading Spinner */}
       {isLoading && (
