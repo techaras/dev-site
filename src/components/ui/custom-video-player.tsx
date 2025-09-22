@@ -17,8 +17,6 @@ interface CustomVideoPlayerProps {
   onPause?: () => void;
   onTimeUpdate?: (currentTime: number, duration: number) => void;
   onVolumeChange?: (volume: number) => void;
-  // NEW: Debug prop to bypass viewport detection
-  debugBypassViewport?: boolean;
 }
 
 export function CustomVideoPlayer({
@@ -32,8 +30,7 @@ export function CustomVideoPlayer({
   onPlay,
   onPause,
   onTimeUpdate,
-  onVolumeChange,
-  debugBypassViewport = false // NEW: Default to false
+  onVolumeChange
 }: CustomVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -46,11 +43,11 @@ export function CustomVideoPlayer({
   const [volume, setVolume] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Only use viewport hook if not in debug bypass mode
+  // Initialize the autoplay hook
   const { isInViewport } = useVideoViewport(videoRef, {
     threshold: 0.5,
     rootMargin: '0px',
-    enabled: !debugBypassViewport // Disable viewport detection in debug mode
+    enabled: true
   });
 
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
@@ -64,22 +61,11 @@ export function CustomVideoPlayer({
     if (!video) return;
 
     console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
-    console.log('🎬 DEBUG MODE:', debugBypassViewport ? 'ENABLED - Will bypass viewport' : 'DISABLED - Using viewport');
 
     const handleLoadedData = () => {
       console.log('🎬 CustomVideoPlayer: Video loaded');
       setIsLoading(false);
       setDuration(video.duration);
-      
-      // NEW: If in debug mode, try to play immediately on load
-      if (debugBypassViewport) {
-        console.log('🎬 DEBUG: Attempting immediate play on load');
-        video.play().then(() => {
-          console.log('🎬 DEBUG: Immediate play SUCCESS');
-        }).catch((error) => {
-          console.error('🎬 DEBUG: Immediate play FAILED:', error);
-        });
-      }
     };
 
     const handleTimeUpdate = () => {
@@ -131,15 +117,10 @@ export function CustomVideoPlayer({
       video.removeEventListener('volumechange', handleVolumeChange);
       video.removeEventListener('ended', handleEnded);
     };
-  }, [onPlay, onPause, onTimeUpdate, onVolumeChange, loop, debugBypassViewport]);
+  }, [onPlay, onPause, onTimeUpdate, onVolumeChange, loop]);
 
-  // Viewport-based autoplay (only if NOT in debug bypass mode)
+  // Auto-play based on viewport visibility
   useEffect(() => {
-    if (debugBypassViewport) {
-      console.log('🎬 DEBUG: Skipping viewport-based autoplay');
-      return;
-    }
-
     const video = videoRef.current;
     if (!video || isLoading) return;
 
@@ -163,7 +144,7 @@ export function CustomVideoPlayer({
     };
 
     handleAutoPlay();
-  }, [isInViewport, isPlaying, isLoading, debugBypassViewport]);
+  }, [isInViewport, isPlaying, isLoading]);
 
   const toggleMute = () => {
     const video = videoRef.current;
@@ -227,13 +208,6 @@ export function CustomVideoPlayer({
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
           <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
-        </div>
-      )}
-
-      {/* Debug Info - Only show in debug mode */}
-      {debugBypassViewport && (
-        <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-10">
-          DEBUG: Viewport Bypass ON
         </div>
       )}
 
