@@ -50,12 +50,24 @@ export function CustomVideoPlayer({
     setDebugLogs(prev => [...prev.slice(-4), `${new Date().toLocaleTimeString()}: ${message}`]);
   };
 
+  // Component mount debug
+  useEffect(() => {
+    const isMobile = /Mobile|Android|iPhone|iPad/.test(navigator.userAgent);
+    addDebugLog(`🎬 COMPONENT MOUNTED | Device: ${isMobile ? 'MOBILE' : 'DESKTOP'}`);
+    addDebugLog(`🎬 Video ref: ${videoRef.current ? 'EXISTS' : 'NULL'}`);
+  }, []);
+
   // Initialize the autoplay hook
   const { isInViewport } = useVideoViewport(videoRef, {
     threshold: 0.5,
     rootMargin: '0px',
     enabled: true
   });
+
+  // Debug viewport hook changes
+  useEffect(() => {
+    addDebugLog(`🎬 VIEWPORT HOOK: ${isInViewport ? 'IN' : 'OUT'} | Loading: ${isLoading}`);
+  }, [isInViewport, isLoading]);
 
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
   
@@ -70,7 +82,7 @@ export function CustomVideoPlayer({
     console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
 
     const handleLoadedData = () => {
-      addDebugLog('🎬 Video loaded');
+      addDebugLog('🎬 VIDEO LOADED');
       setIsLoading(false);
       setDuration(video.duration);
     };
@@ -216,15 +228,17 @@ export function CustomVideoPlayer({
         x5-video-player-fullscreen="true"
       />
 
-      {/* On-Screen Debug Panel (Mobile Visible) */}
-      {debugLogs.length > 0 && (
-        <div className="absolute top-2 left-2 bg-black/80 text-white text-xs p-2 rounded max-w-xs z-50 font-mono">
-          <div className="font-bold mb-1">🎬 Debug Log:</div>
-          {debugLogs.map((log, i) => (
+      {/* On-Screen Debug Panel (Always Visible on Mobile) */}
+      <div className="absolute top-2 left-2 bg-black/80 text-white text-xs p-2 rounded max-w-xs z-50 font-mono">
+        <div className="font-bold mb-1">🎬 Debug Log:</div>
+        {debugLogs.length === 0 ? (
+          <div className="text-yellow-300">Waiting for logs...</div>
+        ) : (
+          debugLogs.map((log, i) => (
             <div key={i} className="mb-1 break-words">{log}</div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
 
       {/* Loading Spinner */}
       {isLoading && (
