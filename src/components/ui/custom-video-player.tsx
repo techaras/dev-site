@@ -197,11 +197,15 @@ export function CustomVideoPlayer({
         src={videoUrl}
         poster={posterUrl}
         autoPlay={autoPlay}
-        muted={muted}
+        muted={true}  // ✅ FIXED: Force muted for mobile compatibility
         loop={loop}
-        playsInline
+        playsInline={true}  // ✅ FIXED: Explicit true for mobile autoplay
         preload="metadata"
         className="w-full h-full object-cover"
+        // ✅ FIXED: Additional mobile compatibility attributes
+        webkit-playsinline="true"
+        x5-video-player-type="h5"
+        x5-video-player-fullscreen="true"
       />
 
       {/* Loading Spinner */}
