@@ -42,41 +42,6 @@ export function CustomVideoPlayer({
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [debugLogs, setDebugLogs] = useState<string[]>([]);
-
-  // Debug logger that shows on screen
-  const addDebugLog = (message: string) => {
-    console.log(message);
-    setDebugLogs(prev => [...prev.slice(-4), `${new Date().toLocaleTimeString()}: ${message}`]);
-  };
-
-  // Component mount debug
-  useEffect(() => {
-    const isMobile = /Mobile|Android|iPhone|iPad/.test(navigator.userAgent);
-    addDebugLog(`🎬 COMPONENT MOUNTED | Device: ${isMobile ? 'MOBILE' : 'DESKTOP'}`);
-    addDebugLog(`🎬 Video ref: ${videoRef.current ? 'EXISTS' : 'NULL'}`);
-    
-    // Debug video src URL
-    const video = videoRef.current;
-    if (video) {
-      addDebugLog(`🎬 Video SRC: ${video.src ? 'SET' : 'EMPTY'}`);
-      addDebugLog(`🎬 Preload: ${video.preload}`);
-      
-      // Force mobile to load metadata after component mounts
-      if (isMobile && isLoading) {
-        addDebugLog('🎬 📱 FORCE MOBILE LOAD');
-        video.load(); // Force reload on mobile
-        
-        // Timeout fallback - if video doesn't load in 10 seconds, set as loaded anyway
-        setTimeout(() => {
-          if (isLoading) {
-            addDebugLog('🎬 ⏰ TIMEOUT - FORCE READY');
-            setIsLoading(false);
-          }
-        }, 10000);
-      }
-    }
-  }, [isLoading]); // Added isLoading dependency
 
   // Initialize the autoplay hook
   const { isInViewport } = useVideoViewport(videoRef, {
@@ -85,57 +50,22 @@ export function CustomVideoPlayer({
     enabled: true
   });
 
-  // Debug viewport hook changes
-  useEffect(() => {
-    addDebugLog(`🎬 VIEWPORT HOOK: ${isInViewport ? 'IN' : 'OUT'} | Loading: ${isLoading}`);
-  }, [isInViewport, isLoading]);
-
   const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
   
   // Generate Cloudinary video URL with optimizations
   const videoUrl = `https://res.cloudinary.com/${cloudName}/video/upload/f_auto,q_auto/${publicId}`;
   const posterUrl = poster || `https://res.cloudinary.com/${cloudName}/video/upload/f_auto,q_auto,so_0/${publicId}.jpg`;
 
-  // Detect mobile for preload optimization
-  const isMobileDevice = /Mobile|Android|iPhone|iPad/.test(navigator.userAgent);
-
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    addDebugLog('🎬 SETTING UP VIDEO LISTENERS');
+    console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
 
     const handleLoadedData = () => {
-      addDebugLog('🎬 VIDEO LOADED');
+      console.log('🎬 CustomVideoPlayer: Video loaded');
       setIsLoading(false);
       setDuration(video.duration);
-    };
-
-    const handleLoadStart = () => {
-      addDebugLog('🎬 VIDEO LOAD START');
-    };
-
-    const handleCanPlay = () => {
-      addDebugLog('🎬 VIDEO CAN PLAY');
-    };
-
-    const handleCanPlayThrough = () => {
-      addDebugLog('🎬 VIDEO CAN PLAY THROUGH');
-      // Mobile fallback - if loadeddata didn't fire, use this event
-      if (isLoading) {
-        addDebugLog('🎬 📱 MOBILE FALLBACK - READY VIA CANPLAYTHROUGH');
-        setIsLoading(false);
-        setDuration(video.duration || 0);
-      }
-    };
-
-    const handleError = (e: Event) => {
-      const error = (e.target as HTMLVideoElement).error;
-      addDebugLog(`🎬 ❌ VIDEO ERROR: ${error?.code} - ${error?.message}`);
-    };
-
-    const handleStalled = () => {
-      addDebugLog('🎬 ⚠️ VIDEO STALLED');
     };
 
     const handleTimeUpdate = () => {
@@ -171,12 +101,7 @@ export function CustomVideoPlayer({
       }
     };
 
-    video.addEventListener('loadstart', handleLoadStart);
     video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('canplay', handleCanPlay);
-    video.addEventListener('canplaythrough', handleCanPlayThrough);
-    video.addEventListener('error', handleError);
-    video.addEventListener('stalled', handleStalled);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
@@ -185,12 +110,7 @@ export function CustomVideoPlayer({
 
     return () => {
       console.log('🎬 CustomVideoPlayer: Cleaning up video event listeners');
-      video.removeEventListener('loadstart', handleLoadStart);
       video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('canplay', handleCanPlay);
-      video.removeEventListener('canplaythrough', handleCanPlayThrough);
-      video.removeEventListener('error', handleError);
-      video.removeEventListener('stalled', handleStalled);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
@@ -204,23 +124,22 @@ export function CustomVideoPlayer({
     const video = videoRef.current;
     if (!video || isLoading) return;
 
-    const isMobile = /Mobile|Android|iPhone|iPad/.test(navigator.userAgent);
-    addDebugLog(`🎬 Viewport: ${isInViewport ? 'IN' : 'OUT'} | Device: ${isMobile ? 'MOBILE' : 'DESKTOP'} | Playing: ${isPlaying}`);
+    console.log('🎬 CustomVideoPlayer: Viewport change detected', { 
+      isInViewport, 
+      currentlyPlaying: isPlaying 
+    });
 
     const handleAutoPlay = async () => {
       try {
         if (isInViewport && !isPlaying) {
-          addDebugLog(`🎬 📱 AUTOPLAY ATTEMPT: muted=${video.muted} inline=${video.playsInline}`);
-          
+          console.log('🎬 CustomVideoPlayer: Auto-playing video (entered viewport)');
           await video.play();
-          addDebugLog('🎬 ✅ AUTOPLAY SUCCESS');
         } else if (!isInViewport && isPlaying) {
-          addDebugLog('🎬 Auto-pausing (left viewport)');
+          console.log('🎬 CustomVideoPlayer: Auto-pausing video (left viewport)');
           await video.pause();
         }
       } catch (error) {
-        const err = error as Error;
-        addDebugLog(`🎬 ❌ AUTOPLAY FAILED: ${err.name} - ${err.message}`);
+        console.error('🎬 CustomVideoPlayer: Auto-play error:', error);
       }
     };
 
@@ -278,28 +197,12 @@ export function CustomVideoPlayer({
         src={videoUrl}
         poster={posterUrl}
         autoPlay={autoPlay}
-        muted={true}  // ✅ FIXED: Force muted for mobile compatibility
+        muted={muted}
         loop={loop}
-        playsInline={true}  // ✅ FIXED: Explicit true for mobile autoplay
+        playsInline
         preload="metadata"
         className="w-full h-full object-cover"
-        // ✅ FIXED: Additional mobile compatibility attributes
-        webkit-playsinline="true"
-        x5-video-player-type="h5"
-        x5-video-player-fullscreen="true"
       />
-
-      {/* On-Screen Debug Panel (Always Visible on Mobile) */}
-      <div className="absolute top-2 left-2 bg-black/80 text-white text-xs p-2 rounded max-w-xs z-50 font-mono">
-        <div className="font-bold mb-1">🎬 Debug Log:</div>
-        {debugLogs.length === 0 ? (
-          <div className="text-yellow-300">Waiting for logs...</div>
-        ) : (
-          debugLogs.map((log, i) => (
-            <div key={i} className="mb-1 break-words">{log}</div>
-          ))
-        )}
-      </div>
 
       {/* Loading Spinner */}
       {isLoading && (
