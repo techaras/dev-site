@@ -60,9 +60,23 @@ export function CustomVideoPlayer({
     const video = videoRef.current;
     if (video) {
       addDebugLog(`🎬 Video SRC: ${video.src ? 'SET' : 'EMPTY'}`);
-      addDebugLog(`🎬 Video URL: ${video.src?.substring(0, 50)}...`);
+      addDebugLog(`🎬 Preload: ${video.preload}`);
+      
+      // Force mobile to load metadata after component mounts
+      if (isMobile && isLoading) {
+        addDebugLog('🎬 📱 FORCE MOBILE LOAD');
+        video.load(); // Force reload on mobile
+        
+        // Timeout fallback - if video doesn't load in 10 seconds, set as loaded anyway
+        setTimeout(() => {
+          if (isLoading) {
+            addDebugLog('🎬 ⏰ TIMEOUT - FORCE READY');
+            setIsLoading(false);
+          }
+        }, 10000);
+      }
     }
-  }, []);
+  }, [isLoading]); // Added isLoading dependency
 
   // Initialize the autoplay hook
   const { isInViewport } = useVideoViewport(videoRef, {
@@ -82,6 +96,9 @@ export function CustomVideoPlayer({
   const videoUrl = `https://res.cloudinary.com/${cloudName}/video/upload/f_auto,q_auto/${publicId}`;
   const posterUrl = poster || `https://res.cloudinary.com/${cloudName}/video/upload/f_auto,q_auto,so_0/${publicId}.jpg`;
 
+  // Detect mobile for preload optimization
+  const isMobileDevice = /Mobile|Android|iPhone|iPad/.test(navigator.userAgent);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -100,6 +117,16 @@ export function CustomVideoPlayer({
 
     const handleCanPlay = () => {
       addDebugLog('🎬 VIDEO CAN PLAY');
+    };
+
+    const handleCanPlayThrough = () => {
+      addDebugLog('🎬 VIDEO CAN PLAY THROUGH');
+      // Mobile fallback - if loadeddata didn't fire, use this event
+      if (isLoading) {
+        addDebugLog('🎬 📱 MOBILE FALLBACK - READY VIA CANPLAYTHROUGH');
+        setIsLoading(false);
+        setDuration(video.duration || 0);
+      }
     };
 
     const handleError = (e: Event) => {
@@ -147,6 +174,7 @@ export function CustomVideoPlayer({
     video.addEventListener('loadstart', handleLoadStart);
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('canplaythrough', handleCanPlayThrough);
     video.addEventListener('error', handleError);
     video.addEventListener('stalled', handleStalled);
     video.addEventListener('timeupdate', handleTimeUpdate);
@@ -160,6 +188,7 @@ export function CustomVideoPlayer({
       video.removeEventListener('loadstart', handleLoadStart);
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('canplaythrough', handleCanPlayThrough);
       video.removeEventListener('error', handleError);
       video.removeEventListener('stalled', handleStalled);
       video.removeEventListener('timeupdate', handleTimeUpdate);
