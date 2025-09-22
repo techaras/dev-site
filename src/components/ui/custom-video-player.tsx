@@ -55,6 +55,13 @@ export function CustomVideoPlayer({
     const isMobile = /Mobile|Android|iPhone|iPad/.test(navigator.userAgent);
     addDebugLog(`🎬 COMPONENT MOUNTED | Device: ${isMobile ? 'MOBILE' : 'DESKTOP'}`);
     addDebugLog(`🎬 Video ref: ${videoRef.current ? 'EXISTS' : 'NULL'}`);
+    
+    // Debug video src URL
+    const video = videoRef.current;
+    if (video) {
+      addDebugLog(`🎬 Video SRC: ${video.src ? 'SET' : 'EMPTY'}`);
+      addDebugLog(`🎬 Video URL: ${video.src?.substring(0, 50)}...`);
+    }
   }, []);
 
   // Initialize the autoplay hook
@@ -79,12 +86,29 @@ export function CustomVideoPlayer({
     const video = videoRef.current;
     if (!video) return;
 
-    console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
+    addDebugLog('🎬 SETTING UP VIDEO LISTENERS');
 
     const handleLoadedData = () => {
       addDebugLog('🎬 VIDEO LOADED');
       setIsLoading(false);
       setDuration(video.duration);
+    };
+
+    const handleLoadStart = () => {
+      addDebugLog('🎬 VIDEO LOAD START');
+    };
+
+    const handleCanPlay = () => {
+      addDebugLog('🎬 VIDEO CAN PLAY');
+    };
+
+    const handleError = (e: Event) => {
+      const error = (e.target as HTMLVideoElement).error;
+      addDebugLog(`🎬 ❌ VIDEO ERROR: ${error?.code} - ${error?.message}`);
+    };
+
+    const handleStalled = () => {
+      addDebugLog('🎬 ⚠️ VIDEO STALLED');
     };
 
     const handleTimeUpdate = () => {
@@ -120,7 +144,11 @@ export function CustomVideoPlayer({
       }
     };
 
+    video.addEventListener('loadstart', handleLoadStart);
     video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
+    video.addEventListener('stalled', handleStalled);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
@@ -129,7 +157,11 @@ export function CustomVideoPlayer({
 
     return () => {
       console.log('🎬 CustomVideoPlayer: Cleaning up video event listeners');
+      video.removeEventListener('loadstart', handleLoadStart);
       video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('error', handleError);
+      video.removeEventListener('stalled', handleStalled);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
@@ -292,7 +324,7 @@ export function CustomVideoPlayer({
               </div>
             </div>
 
-            {/* Time Dislay */}
+            {/* Time Display */}
             <div className="text-xs">
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
