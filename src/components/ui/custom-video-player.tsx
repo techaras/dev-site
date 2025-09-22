@@ -19,6 +19,13 @@ interface CustomVideoPlayerProps {
   onVolumeChange?: (volume: number) => void;
 }
 
+// Mobile detection utility
+const isMobileDevice = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+         (window.innerWidth <= 768);
+};
+
 export function CustomVideoPlayer({
   publicId,
   className = '',
@@ -62,8 +69,11 @@ export function CustomVideoPlayer({
 
     console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
 
+    const isMobile = isMobileDevice();
+    console.log('🎬 CustomVideoPlayer: Mobile device detected:', isMobile);
+
     const handleLoadedData = () => {
-      console.log('🎬 CustomVideoPlayer: Video loaded');
+      console.log('🎬 CustomVideoPlayer: Video loaded (loadeddata event)');
       setIsLoading(false);
       setDuration(video.duration);
     };
@@ -101,6 +111,19 @@ export function CustomVideoPlayer({
       }
     };
 
+    // Mobile fallback: assume loading completes after timeout
+    let mobileLoadingTimeout: NodeJS.Timeout;
+    if (isMobile) {
+      console.log('🎬 CustomVideoPlayer: Setting mobile loading timeout');
+      mobileLoadingTimeout = setTimeout(() => {
+        console.log('🎬 CustomVideoPlayer: Mobile loading timeout - assuming video is ready');
+        setIsLoading(false);
+        if (video.duration && !isNaN(video.duration)) {
+          setDuration(video.duration);
+        }
+      }, 2000); // 2 second timeout for mobile
+    }
+
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('play', handlePlay);
@@ -110,6 +133,9 @@ export function CustomVideoPlayer({
 
     return () => {
       console.log('🎬 CustomVideoPlayer: Cleaning up video event listeners');
+      if (mobileLoadingTimeout) {
+        clearTimeout(mobileLoadingTimeout);
+      }
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('play', handlePlay);
@@ -122,28 +148,37 @@ export function CustomVideoPlayer({
   // Auto-play based on viewport visibility
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || isLoading) return;
+    if (!video) return;
 
-    console.log('🎬 CustomVideoPlayer: Viewport change detected', { 
-      isInViewport, 
-      currentlyPlaying: isPlaying 
-    });
+    const isMobile = isMobileDevice();
+    
+    // On mobile, don't wait for loading completion due to event blocking
+    if (isMobile || !isLoading) {
+      console.log('🎬 CustomVideoPlayer: Viewport change detected', { 
+        isInViewport, 
+        currentlyPlaying: isPlaying,
+        isMobile,
+        isLoading
+      });
 
-    const handleAutoPlay = async () => {
-      try {
-        if (isInViewport && !isPlaying) {
-          console.log('🎬 CustomVideoPlayer: Auto-playing video (entered viewport)');
-          await video.play();
-        } else if (!isInViewport && isPlaying) {
-          console.log('🎬 CustomVideoPlayer: Auto-pausing video (left viewport)');
-          await video.pause();
+      const handleAutoPlay = async () => {
+        try {
+          if (isInViewport && !isPlaying) {
+            console.log('🎬 CustomVideoPlayer: Auto-playing video (entered viewport)');
+            await video.play();
+          } else if (!isInViewport && isPlaying) {
+            console.log('🎬 CustomVideoPlayer: Auto-pausing video (left viewport)');
+            await video.pause();
+          }
+        } catch (error) {
+          console.error('🎬 CustomVideoPlayer: Auto-play error:', error);
         }
-      } catch (error) {
-        console.error('🎬 CustomVideoPlayer: Auto-play error:', error);
-      }
-    };
+      };
 
-    handleAutoPlay();
+      handleAutoPlay();
+    } else {
+      console.log('🎬 CustomVideoPlayer: Waiting for loading to complete on desktop');
+    }
   }, [isInViewport, isPlaying, isLoading]);
 
   const toggleMute = () => {
@@ -204,8 +239,8 @@ export function CustomVideoPlayer({
         className="w-full h-full object-cover"
       />
 
-      {/* Loading Spinner */}
-      {isLoading && (
+      {/* Loading Spinner - Only show on desktop or if actually loading */}
+      {isLoading && !isMobileDevice() && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
           <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
         </div>
