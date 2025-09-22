@@ -292,7 +292,7 @@ export function CustomVideoPlayer({
               </div>
             </div>
 
-            {/* Time Display */}
+            {/* Time Dislay */}
             <div className="text-xs">
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
