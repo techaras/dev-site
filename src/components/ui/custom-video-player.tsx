@@ -126,20 +126,38 @@ export function CustomVideoPlayer({
 
     console.log('🎬 CustomVideoPlayer: Viewport change detected', { 
       isInViewport, 
-      currentlyPlaying: isPlaying 
+      currentlyPlaying: isPlaying,
+      videoReadyState: video.readyState,
+      videoMuted: video.muted,
+      videoPlaysInline: video.playsInline,
+      userAgent: navigator.userAgent.includes('Mobile') ? 'MOBILE' : 'DESKTOP'
     });
 
     const handleAutoPlay = async () => {
       try {
         if (isInViewport && !isPlaying) {
-          console.log('🎬 CustomVideoPlayer: Auto-playing video (entered viewport)');
+          console.log('🎬 📱 MOBILE AUTOPLAY ATTEMPT:', {
+            videoSrc: video.src,
+            videoMuted: video.muted,
+            videoPlaysInline: video.playsInline,
+            readyState: video.readyState
+          });
+          
           await video.play();
+          console.log('🎬 ✅ MOBILE AUTOPLAY SUCCESS');
         } else if (!isInViewport && isPlaying) {
           console.log('🎬 CustomVideoPlayer: Auto-pausing video (left viewport)');
           await video.pause();
         }
       } catch (error) {
-        console.error('🎬 CustomVideoPlayer: Auto-play error:', error);
+        const err = error as Error;
+        console.error('🎬 ❌ MOBILE AUTOPLAY FAILED:', {
+          error: err.message,
+          errorName: err.name,
+          videoSrc: video?.src,
+          videoMuted: video?.muted,
+          videoPlaysInline: video?.playsInline
+        });
       }
     };
 
