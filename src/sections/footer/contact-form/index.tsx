@@ -2,7 +2,7 @@ import RainbowButton from '@/components/magicui/rainbow-button';
 import { useContactForm } from '@/hooks/useContactForm';
 
 export function ContactForm() {
-  const { isSubmitting, isSuccess, message, isSubmitSuccessful, onSubmit, reset } = useContactForm();
+  const { isSubmitting, isSuccess, message, isSubmitSuccessful, onSubmit } = useContactForm();
 
   if (isSubmitSuccessful) {
     return (
@@ -28,12 +28,6 @@ export function ContactForm() {
             <p className="font-body text-muted-foreground mb-6">{message}</p>
           </>
         )}
-        <button
-          onClick={reset}
-          className="font-body text-primary hover:text-primary/80 transition-colors"
-        >
-          Send another message
-        </button>
       </div>
     );
   }

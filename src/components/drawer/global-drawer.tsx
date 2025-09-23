@@ -67,17 +67,6 @@ export function GlobalDrawer() {
     reset();
   };
 
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    await onSubmit(event);
-    if (isSuccess) {
-      // Auto-close drawer after successful submission
-      setTimeout(() => {
-        close();
-        reset();
-      }, 2000);
-    }
-  };
-
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && close()}>
       <DrawerContent className="mx-2.5 max-w-none sm:max-w-fit sm:mx-auto p-4 sm:p-6 rounded-2xl shadow-xl">
@@ -122,7 +111,6 @@ export function GlobalDrawer() {
                     </svg>
                   </div>
                   <p className="font-body text-muted-foreground mb-6">{message}</p>
-                  <p className="font-body text-sm text-muted-foreground">This drawer will close automatically...</p>
                 </>
               ) : (
                 <>
@@ -146,7 +134,7 @@ export function GlobalDrawer() {
           {/* Contact Form */}
           {!isSubmitSuccessful && (
             <motion.div variants={itemVariants}>
-              <form onSubmit={handleFormSubmit} className="flex flex-col gap-3 sm:gap-6">
+              <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:gap-6">
                 {/* Name Field */}
                 <motion.div variants={itemVariants}>
                   <label className="block font-body text-sm font-medium text-foreground mb-2">
