@@ -8,6 +8,7 @@ import {
 import { motion, type Variants } from "framer-motion";
 import { X } from "lucide-react";
 import { useDrawerStore } from "@/stores/drawerStore";
+import { useContactForm } from "@/hooks/useContactForm";
 import RainbowButton from '@/components/magicui/rainbow-button';
 
 const drawerVariants: Variants = {
@@ -60,6 +61,22 @@ const itemVariants: Variants = {
 
 export function GlobalDrawer() {
   const { isOpen, close } = useDrawerStore();
+  const { isSubmitting, isSuccess, message, isSubmitSuccessful, onSubmit, reset } = useContactForm();
+
+  const handleReset = () => {
+    reset();
+  };
+
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    await onSubmit(event);
+    if (isSuccess) {
+      // Auto-close drawer after successful submission
+      setTimeout(() => {
+        close();
+        reset();
+      }, 2000);
+    }
+  };
 
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && close()}>
@@ -70,77 +87,123 @@ export function GlobalDrawer() {
           animate="visible"
           className="mx-auto w-full max-w-[480px] space-y-4 sm:space-y-6"
         >
-            {/* Header */}
-            <motion.div variants={itemVariants}>
-              <DrawerHeader className="px-0 space-y-2.5 relative">
-                <DrawerClose asChild>
-                  <button 
-                    className="absolute -top-2 -right-2 p-2 hover:bg-accent rounded-full transition-colors"
-                    aria-label="Close"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </DrawerClose>
-                
-                <DrawerTitle className="text-2xl font-heading tracking-tight mt-6">
-                  Let's work together
-                </DrawerTitle>
-                
+          {/* Header */}
+          <motion.div variants={itemVariants}>
+            <DrawerHeader className="px-0 space-y-2.5 relative">
+              <DrawerClose asChild>
+                <button 
+                  className="absolute -top-2 -right-2 p-2 hover:bg-accent rounded-full transition-colors"
+                  aria-label="Close"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </DrawerClose>
+              
+              <DrawerTitle className="text-2xl font-heading tracking-tight mt-6">
+                {isSubmitSuccessful ? (isSuccess ? "Message sent!" : "Oops!") : "Let's work together"}
+              </DrawerTitle>
+              
+              {!isSubmitSuccessful && (
                 <p className="text-sm leading-relaxed text-muted-foreground font-body">
                   Turn your vision into reality with a partner who truly understands what your business needs.
                 </p>
-              </DrawerHeader>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:gap-6">
-              {/* Name Field */}
-              <motion.div variants={itemVariants}>
-                <label className="block font-body text-sm font-medium text-foreground mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="John Doe"
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors"
-                />
-              </motion.div>
-
-              {/* Email Field */}
-              <motion.div variants={itemVariants}>
-                <label className="block font-body text-sm font-medium text-foreground mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder="john@example.com"
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors"
-                />
-              </motion.div>
-
-              {/* Message Text Area */}
-              <motion.div variants={itemVariants}>
-                <label className="block font-body text-sm font-medium text-foreground mb-2">
-                  Message
-                </label>
-                <textarea
-                  placeholder="Tell me about your project..."
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors resize-none h-28 sm:h-36"
-                />
-              </motion.div>
-
-              {/* Send Button - Now using RainbowButton */}
-              <motion.div variants={itemVariants}>
-                <RainbowButton 
-                  size="lg" 
-                  className="w-full font-heading pt-0.5 mb-10"
-                  variant="outline"
-                >
-                  Send a message
-                </RainbowButton>
-              </motion.div>
-            </motion.div>
+              )}
+            </DrawerHeader>
           </motion.div>
+
+          {/* Success/Error State */}
+          {isSubmitSuccessful && (
+            <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
+              {isSuccess ? (
+                <>
+                  <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
+                    <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="font-body text-muted-foreground mb-6">{message}</p>
+                  <p className="font-body text-sm text-muted-foreground">This drawer will close automatically...</p>
+                </>
+              ) : (
+                <>
+                  <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mb-4">
+                    <svg className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <p className="font-body text-muted-foreground mb-6">{message}</p>
+                  <button
+                    onClick={handleReset}
+                    className="font-body text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Try again
+                  </button>
+                </>
+              )}
+            </motion.div>
+          )}
+
+          {/* Contact Form */}
+          {!isSubmitSuccessful && (
+            <motion.div variants={itemVariants}>
+              <form onSubmit={handleFormSubmit} className="flex flex-col gap-3 sm:gap-6">
+                {/* Name Field */}
+                <motion.div variants={itemVariants}>
+                  <label className="block font-body text-sm font-medium text-foreground mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="John Doe"
+                    required
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors"
+                  />
+                </motion.div>
+
+                {/* Email Field */}
+                <motion.div variants={itemVariants}>
+                  <label className="block font-body text-sm font-medium text-foreground mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="john@example.com"
+                    required
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors"
+                  />
+                </motion.div>
+
+                {/* Message Text Area */}
+                <motion.div variants={itemVariants}>
+                  <label className="block font-body text-sm font-medium text-foreground mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    placeholder="Tell me about your project..."
+                    required
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors resize-none h-28 sm:h-36"
+                  />
+                </motion.div>
+
+                {/* Send Button */}
+                <motion.div variants={itemVariants}>
+                  <RainbowButton 
+                    type="submit"
+                    size="lg" 
+                    className="w-full font-heading pt-0.5 mb-10"
+                    variant="outline"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send a message"}
+                  </RainbowButton>
+                </motion.div>
+              </form>
+            </motion.div>
+          )}
+        </motion.div>
       </DrawerContent>
     </Drawer>
   );
