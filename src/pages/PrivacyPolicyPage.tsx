@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { privacyPolicyContent } from "@/content/privacy-policy";
 
 export function PrivacyPolicyPage() {
@@ -31,7 +32,7 @@ export function PrivacyPolicyPage() {
 
         {/* Privacy Policy Content */}
         <div className="bg-card border border-border rounded-2xl p-8 md:p-12">
-          <h1 className="font-heading text-4xl md:text-5xl text-foreground mb-4">
+          <h1 className="font-heading text-2xl md:text-5xl text-foreground mb-4">
             {privacyPolicyContent.title}
           </h1>
           
@@ -39,11 +40,43 @@ export function PrivacyPolicyPage() {
             {privacyPolicyContent.lastUpdated}
           </p>
 
-          <div className="font-light text-card-foreground/80 leading-relaxed space-y-6">
-            <div 
-              className="whitespace-pre-line"
-              dangerouslySetInnerHTML={{ __html: privacyPolicyContent.content }}
-            />
+          <div className="font-light text-card-foreground/80 leading-relaxed space-y-6 prose prose-invert prose-lg max-w-none">
+            <ReactMarkdown
+              components={{
+                h2: ({ children }) => (
+                  <h2 className="font-heading text-2xl md:text-3xl text-foreground mt-8 mb-4 first:mt-0">
+                    {children}
+                  </h2>
+                ),
+                p: ({ children }) => (
+                  <p className="mb-4 leading-relaxed">
+                    {children}
+                  </p>
+                ),
+                strong: ({ children }) => (
+                  <strong className="text-foreground font-semibold">
+                    {children}
+                  </strong>
+                ),
+                em: ({ children }) => (
+                  <em className="text-muted-foreground">
+                    {children}
+                  </em>
+                ),
+                ul: ({ children }) => (
+                  <ul className="space-y-2 mb-4">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="space-y-3 mb-6 list-decimal list-inside text-foreground font-medium">
+                    {children}
+                  </ol>
+                ),
+              }}
+            >
+              {privacyPolicyContent.content}
+            </ReactMarkdown>
           </div>
         </div>
       </div>
