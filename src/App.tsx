@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router";
 import { HomePage } from "@/pages/HomePage";
 import { MobileHomePage } from "@/pages/MobileHomePage";
 import { CaseStudyDetailPage } from "@/pages/CaseStudyDetailPage";
+import { PrivacyPolicyPage } from "@/pages/PrivacyPolicyPage";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -15,6 +16,7 @@ function DesktopApp() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       </Routes>
     </SmoothScrollProvider>
   );
@@ -25,6 +27,7 @@ function MobileApp() {
     <Routes>
       <Route path="/" element={<MobileHomePage />} />
       <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
     </Routes>
   );
 }
