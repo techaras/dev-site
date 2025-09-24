@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import { privacyPolicyContent } from "@/content/privacy-policy";
+import { privacyPolicyContent, personalInfoCategories } from "@/content/privacy-policy";
 
 export function PrivacyPolicyPage() {
   return (
@@ -48,11 +48,59 @@ export function PrivacyPolicyPage() {
                     {children}
                   </h2>
                 ),
-                p: ({ children }) => (
-                  <p className="mb-4 leading-relaxed">
-                    {children}
-                  </p>
-                ),
+                p: ({ children }) => {
+                  // Check if this paragraph contains the table trigger text
+                  const content = typeof children === 'string' ? children : 
+                    Array.isArray(children) ? children.join('') : '';
+                  
+                  if (content.includes('The table below shows the categories of personal information')) {
+                    return (
+                      <div>
+                        <p className="mb-4 leading-relaxed">{children}</p>
+                        
+                        {/* Custom Tailwind Table */}
+                        <div className="overflow-x-auto my-8">
+                          <table className="w-full border-collapse border border-border">
+                            <thead>
+                              <tr className="bg-muted">
+                                <th className="border border-border px-4 py-3 text-left font-semibold text-foreground">
+                                  Category
+                                </th>
+                                <th className="border border-border px-4 py-3 text-left font-semibold text-foreground">
+                                  Examples
+                                </th>
+                                <th className="border border-border px-4 py-3 text-right font-semibold text-foreground">
+                                  Collected
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {personalInfoCategories.map((row, index) => (
+                                <tr key={index} className={`border-b border-border ${index % 2 === 1 ? 'bg-muted/30' : ''}`}>
+                                  <td className="border border-border px-4 py-3 text-sm font-medium">
+                                    {row.category}
+                                  </td>
+                                  <td className="border border-border px-4 py-3 text-sm">
+                                    {row.examples}
+                                  </td>
+                                  <td className="border border-border px-4 py-3 text-sm text-right font-semibold">
+                                    {row.collected}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <p className="mb-4 leading-relaxed">
+                      {children}
+                    </p>
+                  );
+                },
                 strong: ({ children }) => (
                   <strong className="text-foreground font-semibold">
                     {children}
