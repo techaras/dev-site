@@ -1,9 +1,15 @@
 import { Link } from "react-router";
+import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { privacyPolicyContent, personalInfoCategories } from "@/content/privacy-policy";
 
 export function PrivacyPolicyPage() {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen w-full bg-black relative">
       {/* Vercel Grid */}
