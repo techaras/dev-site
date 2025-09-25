@@ -48,6 +48,41 @@ function DrawerContent({
   children,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Content>) {
+  // Handle mobile keyboard behavior
+  React.useEffect(() => {
+    const handleFocusIn = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (target?.matches('input, textarea, select')) {
+        // Small delay to ensure keyboard is shown, then scroll smoothly
+        setTimeout(() => {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          });
+        }, 150);
+      }
+    };
+
+    const handleViewportChange = () => {
+      // Update CSS custom property for dynamic viewport height
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    // Set initial viewport height
+    handleViewportChange();
+
+    // Listen for viewport changes (keyboard show/hide)
+    window.addEventListener('resize', handleViewportChange);
+    document.addEventListener('focusin', handleFocusIn);
+
+    return () => {
+      window.removeEventListener('resize', handleViewportChange);
+      document.removeEventListener('focusin', handleFocusIn);
+    };
+  }, []);
+
   return (
     <DrawerPortal data-slot="drawer-portal">
       <DrawerOverlay />
