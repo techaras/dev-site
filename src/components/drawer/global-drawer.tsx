@@ -107,12 +107,11 @@ export function GlobalDrawer() {
 
   return (
     <Drawer open={isOpen} onOpenChange={(open) => !open && close()} repositionInputs={false}>
-      <DrawerContent className="mx-2.5 max-w-none sm:max-w-fit sm:mx-auto rounded-2xl shadow-xl">
-        <div className="overflow-y-auto overflow-x-hidden p-4 sm:p-6">
+      <DrawerContent className="mx-2.5 max-w-none sm:max-w-fit sm:mx-auto p-4 sm:p-6 rounded-2xl shadow-xl">
           <motion.div
             variants={drawerVariants}
             initial="hidden"
-            animate="visible"  
+            animate="visible"
             className="mx-auto w-full max-w-[480px] space-y-4 sm:space-y-6"
           >
           {/* Header */}
@@ -233,7 +232,6 @@ export function GlobalDrawer() {
             </motion.div>
           )}
         </motion.div>
-        </div>
       </DrawerContent>
     </Drawer>
   );
