@@ -106,7 +106,7 @@ export function GlobalDrawer() {
   };
 
   return (
-    <Drawer open={isOpen} onOpenChange={(open) => !open && close()}>
+    <Drawer open={isOpen} onOpenChange={(open) => !open && close()} repositionInputs={false}>
       <DrawerContent className="mx-2.5 max-w-none sm:max-w-fit sm:mx-auto p-4 sm:p-6 rounded-2xl shadow-xl">
         <motion.div
           variants={drawerVariants}
