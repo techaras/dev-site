@@ -303,16 +303,33 @@
 
 /* Mobile Input Focus Improvements */
 @media (max-width: 768px) {
-  /* Prevent zoom on input focus - helps with positioning */
+  /* Prevent zoom on input focus */
   [data-slot="drawer-content"] input,
   [data-slot="drawer-content"] textarea {
     font-size: 16px;
+    touch-action: manipulation;
   }
   
-  /* Better touch targets */
-  [data-slot="drawer-content"] input,
-  [data-slot="drawer-content"] textarea {
-    touch-action: manipulation;
+  /* Fix black area issue - ensure drawer content is properly contained */
+  [data-slot="drawer-content"] {
+    /* Only constrain height when keyboard might be active */
+    max-height: 90vh;
+    /* But allow natural sizing for smaller content */
+    min-height: auto;
+    /* Enable scrolling only when content exceeds available space */
+    overflow-y: auto;
+    /* Prevent scroll bouncing */
+    overscroll-behavior: contain;
+  }
+  
+  /* Dynamic height adjustment when viewport changes (keyboard appears) */
+  [data-slot="drawer-content"] {
+    max-height: calc(var(--vh, 1vh) * 90);
+  }
+  
+  /* Ensure content stays within bounds */
+  [data-slot="drawer-content"] > * {
+    flex-shrink: 0;
   }
 }
 
