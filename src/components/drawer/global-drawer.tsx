@@ -4,6 +4,7 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
@@ -213,18 +214,20 @@ export function GlobalDrawer() {
                   />
                 </motion.div>
 
-                {/* Send Button */}
-                <motion.div variants={itemVariants}>
-                  <RainbowButton 
-                    type="submit"
-                    size="lg" 
-                    className="w-full font-heading pt-0.5 mb-10"
-                    variant="outline"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Sending..." : "Send a message"}
-                  </RainbowButton>
-                </motion.div>
+                {/* Send Button with DrawerFooter */}
+                <DrawerFooter className="flex flex-col gap-3 px-0">
+                  <motion.div variants={itemVariants}>
+                    <RainbowButton 
+                      type="submit"
+                      size="lg" 
+                      className="w-full font-heading pt-0.5"
+                      variant="outline"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "Send a message"}
+                    </RainbowButton>
+                  </motion.div>
+                </DrawerFooter>
               </form>
             </motion.div>
           )}
