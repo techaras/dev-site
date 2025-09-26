@@ -31,7 +31,7 @@ export const SEO: FC<SEOProps> = ({
   image = "https://www.stavrossymeonidis.dev/og-image.jpg",
   url = "https://www.stavrossymeonidis.dev",
   type = "website",
-  twitterHandle = "@stavrossymeonidis",
+  twitterHandle,
   jsonLd,
   children
 }) => {
@@ -62,6 +62,7 @@ export const SEO: FC<SEOProps> = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+
       {twitterHandle && <meta name="twitter:creator" content={twitterHandle} />}
       
       {/* Additional SEO Tags */}
