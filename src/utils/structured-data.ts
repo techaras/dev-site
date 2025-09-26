@@ -3,7 +3,7 @@ export const getPersonStructuredData = () => ({
     "@type": "Person",
     "name": "Stavros Symeonidis",
     "url": "https://www.stavrossymeonidis.dev",
-    "image": "https://www.stavrossymeonidis.dev/profile-dev.jpg",
+    "image": "https://www.stavrossymeonidis.dev/graph-profile-dev.jpg",
     "sameAs": [
       "https://www.linkedin.com/in/stav-symeonidis/",
       "https://github.com/techaras"
