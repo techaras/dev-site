@@ -93,6 +93,14 @@ export const getPersonStructuredData = () => ({
             "name": "Intelligence Dashboards",
             "description": "Transform scattered data into actionable insights"
           }
+        },
+        {
+            "@type": "Offer", 
+            "itemOffered": {
+                "@type": "Service",
+                "name": "Predictive Analytics Models", 
+                "description": "Forecast cash flow and business trends using machine learning on your Xero and CRM data"
+            }
         }
       ]
     }
