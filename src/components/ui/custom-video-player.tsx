@@ -26,6 +26,14 @@ const isMobileDevice = (): boolean => {
          (window.innerWidth <= 768);
 };
 
+// Safari detection utility
+const isSafariBrowser = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  const ua = navigator.userAgent;
+  // Detect Safari but exclude Chrome/Chromium (which also contains "Safari" in UA)
+  return /^((?!chrome|android).)*safari/i.test(ua);
+};
+
 export function CustomVideoPlayer({
   publicId,
   className = '',
@@ -70,12 +78,21 @@ export function CustomVideoPlayer({
     console.log('🎬 CustomVideoPlayer: Setting up video event listeners');
 
     const isMobile = isMobileDevice();
-    console.log('🎬 CustomVideoPlayer: Mobile device detected:', isMobile);
+    const isSafari = isSafariBrowser();
+    console.log('🎬 CustomVideoPlayer: Browser detection:', { isMobile, isSafari });
 
     const handleLoadedData = () => {
       console.log('🎬 CustomVideoPlayer: Video loaded (loadeddata event)');
       setIsLoading(false);
       setDuration(video.duration);
+    };
+
+    const handleCanPlay = () => {
+      console.log('🎬 CustomVideoPlayer: Video can play (canplay event)');
+      setIsLoading(false);
+      if (video.duration && !isNaN(video.duration)) {
+        setDuration(video.duration);
+      }
     };
 
     const handleTimeUpdate = () => {
@@ -111,20 +128,22 @@ export function CustomVideoPlayer({
       }
     };
 
-    // Mobile fallback: assume loading completes after timeout
-    let mobileLoadingTimeout: NodeJS.Timeout;
-    if (isMobile) {
-      console.log('🎬 CustomVideoPlayer: Setting mobile loading timeout');
-      mobileLoadingTimeout = setTimeout(() => {
-        console.log('🎬 CustomVideoPlayer: Mobile loading timeout - assuming video is ready');
+    // Fallback timeout for mobile and Safari (both have unreliable video events)
+    let loadingTimeout: NodeJS.Timeout;
+    if (isMobile || isSafari) {
+      console.log('🎬 CustomVideoPlayer: Setting loading timeout fallback for', isMobile ? 'mobile' : 'Safari');
+      loadingTimeout = setTimeout(() => {
+        console.log('🎬 CustomVideoPlayer: Loading timeout - assuming video is ready');
         setIsLoading(false);
         if (video.duration && !isNaN(video.duration)) {
           setDuration(video.duration);
         }
-      }, 2000); // 2 second timeout for mobile
+      }, 2000); // 2 second timeout
     }
 
+    // Listen to both loadeddata and canplay for better cross-browser support
     video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
@@ -133,10 +152,11 @@ export function CustomVideoPlayer({
 
     return () => {
       console.log('🎬 CustomVideoPlayer: Cleaning up video event listeners');
-      if (mobileLoadingTimeout) {
-        clearTimeout(mobileLoadingTimeout);
+      if (loadingTimeout) {
+        clearTimeout(loadingTimeout);
       }
       video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
@@ -151,13 +171,15 @@ export function CustomVideoPlayer({
     if (!video) return;
 
     const isMobile = isMobileDevice();
+    const isSafari = isSafariBrowser();
     
-    // On mobile, don't wait for loading completion due to event blocking
-    if (isMobile || !isLoading) {
+    // Don't wait for loading completion on mobile or Safari
+    if (isMobile || isSafari || !isLoading) {
       console.log('🎬 CustomVideoPlayer: Viewport change detected', { 
         isInViewport, 
         currentlyPlaying: isPlaying,
         isMobile,
+        isSafari,
         isLoading
       });
 
@@ -177,7 +199,7 @@ export function CustomVideoPlayer({
 
       handleAutoPlay();
     } else {
-      console.log('🎬 CustomVideoPlayer: Waiting for loading to complete on desktop');
+      console.log('🎬 CustomVideoPlayer: Waiting for loading to complete');
     }
   }, [isInViewport, isPlaying, isLoading]);
 
@@ -239,8 +261,8 @@ export function CustomVideoPlayer({
         className="w-full h-full object-cover"
       />
 
-      {/* Loading Spinner - Only show on desktop or if actually loading */}
-      {isLoading && !isMobileDevice() && (
+      {/* Loading Spinner - Only show if actually loading (not on mobile/Safari after timeout) */}
+      {isLoading && !isMobileDevice() && !isSafariBrowser() && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
           <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
         </div>
